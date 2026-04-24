@@ -1,55 +1,59 @@
-<div id="auth-pannel">
-   <div id="auth-zone">
+<body>
+    <div id="auth-pannel">
 
-        <!-- PAGE DE CREATION D'UN COMPTE -->
-        <form *ngIf="newUser" (submit)="addUser()" [formGroup]="formAuth" class="form-zone">
-            <div>CREE TON COMPTE !</div>
-            <div>Déjà dans la team ? : <button (click)="newUser = false">Connecte-toi !</button></div>
-            <label for="username" class="form-username">Username</label>
-            
-            <div>
-                <input type="text" class="form-control" id="username" formControlName="username" [class.is-invalid]="formUsernameCtrl.invalid" />
-                <div *ngIf="formUsernameCtrl.hasError('required')" class="invalid-feedback">Le username est obligatoire</div>
-            </div>
+        <div id="auth-zone">
+                <!-- PAGE DE CREATION D'UN COMPTE -->
+                <form *ngIf="newUser" (submit)="addUser()" [formGroup]="formAuth" class="form-zone">
+                    <div>CREE TON COMPTE !</div>
+                    <div>Déjà dans la team ? : <button (click)="newUser = false">Connecte-toi !</button></div>
+                            
+                    <div class="form-input">
+                        <label for="username" class="form-username">Username</label>
+                        <input type="text" id="username" formControlName="username" placeholder="JacquelineDu38" [class.is-invalid]="formUsernameCtrl.invalid" />
+                        <div *ngIf="formUsernameCtrl.hasError('required')" class="invalid-feedback">Le username est obligatoire</div>
+                    </div>
 
-            
-            <label for="email" class="form-email">Email</label>
-            <div>
-                <input type="text" class="form-control" id="email" formControlName="email" [class.is-invalid]="formEmailCtrl.invalid" />
-                <div *ngIf="formEmailCtrl.hasError('required')" class="invalid-feedback">L'email est obligatoire</div>
-            </div>
-            
-            <label for="password" class="form-password">Mot de passe</label>
-            <div>
-                <input type="text" class="form-control" id="password" formControlName="password" [class.is-invalid]="formPasswordCtrl.invalid" />
-                <div *ngIf="formPasswordCtrl.hasError('required')" class="invalid-feedback">le mot de passe est obligatoire</div>
-            </div>
-            
-            <div>
-                <input [disabled]="formAuth.invalid" type="submit" class="btn-success" value="Ajouter" />
-            </div>  
-        </form>
-        
-        <!-- PAGE DE CONNEXION -->
-        <form *ngIf="!newUser" (submit)="login()" [formGroup]="formAuth" class="form-zone">
-            <div>CONNEXION</div>
+                    <div class="form-input">
+                        <label for="email" class="form-email">Email</label>
+                        <input type="text" id="email" formControlName="email" placeholder="VOTRE.EMAIL@EMAIL.COM" [class.is-invalid]="formEmailCtrl.invalid" />
+                        <div *ngIf="formEmailCtrl.hasError('required')" class="invalid-feedback">L'email est obligatoire</div>
+                    </div>
+                    
+                    <div class="form-input">
+                        <label for="password" class="form-password">Mot de passe</label>
+                        <input type="text" id="password" formControlName="password" placeholder="********" [class.is-invalid]="formPasswordCtrl.invalid" />
+                        <div *ngIf="formPasswordCtrl.hasError('required')" class="invalid-feedback">le mot de passe est obligatoire</div>
+                    </div>
+                    
+                    <div>
+                        <input [disabled]="formAuth.invalid" type="submit" class="btn-success" value="Ajouter" />
+                    </div>  
+                    </form>
+                
+                <!-- PAGE DE CONNEXION -->
+                <form *ngIf="!newUser" (submit)="login()" [formGroup]="formAuth" class="form-zone">
+                    <div>CONNEXION</div>
 
-            <label for="username" class="form-username">Username</label>
-            <div>
-                <input type="text" class="form-control" id="username" formControlName="username" [class.is-invalid]="formUsernameCtrl.invalid" />
-                <div *ngIf="formUsernameCtrl.hasError('required')" class="invalid-feedback">Le username est obligatoire</div>
-            </div>
+                    
+                    <div>
+                        <label for="username" class="form-username">Username</label>
+                        <input type="text" class="form-control" id="username" formControlName="username" [class.is-invalid]="formUsernameCtrl.invalid" />
+                        <div *ngIf="formUsernameCtrl.hasError('required')" class="invalid-feedback">Le username est obligatoire</div>
+                    </div>
 
-            <label for="password" class="form-password">Mot de passe</label>
-            <div>
-                <input type="text" class="form-control" id="password" formControlName="password" [class.is-invalid]="formPasswordCtrl.invalid" />
-                <div *ngIf="formPasswordCtrl.hasError('required')" class="invalid-feedback">le mot de passe est obligatoire</div>
-            </div>
+                    
+                    <div>
+                        <label for="password" class="form-password">Mot de passe</label>
+                        <input type="text" class="form-control" id="password" formControlName="password" [class.is-invalid]="formPasswordCtrl.invalid" />
+                        <div *ngIf="formPasswordCtrl.hasError('required')" class="invalid-feedback">le mot de passe est obligatoire</div>
+                    </div>
 
-            <button (click)="newUser = true">Retourner au formulaire de création</button>
-        </form> 
-   </div> 
-   <div id="img-zone">
-        <img src="img/front/users_h.PNG" alt="ICI UNE IMAGE"/>
-   </div>
-</div>
+                    <button (click)="newUser = true">Retourner au formulaire de création</button>
+                </form> 
+        </div> 
+
+        <div id="img-zone">
+                <img src="img/front/users_h.PNG" alt="ICI UNE IMAGE"/>
+        </div>  
+    </div>
+</body>

@@ -1,3 +1,36 @@
+html, body {
+    height: 100%;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-grand);
+}
+
 #auth-pannel {
     display: flex;
+    background: var(--green);
+    border-radius: 25px;
+    padding: 50px;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+    background: var(--field-bg);
+    border-radius: 12px;
+    padding: 5px 15px;
+    margin: 5px;
+    transition: border-color .2s, background .2s;
+    border: 1.5px solid var(--field-border);
+}
+
+.form-input:focus-within {
+    filter: brightness(1.5);
+}
+
+.form-input input {
+    background: none;
+    border: none;
+    outline: none;
 }
