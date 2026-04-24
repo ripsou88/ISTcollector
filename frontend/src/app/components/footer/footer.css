@@ -1,0 +1,8 @@
+footer {
+  background: linear-gradient(135deg, #4db6ac, #0288d1);
+  color: white;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  border-top: 4px solid #ff6f91;
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
+}

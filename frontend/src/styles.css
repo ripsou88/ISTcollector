@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  background: #f7f8fc; /* Fond général doux et clair, agréable pour les yeux */
+  font-family: 'Rubik', sans-serif; /* Typographie lisible & moderne */
+  line-height: 1.6;
+  color: #333; /* Texte principal gris foncé */
+  padding-top: 80px;
+}
