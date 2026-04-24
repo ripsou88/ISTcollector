@@ -9,3 +9,22 @@ import { Component } from '@angular/core';
 export class HomePage {
 
 }
+
+
+/* Il faut convertir le js en ts je pense
+document.addEventListener("DOMContentLoaded", function() {
+  const bubble = document.querySelector(".bubble");
+  const trigger = document.querySelector("#middle-cards");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        bubble.classList.add("show");
+        observer.unobserve(trigger);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(trigger);
+});
+*/
