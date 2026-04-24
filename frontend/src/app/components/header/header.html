@@ -1,38 +1,26 @@
 <header>
   <nav>
 
-    <div class="logo">
-      <img src="assets/img/front/LOGO.png">
+    <div class="nav-left">
+      <div class="hamburger">☰</div>
+
+      <div class="logo">
+        <img src="img/front/LOGO.png">
+      </div>
+
+      <div class="search-bar">
+        <img src="img/front/Pokeball.png" class="search-icon">
+        <input type="text" placeholder="Rechercher une IST...">
+      </div>
     </div>
 
-    <ul>
-      <li>
-        <a [routerLink]="['/home']" routerLinkActive="active">ACCUEIL</a>
-      </li>
-
-      <li>
-        <a href="#">APPRENDRE</a>
-      </li>
-
-      <li>
-        <a href="#">COLLECTION</a>
-      </li>
-
-      <li>
-        <a href="#">QUIZZ</a>
-      </li>
-
-      <li>
-        <a [routerLink]="['/connexion']" routerLinkActive="active">CONNEXION</a>
-      </li>
+    <ul class="nav-menu">
+      <li><a [routerLink]="['/home']">ACCUEIL</a></li>
+      <li><a href="#">APPRENDRE</a></li>
+      <li><a href="#">COLLECTION</a></li>
+      <li><a href="#">QUIZZ</a></li>
+      <li><a [routerLink]="['/connexion']">CONNEXION</a></li>
     </ul>
-
-    <div class="hamburger">☰</div>
-
-    <div class="search-bar">
-      <img src="assets/img/front/Pokeball.png" class="search-icon">
-      <input type="text" placeholder="Rechercher une IST...">
-    </div>
 
   </nav>
 </header>
