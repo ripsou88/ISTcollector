@@ -1,8 +1,38 @@
 <header>
   <nav>
-    <a [routerLink]="['/home']" routerLinkActive="active">Accueil</a>
-    |
-    <a [routerLink]="['/connexion']" routerLinkActive="active">Connexion</a>
+
+    <div class="logo">
+      <img src="assets/img/front/LOGO.png">
+    </div>
+
+    <ul>
+      <li>
+        <a [routerLink]="['/home']" routerLinkActive="active">ACCUEIL</a>
+      </li>
+
+      <li>
+        <a href="#">APPRENDRE</a>
+      </li>
+
+      <li>
+        <a href="#">COLLECTION</a>
+      </li>
+
+      <li>
+        <a href="#">QUIZZ</a>
+      </li>
+
+      <li>
+        <a [routerLink]="['/connexion']" routerLinkActive="active">CONNEXION</a>
+      </li>
+    </ul>
+
+    <div class="hamburger">☰</div>
+
+    <div class="search-bar">
+      <img src="assets/img/front/Pokeball.png" class="search-icon">
+      <input type="text" placeholder="Rechercher une IST...">
+    </div>
+
   </nav>
 </header>
- 
