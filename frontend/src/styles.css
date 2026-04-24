@@ -1,3 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700&display=swap');
+
+:root {
+    --font-petit: 'Bebas Neue', sans-serif;
+    --font-grand: 'Barlow', sans-serif;
+
+    --green: #63ceaa;
+    --green-dark: #055c5c;
+    --green-deep: #02333a;
+    --pink: #d794dd;
+    --pink-dark: #8b3065;
+    --white: #ffffff;
+    --cream: #f0e7e3;
+    --field-bg: rgba(255,255,255,0.13);
+    --field-border: rgba(255,255,255,0.35);
+}
+
 body {
   background: #f7f8fc; /* Fond général doux et clair, agréable pour les yeux */
   font-family: 'Rubik', sans-serif; /* Typographie lisible & moderne */

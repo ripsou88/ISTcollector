@@ -1,3 +1,15 @@
+html, body {
+    height: 100%;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-grand);
+}
+
 #auth-pannel {
     display: flex;
+    background: var(--green);
+    border-radius: 25px;
+    padding: 50px;
 }
