@@ -13,3 +13,24 @@ html, body {
     border-radius: 25px;
     padding: 50px;
 }
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+    background: var(--field-bg);
+    border-radius: 12px;
+    padding: 5px 15px;
+    margin: 5px;
+    transition: border-color .2s, background .2s;
+    border: 1.5px solid var(--field-border);
+}
+
+.form-input:focus-within {
+    filter: brightness(1.5);
+}
+
+.form-input input {
+    background: none;
+    border: none;
+    outline: none;
+}
