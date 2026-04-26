@@ -2,25 +2,38 @@
   <nav>
 
     <div class="nav-left">
-      <div class="hamburger">☰</div>
+      <div class="hamburger" (click)="toggleMenu()">☰</div>
 
       <div class="logo">
-        <img src="img/front/LOGO.png">
+        <img src="img/front/LOGO.png" alt="logo">
       </div>
 
       <div class="search-bar">
-        <img src="img/front/Pokeball.png" class="search-icon">
+        <img src="img/front/Pokeball.png" class="search-icon" alt="search">
         <input type="text" placeholder="Rechercher une IST...">
       </div>
     </div>
 
-    <ul class="nav-menu">
-      <li><a [routerLink]="['/home']">ACCUEIL</a></li>
-      <li><a href="#">APPRENDRE</a></li>
-      <li><a href="#">COLLECTION</a></li>
-      <li><a href="#">QUIZZ</a></li>
-      <li><a [routerLink]="['/connexion']">CONNEXION</a></li>
-    </ul>
+    <!-- MENU -->
+    <ul class="nav-menu" [class.open]="menuOpen">
+      <li><a [routerLink]="['/home']"
+        routerLinkActive="active"
+        (click)="menuOpen = false"
+        [routerLinkActiveOptions]="{ exact: true }">
+        ACCUEIL</a></li>
 
-  </nav>
-</header>
+        <li><a [routerLink]="['/apprendre']" routerLinkActive="active">
+          APPRENDRE</a></li>
+
+          <li><a [routerLink]="['/collection']" routerLinkActive="active">
+            COLLECTION</a></li>
+
+            <li><a [routerLink]="['/quizz']" routerLinkActive="active">
+              QUIZZ</a></li>
+
+              <li><a [routerLink]="['/connexion']" routerLinkActive="active">
+                CONNEXION</a></li>
+              </ul>
+
+            </nav>
+          </header>
