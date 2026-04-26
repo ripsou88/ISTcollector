@@ -4,88 +4,98 @@ nav {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: linear-gradient(135deg, #4db6ac, #0288d1); /* du vert au bleu : ambiance Pokémon douce sans être trop médical */
-  /* ou juste vert : background: #4db6ac; */
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 3px solid #ff6f91; /* Rose vif */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Ombre douce */
-  height: 80px;
-}
+  background: linear-gradient(
+    135deg,
+    var(--green-light),
+    var(--blue-electric)
+    );
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--pink);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    height: 80px;
+  }
 
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 
-.nav-menu {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 0;
-}
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 1.5rem;
+  }
 
-.hamburger {
-  font-size: 1.8rem;
-  color: white;
-  cursor: pointer;
-}
+  .hamburger {
+    font-size: 1.8rem;
+    color: var(--white);
+    cursor: pointer;
+  }
 
-.logo img {
-  width: 320px;
-  margin-left: -20px;
-  height: auto;
-}
-
-.search-bar {
-  display: flex;
-  margin-left: -60px;
-  align-items: center;
-  background: white;
-  padding: 0.35rem 0.8rem;
-  border-radius: 40px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  gap: 0.5rem;
-}
-
-.search-bar input {
-  border: none;
-  outline: none;
-  font-size: 0.9rem;
-  width: 180px;
-  background: transparent;
-}
-
-.search-icon {
-  width: 28px;
-  height: 28px;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 0.8rem;
-  align-items: center;
-}
-
-nav ul li a {
-  color: white;
-  text-decoration: none;
-  padding: 0.4rem 0.7rem;
-  border-radius: 10px;
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: all 0.3s;
-  letter-spacing:0.5px;
-}
-
-nav ul li a:hover {
-  background: #f48fb1; /* Rose vif */
+  .hamburger:hover {
+  color: var(--pink);
   transform: scale(1.1);
-  text-shadow: 0 0 8px rgba(255,255,255,0.9);
+  transition: 0.2s ease;
 }
+
+  .logo img {
+    width: 320px;
+    margin-left: -20px;
+    height: auto;
+  }
+
+  .search-bar {
+    display: flex;
+    margin-left: -60px;
+    align-items: center;
+    background: var(--white);
+    padding: 0.35rem 0.8rem;
+    border-radius: 40px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    gap: 0.5rem;
+  }
+
+  .search-bar input {
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+    width: 180px;
+    background: transparent;
+    color: var(--text-color);
+  }
+
+  .search-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+  }
+
+  nav ul li a {
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.4rem 0.7rem;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    letter-spacing:0.5px;
+  }
+
+  nav ul li a:hover {
+    background: var(--pink);
+    transform: scale(1.1);
+    text-shadow: 0 0 8px rgba(255,255,255,0.9);
+  }
