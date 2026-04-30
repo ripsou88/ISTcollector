@@ -1,4 +1,4 @@
-package fr.formation.backend.dto.response;
+package fr.formation.dto.response;
 
 public class EntityCreatedOrUpdatedResponse {
     private int id;

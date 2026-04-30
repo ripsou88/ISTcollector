@@ -1,4 +1,4 @@
-package fr.formation.backend.security.config;
+package fr.formation.security.config;
 
 import java.util.List;
 
