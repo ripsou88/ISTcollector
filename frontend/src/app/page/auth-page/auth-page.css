@@ -18,7 +18,7 @@ html, body {
     background: var(--green);
     border-radius: 25px;
     padding: 50px;
-    margin: 90px 15px 15px 15px;
+    margin: 15px;
     height: calc(100dvh - 105px);
     width: 100%;
     box-sizing: border-box;
