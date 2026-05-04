@@ -25,16 +25,24 @@ html, body {
 
     background-image: 
         linear-gradient(#8b306599),
-        url('/img/front/users_h_reverse.PNG'),
+        url('/img/front/user_f_reverse.png'),
         linear-gradient(var(--pink-dark-transparent)),
         url('/img/front/background_virus.png');
 
     background-size: auto, 40%, auto, cover;
     background-position: center, left 5% top -50px, center, center;
     background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+
+    position: relative;
+    overflow: hidden;
 }
 
 /* ---------------- FOMULAIRE ---------------- */
+#auth-zone {
+    width: 50%;
+    margin-left: 20%;
+}
+
 .form-input {
     display: flex;
     flex-direction: column;
@@ -44,6 +52,7 @@ html, body {
     padding: 5px 15px;
     margin: 5px;
     transition: border-color .2s, background .2s;
+    width: 400px;
 }
 
 .form-input:focus-within {
@@ -94,4 +103,37 @@ button:hover, .btn-success:hover {
     scale: 1.02;
 }
 
+button:disabled, input[type="submit"]:disabled, .btn-success:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: none;
+    scale: 1;
+}
+
 /* ---------------- IMAGE PERSONNAGE ---------------- */
+
+#img-zone {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#img-zone::before {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 150%;
+    background: var(--cream);
+    border-radius: 50%;
+    z-index: 0;
+    margin-top:40%;
+    margin-left:40%;
+}
+
+#img-zone img {
+    margin-top:35%;
+    height: 140%;
+    width: auto; /* garde les proportions */
+    z-index: 1;
+}
