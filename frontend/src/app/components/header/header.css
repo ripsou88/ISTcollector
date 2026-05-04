@@ -39,11 +39,25 @@ nav {
     cursor: pointer;
   }
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+.hamburger:hover {
+  color: var(--pink);
+  transform: scale(1.1);
+  transition: 0.2s ease;
+}
+=======
+>>>>>>> Stashed changes
   .hamburger:hover {
     color: var(--pink);
     transform: scale(1.1);
     transition: 0.2s ease;
   }
+<<<<<<< Updated upstream
+=======
+>>>>>>> Camille
+>>>>>>> Stashed changes
 
   .logo img {
     width: 320px;
