@@ -7,12 +7,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import fr.formation.backend.dao.IDAOUtilisateur;
+import fr.formation.backend.repo.UtilisateurRepository;
 
 @Service
 public class JpaUserDetailsService implements UserDetailsService {
     @Autowired
-    private IDAOUtilisateur daoUtilisateur;
+    private UtilisateurRepository daoUtilisateur;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

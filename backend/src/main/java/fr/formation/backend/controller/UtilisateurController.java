@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.formation.backend.config.JwtUtils;
-import fr.formation.backend.dao.IDAOUtilisateur;
 import fr.formation.backend.dto.request.AuthRequest;
 import fr.formation.backend.dto.response.EntityCreatedOrUpdatedResponse;
 import fr.formation.backend.dto.response.TokenResponse;
 import fr.formation.backend.model.Utilisateur;
+import fr.formation.backend.repo.UtilisateurRepository;
 
 @RestController
 @RequestMapping("/api")
@@ -29,7 +29,7 @@ public class UtilisateurController {
     private JwtUtils jwtUtils;
 
     @Autowired
-    private IDAOUtilisateur daoUtilisateur;
+    private UtilisateurRepository daoUtilisateur;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
