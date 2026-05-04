@@ -17,6 +17,4 @@ public enum Transmission {
         this.typeTransmission = typeTransmission;
     }
 
-
-
 }
