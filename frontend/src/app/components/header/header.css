@@ -1,5 +1,5 @@
 nav {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
@@ -40,10 +40,10 @@ nav {
   }
 
   .hamburger:hover {
-  color: var(--pink);
-  transform: scale(1.1);
-  transition: 0.2s ease;
-}
+    color: var(--pink);
+    transform: scale(1.1);
+    transition: 0.2s ease;
+  }
 
   .logo img {
     width: 320px;
