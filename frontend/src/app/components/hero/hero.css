@@ -1,50 +1,65 @@
 .hero {
-  text-align:center;
-  padding:6rem 2rem;
-  background: linear-gradient(135deg,#ff6f91, #ff9ac1, #ffc1e3);
-  /* Gradient : rose vif, rose clair, rose pastel */
-  color:white;
-  border-radius:0 0 50% 50% / 0 0 10% 10%;
-  position: relative;
-  overflow: hidden;
-}
+  text-align: center;
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg,
+    var(--pink),
+    var(--pink-light),
+    var(--pink-pastel)
+    );
+    color: var(--white);
+    border-radius: 0 0 50% 50% / 0 0 10% 10%;
+    position: relative;
+    overflow: hidden;
+  }
 
-.hero::before {
-  content:"";
-  position:absolute;
-  top:0; left:0; width:100%; height:100%;
-  background-size: cover;
-  opacity:0.05;
-  pointer-events:none;
-}
+  .hero h1 {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+    text-shadow: var(--text-shadow);
+  }
 
-.hero h1 {
-  font-size:2.4rem;
-  margin-bottom:1rem;
-  text-shadow:2px 2px 8px rgba(0,0,0,0.4); /* Ombre texte pour lisibilité sur gradient */
-}
-.hero p {
-  font-size:1.1rem;
-  margin-bottom:2.5rem;
-  text-shadow:1px 1px 4px rgba(0,0,0,0.3); /* Légère ombre */
-}
+  .hero p {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    text-shadow: var(--text-shadow);
+  }
 
-.hero .btn {
-  display:inline-block;
-  padding:0.9rem 2.2rem;
-  margin:0.4rem;
-  background:#4db6ac; /* Boutons verts clairs */
-  font-weight:600;
-  border:none;
-  border-radius:25px;
-  color:white;
-  text-decoration:none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
+  .hero .btn {
+    display: inline-block;
+    padding: 0.9rem 2.2rem;
+    margin: 0.4rem;
+    background: var(--green-light);
+    font-weight: 600;
+    border: none;
+    border-radius: 25px;
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
 
-.hero .btn:hover {
-  transform: scale(1.1) rotate(-2deg);
-  background:#0288d1; /* Bleu vif pour contraster & dynamique */
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4); /* Ombre plus marquée */
-}
+  .hero .btn:hover {
+    transform: scale(1.1) rotate(-2deg);
+    background: var(--blue-electric);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 4rem 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 1.8rem;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero .btn {
+      padding: 0.8rem 1.8rem;
+      margin: 0.3rem;
+    }
+  }

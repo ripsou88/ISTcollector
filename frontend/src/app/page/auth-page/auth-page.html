@@ -12,12 +12,6 @@
                         <input type="text" id="username" formControlName="username" placeholder="JacquelineDu38" [class.is-invalid]="formUsernameCtrl.invalid" />
                         <div *ngIf="formUsernameCtrl.hasError('required')" class="invalid-feedback">Le username est obligatoire</div>
                     </div>
-
-                    <div class="form-input">
-                        <label for="email" class="form-email">Email</label>
-                        <input type="text" id="email" formControlName="email" placeholder="VOTRE.EMAIL@EMAIL.COM" [class.is-invalid]="formEmailCtrl.invalid" />
-                        <div *ngIf="formEmailCtrl.hasError('required')" class="invalid-feedback">L'email est obligatoire</div>
-                    </div>
                     
                     <div class="form-input">
                         <label for="password" class="form-password">Mot de passe</label>

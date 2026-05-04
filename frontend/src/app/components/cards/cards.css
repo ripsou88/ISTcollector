@@ -20,7 +20,7 @@
   left: 400px;
   max-width: 250px;
   padding: 1rem 1.2rem;
-  background: #fffb8f; /* jaune clair */
+  background: var(--yellow-soft);
   color: #333;
   font-weight: 500;
   font-size: 1rem;
@@ -48,7 +48,7 @@
   width: 0;
   height: 0;
   border: 20px solid transparent;
-  border-right: 30px solid #fffb8f;
+  border-right: 30px solid var(--yellow-soft);
 }
 
 .cards-column {
@@ -74,9 +74,8 @@
 .middle-cards .card {
   padding: 1.5rem;
   border-radius: 20px;
-  border: 2px solid #4db6ac; /* Bordure verte */
-  background: linear-gradient(145deg,#ffffff,#e3f2f);
-  /* Fond cartes : blanc + bleu très clair */
+  border: 2px solid var(--green-light);
+  background: var(--white);
   box-shadow: 0 6px 15px rgba(0,0,0,0.15);
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -100,14 +99,14 @@
 #middle-cards h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #4db6ac; /* Vert principal pour les titres */
+  color: var(--green-light);
 }
 
 #middle-cards p {
   max-width: 600px;
   margin: 0 auto 2rem;
   font-size: 1rem;
-  color: #333; /* Texte gris foncé */
+  color: var(--text-color);
 }
 
 .middle-cards .card:hover {
@@ -118,12 +117,12 @@
 .middle-cards .card h3 {
   font-size: 1.3rem;
   margin-bottom: 1rem;
-  color: #f48fb1; /* Titre carte rose vif */
+  color: var(--pink-light);
 }
 
 .middle-cards .card p {
   font-size: 1rem;
-  color: #333; /* Texte carte gris foncé */
+  color: var(--text-color);
 }
 .quiz-table {
   width: 100%;
@@ -137,14 +136,14 @@
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: all 0.3s ease;
-  border-left: 6px solid #4db6ac;
+  border-left: 6px solid var(--green-light);
 }
 
 .quiz-table td:hover {
   transform: translateX(8px) scale(1.02);
   background: #f1fbfa;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  border-left: 6px solid #ff6f91; /* du vert au rose */
+  border-left: 6px solid var(--pink);
 }
 
 .quiz-table td:active {
