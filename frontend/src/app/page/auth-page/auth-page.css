@@ -1,19 +1,31 @@
+/* ---------------- GLOBAL ---------------- */
 html, body {
-    height: 100%;
     background: var(--cream);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-grand);
+    overflow: hidden;
 }
 
 #auth-pannel {
     display: flex;
+    justify-content: center;
+    align-items: center;
     background: var(--green);
     border-radius: 25px;
     padding: 50px;
+    margin: 90px 15px 15px 15px;
+    height: calc(100dvh - 105px);
+    width: 100%;
+    box-sizing: border-box;
+
+    background-image: 
+        linear-gradient(rgba(87, 9, 24, 0.9)),   /* dégradé pour assombrir */
+        url('/img/front/background_virus.png');
 }
 
+/* ---------------- FOMULAIRE ---------------- */
 .form-input {
     display: flex;
     flex-direction: column;
@@ -34,3 +46,5 @@ html, body {
     border: none;
     outline: none;
 }
+
+/* ---------------- IMAGE PERSONNAGE ---------------- */
