@@ -21,8 +21,14 @@ html, body {
     box-sizing: border-box;
 
     background-image: 
-        linear-gradient(rgba(87, 9, 24, 0.9)),   /* dégradé pour assombrir */
+        linear-gradient(#0000007b),
+        url('/img/front/users_h.PNG'),
+        linear-gradient(var(--pink-dark-transparent)),
         url('/img/front/background_virus.png');
+
+    background-size: auto, 40%, auto, cover;
+    background-position: center, left 20% top -50px, center, center;
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
 }
 
 /* ---------------- FOMULAIRE ---------------- */
