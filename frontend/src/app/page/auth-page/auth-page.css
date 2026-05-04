@@ -4,7 +4,10 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-grand);
+    font-family: var(--font-petit);
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--cream);
     overflow: hidden;
 }
 
@@ -21,13 +24,13 @@ html, body {
     box-sizing: border-box;
 
     background-image: 
-        linear-gradient(#0000007b),
-        url('/img/front/users_h.PNG'),
+        linear-gradient(#8b306599),
+        url('/img/front/users_h_reverse.PNG'),
         linear-gradient(var(--pink-dark-transparent)),
         url('/img/front/background_virus.png');
 
     background-size: auto, 40%, auto, cover;
-    background-position: center, left 20% top -50px, center, center;
+    background-position: center, left 5% top -50px, center, center;
     background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
 }
 
@@ -35,22 +38,60 @@ html, body {
 .form-input {
     display: flex;
     flex-direction: column;
-    background: var(--field-bg);
+    background: color-mix(in srgb, var(--cream) 90%, transparent);
+    color: var(--pink-dark);
     border-radius: 12px;
     padding: 5px 15px;
     margin: 5px;
     transition: border-color .2s, background .2s;
-    border: 1.5px solid var(--field-border);
 }
 
 .form-input:focus-within {
-    filter: brightness(1.5);
+    filter: brightness(1.1);
 }
 
 .form-input input {
     background: none;
     border: none;
     outline: none;
+}
+
+.form-input input::placeholder {
+    color: rgba(0, 0, 0, 0.50);
+    font-weight: 300;
+}
+
+.invalid-feedback {
+    color: var(--green-dark);
+    font-weight: 300;
+}
+
+.create-account {
+    font-size: 3rem;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px
+}
+
+button, .btn-success {
+    font-family: var(--font-petit);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: color-mix(in srgb, var(--green-dark) 80%, transparent);
+    color: var(--cream);
+    border: none;
+    border-radius: 12px;
+    padding: 14px 30px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+button:hover, .btn-success:hover {
+    filter: brightness(1.1);
+    scale: 1.02;
 }
 
 /* ---------------- IMAGE PERSONNAGE ---------------- */

@@ -4,8 +4,8 @@
         <div id="auth-zone">
                 <!-- PAGE DE CREATION D'UN COMPTE -->
                 <form *ngIf="newUser" (submit)="addUser()" [formGroup]="formAuth" class="form-zone">
-                    <div>CREE TON COMPTE !</div>
-                    <div>Déjà dans la team ? : <button (click)="newUser = false">Connecte-toi !</button></div>
+                    <div class="create-account">CRéé TON COMPTE :</div><br>
+                    <div>Déjà dans la team ? : <button (click)="newUser = false">Connecte-toi !</button></div><br>
                             
                     <div class="form-input">
                         <label for="username" class="form-username">Username</label>
@@ -16,33 +16,43 @@
                     <div class="form-input">
                         <label for="password" class="form-password">Mot de passe</label>
                         <input type="text" id="password" formControlName="password" placeholder="********" [class.is-invalid]="formPasswordCtrl.invalid" />
-                        <div *ngIf="formPasswordCtrl.hasError('required')" class="invalid-feedback">le mot de passe est obligatoire</div>
+                        <div *ngIf="formPasswordCtrl.hasError('required')" class="invalid-feedback">Le mot de passe est obligatoire</div>
                     </div>
                     
+                    <br>
+
                     <div>
-                        <input [disabled]="formAuth.invalid" type="submit" class="btn-success" value="Ajouter" />
+                        <input [disabled]="formAuth.invalid" type="submit" class="btn-success" value="Créer le compte" />
                     </div>  
                     </form>
                 
                 <!-- PAGE DE CONNEXION -->
                 <form *ngIf="!newUser" (submit)="login()" [formGroup]="formAuth" class="form-zone">
-                    <div>CONNEXION</div>
+                    <div class="create-account">CONNEXION</div>
+                    <br>
 
+                    <div><button (click)="newUser = true">Retourner au formulaire de création</button></div>
                     
-                    <div>
+                    <br>
+
+                    <div class="form-input">
                         <label for="username" class="form-username">Username</label>
-                        <input type="text" class="form-control" id="username" formControlName="username" [class.is-invalid]="formUsernameCtrl.invalid" />
+                        <input type="text" class="form-control" id="username" placeholder="JeanMichelDu44" formControlName="username" [class.is-invalid]="formUsernameCtrl.invalid" />
                         <div *ngIf="formUsernameCtrl.hasError('required')" class="invalid-feedback">Le username est obligatoire</div>
                     </div>
 
                     
-                    <div>
+                    <div class="form-input">
                         <label for="password" class="form-password">Mot de passe</label>
-                        <input type="text" class="form-control" id="password" formControlName="password" [class.is-invalid]="formPasswordCtrl.invalid" />
-                        <div *ngIf="formPasswordCtrl.hasError('required')" class="invalid-feedback">le mot de passe est obligatoire</div>
+                        <input type="text" class="form-control" id="password" placeholder="********" formControlName="password" [class.is-invalid]="formPasswordCtrl.invalid" />
+                        <div *ngIf="formPasswordCtrl.hasError('required')" class="invalid-feedback">Le mot de passe est obligatoire</div>
                     </div>
 
-                    <button (click)="newUser = true">Retourner au formulaire de création</button>
+                    <br>
+
+                    <div>
+                        <input [disabled]="formAuth.invalid" type="submit" class="btn-success" value="Connexion" />
+                    </div>  
                 </form> 
         </div> 
 
