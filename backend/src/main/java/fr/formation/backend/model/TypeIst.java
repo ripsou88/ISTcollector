@@ -1,4 +1,4 @@
-package fr.formation.model;
+package fr.formation.backend.model;
 
 public enum TypeIst {
     bacterie("Bactérienne"), virus("Virale"), parasite("Parasitaire"),

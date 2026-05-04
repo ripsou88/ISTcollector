@@ -1,4 +1,4 @@
-package fr.formation.model;
+package fr.formation.backend.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,8 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "traitement")
-public class Traitement {
+@Table(name = "prevention")
+public class Prevention {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,19 +19,15 @@ public class Traitement {
     private String nom;
 
     @Column
-    private String prise;
+    private TypePrevention typePrevention;
 
-    @Column
-    private int duree; // #TODO Choisir si durée en entier ou en string (en fonction si calculs automatiques ou non ?)
-
-    public Traitement() {
+    public Prevention() {
     }
 
-    public Traitement(Integer id, String nom, String prise, int duree) {
+    public Prevention(Integer id, String nom, TypePrevention typePrevention) {
         this.id = id;
         this.nom = nom;
-        this.prise = prise;
-        this.duree = duree;
+        this.typePrevention = typePrevention;
     }
 
     public Integer getId() {
@@ -50,20 +46,12 @@ public class Traitement {
         this.nom = nom;
     }
 
-    public String getPrise() {
-        return prise;
+    public TypePrevention getTypePrevention() {
+        return typePrevention;
     }
 
-    public void setPrise(String prise) {
-        this.prise = prise;
-    }
-
-    public int getDuree() {
-        return duree;
-    }
-
-    public void setDuree(int duree) {
-        this.duree = duree;
+    public void setTypePrevention(TypePrevention typePrevention) {
+        this.typePrevention = typePrevention;
     }
 
 }

@@ -1,8 +1,8 @@
-package fr.formation.repository;
+package fr.formation.backend.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import fr.formation.model.Ist;
+import fr.formation.backend.model.Ist;
 
 public interface IstRepository extends JpaRepository<Ist, Integer> {
 

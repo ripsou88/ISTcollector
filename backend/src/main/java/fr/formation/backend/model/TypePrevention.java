@@ -1,4 +1,4 @@
-package fr.formation.model;
+package fr.formation.backend.model;
 
 public enum TypePrevention {
     medical("Médical"), barriere("Barrière"), comportement("Comportemental");

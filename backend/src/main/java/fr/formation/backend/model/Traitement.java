@@ -1,4 +1,4 @@
-package fr.formation.model;
+package fr.formation.backend.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,8 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "ist")
-public class Ist {
+@Table(name = "traitement")
+public class Traitement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,18 +18,20 @@ public class Ist {
     @Column(unique = true)
     private String nom;
 
-    private TypeIst typeIst;
+    @Column
+    private String prise;
 
-    private Transmission transmission;
+    @Column
+    private int duree; // #TODO Choisir si durée en entier ou en string (en fonction si calculs automatiques ou non ?)
 
-    public Ist() {
+    public Traitement() {
     }
 
-    public Ist(Integer id, String nom, TypeIst typeIst, Transmission transmission) {
+    public Traitement(Integer id, String nom, String prise, int duree) {
         this.id = id;
         this.nom = nom;
-        this.typeIst = typeIst;
-        this.transmission = transmission;
+        this.prise = prise;
+        this.duree = duree;
     }
 
     public Integer getId() {
@@ -48,25 +50,20 @@ public class Ist {
         this.nom = nom;
     }
 
-    public TypeIst getTypeIst() {
-        return typeIst;
+    public String getPrise() {
+        return prise;
     }
 
-    public void setTypeIst(TypeIst typeIst) {
-        this.typeIst = typeIst;
+    public void setPrise(String prise) {
+        this.prise = prise;
     }
 
-    public Transmission getTransmission() {
-        return transmission;
+    public int getDuree() {
+        return duree;
     }
 
-    public void setTransmission(Transmission transmission) {
-        this.transmission = transmission;
-    }
-
-
-    public double calculerPourcentageDeTransmission() {
-        return 0;
+    public void setDuree(int duree) {
+        this.duree = duree;
     }
 
 }

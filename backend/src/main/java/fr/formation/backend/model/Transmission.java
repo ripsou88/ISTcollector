@@ -1,4 +1,4 @@
-package fr.formation.model;
+package fr.formation.backend.model;
 
 public enum Transmission {
     orale("Orale"), sexuelle("Sexuelle"), sang("Contact sanguin"), direct("Contact direct"), materno("Materno-fœtale");
