@@ -82,7 +82,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   z-index: 1; /* pour avoir l'effet pop meme avec Joel */
 }
 
@@ -131,6 +131,8 @@
 
 .quiz-table td {
   background: white;
+  text-align : center;
+  vertical-align: middle;
   padding: 1rem;
   border-radius: 12px;
   cursor: pointer;
