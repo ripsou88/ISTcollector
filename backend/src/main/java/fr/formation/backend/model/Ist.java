@@ -35,11 +35,16 @@ public class Ist {
 
     private Transmission transmission;
 
+    private Prevention prevention;
+
+    private Traitement traitement;
+
     public Ist() {
     }
 
     public Ist(Integer id, String nom, int gravite, int incidence, String image,
-            String shortDescription, TypeIst typeIst, Transmission transmission) {
+            String shortDescription, TypeIst typeIst, Transmission transmission,
+            Prevention prevention, Traitement traitement) {
         this.id = id;
         this.nom = nom;
         this.gravite = gravite;
@@ -48,6 +53,8 @@ public class Ist {
         this.shortDescription = shortDescription;
         this.typeIst = typeIst;
         this.transmission = transmission;
+        this.prevention = prevention;
+        this.traitement = traitement;
     }
 
     public Integer getId() {
@@ -94,16 +101,20 @@ public class Ist {
         return symptomes;
     }
 
-    public void setSymptome(List<String> symptome) {
-        this.symptomes = symptome;
+    public void setSymptomes(List<String> symptomes) {
+        this.symptomes = symptomes;
     }
 
-    public String getShortDescription() {
-        return shortDescription;
+    public List<String> getSymptomes() {
+        return symptomes;
     }
 
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
     }
 
     public TypeIst getTypeIst() {
@@ -120,6 +131,22 @@ public class Ist {
 
     public void setTransmission(Transmission transmission) {
         this.transmission = transmission;
+    }
+
+    public Prevention getPrevention() {
+        return prevention;
+    }
+
+    public void setPrevention(Prevention prevention) {
+        this.prevention = prevention;
+    }
+
+    public Traitement getTraitement() {
+        return traitement;
+    }
+
+    public void setTraitement(Traitement traitement) {
+        this.traitement = traitement;
     }
 
     public double calculerPourcentageDeTransmission() {

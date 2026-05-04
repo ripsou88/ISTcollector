@@ -1,5 +1,8 @@
 package fr.formation.backend.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +26,8 @@ public class Traitement {
 
     @Column
     private int duree; // #TODO Choisir si durée en entier ou en string (en fonction si calculs automatiques ou non ?)
+
+    private List<Ist> ist = new ArrayList<>();
 
     public Traitement() {
     }
@@ -64,6 +69,14 @@ public class Traitement {
 
     public void setDuree(int duree) {
         this.duree = duree;
+    }
+
+    public List<Ist> getIst() {
+        return ist;
+    }
+
+    public void setIst(List<Ist> ist) {
+        this.ist = ist;
     }
 
 }

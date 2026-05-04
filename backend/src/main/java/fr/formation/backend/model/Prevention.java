@@ -1,5 +1,8 @@
 package fr.formation.backend.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +23,8 @@ public class Prevention {
 
     @Column
     private TypePrevention typePrevention;
+
+    private List<Ist> ist = new ArrayList<>();
 
     public Prevention() {
     }
@@ -52,6 +57,14 @@ public class Prevention {
 
     public void setTypePrevention(TypePrevention typePrevention) {
         this.typePrevention = typePrevention;
+    }
+
+    public List<Ist> getIst() {
+        return ist;
+    }
+
+    public void setIst(List<Ist> ist) {
+        this.ist = ist;
     }
 
 }
