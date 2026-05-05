@@ -5,9 +5,14 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,33 +23,50 @@ public class Ist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true)
+    @Column(unique = true, length = 20, nullable = false)
     private String nom;
-
+    @Column
     private int gravite;
-
+    @Column
     private int incidence;
-
+    @Column(length = 20, nullable = false)
     private String image; //#TODO define type
-
-    private List<String> symptomes = new ArrayList<>();
-
+    @ManyToMany
+    @JoinTable(
+        name = "ist-symptome",
+        joinColumns = @JoinColumn(name = "ist_id"),
+        inverseJoinColumns = @JoinColumn(name = "symptome_id")
+    )
+    private List<Symptome> symptomes = new ArrayList<>();
+    @Column(length = 20, nullable = false)
     private String shortDescription;
-
+    @Enumerated(EnumType.STRING)
+    @Column
     private TypeIst typeIst;
-
+    @Enumerated(EnumType.STRING)
+    @Column
     private Transmission transmission;
-
-    private Prevention prevention;
-
-    private Traitement traitement;
+    @ManyToMany
+    @JoinTable(
+            name = "ist-prevention",
+            joinColumns = @JoinColumn(name = "ist_id"),
+            inverseJoinColumns = @JoinColumn(name = "prevention_id")
+        )
+    private List<Prevention> preventions = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "ist-traitement",
+            joinColumns = @JoinColumn(name = "ist_id"),
+            inverseJoinColumns = @JoinColumn(name = "traitement_id")
+        )
+    private List<Traitement> traitements = new ArrayList<>();
 
     public Ist() {
     }
 
     public Ist(Integer id, String nom, int gravite, int incidence, String image,
             String shortDescription, TypeIst typeIst, Transmission transmission,
-            Prevention prevention, Traitement traitement) {
+            List<Prevention> preventions, List<Traitement> traitements) {
         this.id = id;
         this.nom = nom;
         this.gravite = gravite;
@@ -53,8 +75,8 @@ public class Ist {
         this.shortDescription = shortDescription;
         this.typeIst = typeIst;
         this.transmission = transmission;
-        this.prevention = prevention;
-        this.traitement = traitement;
+        this.preventions = preventions;
+        this.traitements = traitements;
     }
 
     public Integer getId() {
@@ -97,15 +119,12 @@ public class Ist {
         this.image = image;
     }
 
-    public List<String> getSymptome() {
-        return symptomes;
-    }
 
-    public void setSymptomes(List<String> symptomes) {
+    public void setSymptomes(List<Symptome> symptomes) {
         this.symptomes = symptomes;
     }
 
-    public List<String> getSymptomes() {
+    public List<Symptome> getSymptomes() {
         return symptomes;
     }
 
@@ -133,21 +152,22 @@ public class Ist {
         this.transmission = transmission;
     }
 
-    public Prevention getPrevention() {
-        return prevention;
-    }
+    public List<Prevention> getPreventions() {
+		return preventions;
+	}
 
-    public void setPrevention(Prevention prevention) {
-        this.prevention = prevention;
-    }
+	public void setPreventions(List<Prevention> preventions) {
+		this.preventions = preventions;
+	}
 
-    public Traitement getTraitement() {
-        return traitement;
-    }
+	public List<Traitement> getTraitements() {
+		return traitements;
+	}
 
-    public void setTraitement(Traitement traitement) {
-        this.traitement = traitement;
-    }
+	public void setTraitements(List<Traitement> traitements) {
+		this.traitements = traitements;
+	}
+
 
     public double calculerPourcentageDeTransmission() {
         return 0;

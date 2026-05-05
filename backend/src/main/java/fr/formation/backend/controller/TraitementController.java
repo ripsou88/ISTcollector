@@ -58,7 +58,6 @@ public class TraitementController {
         traitement.setNom(request.getNom());
         traitement.setPrise(request.getPrise());
         traitement.setDuree(request.getDuree());
-        traitement.setIsts(request.getIsts());
 
         this.repository.save(traitement);
 
@@ -77,7 +76,6 @@ public class TraitementController {
         traitement.setNom(request.getNom());
         traitement.setPrise(request.getPrise());
         traitement.setDuree(request.getDuree());
-        traitement.setIsts(request.getIsts());
 
         this.repository.save(traitement);
 

@@ -63,8 +63,8 @@ public class IstController {
         ist.setShortDescription(request.getShortDescription());
         ist.setTypeIst(request.getTypeIst());
         ist.setTransmission(request.getTransmission());
-        ist.setPrevention(request.getPrevention());
-        ist.setTraitement(request.getTraitement());
+        ist.setPreventions(request.getPrevention());
+        ist.setTraitements(request.getTraitement());
 
         this.repository.save(ist);
 
@@ -88,8 +88,8 @@ public class IstController {
         ist.setShortDescription(request.getShortDescription());
         ist.setTypeIst(request.getTypeIst());
         ist.setTransmission(request.getTransmission());
-        ist.setPrevention(request.getPrevention());
-        ist.setTraitement(request.getTraitement());
+        ist.setPreventions(request.getPrevention());
+        ist.setTraitements(request.getTraitement());
 
         this.repository.save(ist);
 
