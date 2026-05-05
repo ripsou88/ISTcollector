@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import fr.formation.backend.model.Question;
 
-public interface QuestionReposetory extends JpaRepository<Question,Integer> {
+public interface QuestionRepository extends JpaRepository<Question,Integer> {
 
 }
