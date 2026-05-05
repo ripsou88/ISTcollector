@@ -52,7 +52,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        
+
         // TODO set the angular address
         configuration.setAllowedOrigins(List.of("http://localhost"));
 

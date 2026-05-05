@@ -26,7 +26,8 @@ public class JwtHeaderFilter extends OncePerRequestFilter {
     private JwtUtils jwtUtils;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
 
         if (StringUtils.hasText(authHeader) && authHeader.startsWith("Bearer ")) {
@@ -41,7 +42,8 @@ public class JwtHeaderFilter extends OncePerRequestFilter {
                     UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
                     // Recreer une Authentication Spring Security
-                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails,
+                            null, userDetails.getAuthorities());
 
                     // Affecter l'authentication dans le contexte de Spring Security -> lui dire OK, l'utilisateur est authentifie !
                     SecurityContextHolder.getContext().setAuthentication(auth);
@@ -52,7 +54,6 @@ public class JwtHeaderFilter extends OncePerRequestFilter {
                 }
             }
         }
-
 
         // Pour passer a la suite
         filterChain.doFilter(request, response);

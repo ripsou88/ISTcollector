@@ -16,8 +16,9 @@ import fr.formation.backend.config.JwtUtils;
 import fr.formation.backend.dto.request.AuthRequest;
 import fr.formation.backend.dto.response.EntityCreatedOrUpdatedResponse;
 import fr.formation.backend.dto.response.TokenResponse;
-import fr.formation.backend.model.Utilisateur;
-import fr.formation.backend.repo.UtilisateurRepository;
+import fr.formation.backend.model.Compte;
+import fr.formation.backend.model.User;
+import fr.formation.backend.repo.CompteRepository;
 
 @RestController
 @RequestMapping("/api")
@@ -29,7 +30,7 @@ public class UtilisateurController {
     private JwtUtils jwtUtils;
 
     @Autowired
-    private UtilisateurRepository repoUtilisateur;
+    private CompteRepository repository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -47,13 +48,13 @@ public class UtilisateurController {
     @PostMapping("/subscription")
     @ResponseStatus(HttpStatus.CREATED)
     public EntityCreatedOrUpdatedResponse add(@RequestBody AuthRequest request) {
-        Utilisateur utilisateur = new Utilisateur();
+        // La création de compte ne concerne que les utilisateurs, pas les admins
+        Compte utilisateur = new User();
 
         utilisateur.setUsername(request.getUsername());
         utilisateur.setPassword(this.passwordEncoder.encode(request.getPassword()));
-        utilisateur.setAdmin(false);
 
-        utilisateur = this.repoUtilisateur.save(utilisateur);
+        utilisateur = this.repository.save(utilisateur);
 
         return new EntityCreatedOrUpdatedResponse(utilisateur.getId());
     }
