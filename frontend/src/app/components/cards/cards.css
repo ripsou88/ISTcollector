@@ -2,65 +2,66 @@
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }
 
 .infirmier {
   position: absolute;
-  left: -330px;
-  top:-30px;
-  bottom: 0;
+  left: clamp(-350px, -15vw, -330px);
+  top: clamp(-10px, -2vw, -30px);
   z-index: 20;
 }
 
 .characters {
-  max-height: 450px;
+  max-height: clamp(250px, 40vw, 450px);
+  width: auto;
 }
 
 .chlamydia {
   position: absolute;
-  top:-30px;
-  right: 60px;
-
-  width: 90px;
-  height: 90px;
+  top: clamp(-40px, -2vw, -20px);
+  right: clamp(10px, 5vw, 50px);
+  width: clamp(70px, 7vw, 100px);
+  height: auto;
   object-fit: contain;
 }
 
 .papillomavirus {
   position: absolute;
-  top:120px;
-  right: -20px;
-
-  width: 70px;
-  height: 70px;
+  top: clamp(80px, 10vw, 120px);
+  right: clamp(-50px, -2vw, 80px);
+  width: clamp(60px, 5vw, 70px);
+  height: auto;
   object-fit: contain;
 }
 
 .syphillis {
   position: absolute;
-  top:80px;
-  right: 430px;
-
-  width: 110px;
-  height: 110px;
+  top: clamp(60px, 8vw, 100px);
+  right: clamp(100px, 38vw, 430px);
+  width: clamp(70px, 7vw, 110px);
+  height: auto;
   object-fit: contain;
 }
 
 .VIH {
   position: absolute;
-  top:-30px;
-  right: 340px;
-
-  width: 90px;
-  height: 90px;
+  top: clamp(-40px, -3vw, -20px);
+  right: clamp(150px, 40vw, 340px);
+  width: clamp(70px, 7vw, 90px);
+  height: auto;
   object-fit: contain;
 }
 
 .bubble {
   position: absolute;
   bottom: 85%;
-  left: 420px;
-  max-width: 250px;
+  left: clamp(50px, 30vw, 420px);
+  max-width: clamp(180px, 25vw, 250px);
   padding: 1rem 1.2rem;
   background: var(--yellow-soft);
   color: #333;
@@ -111,6 +112,7 @@
   flex-direction: column;
   gap: 1.5rem;
   width: 50%;
+  max-width: 500px;
 }
 
 .middle-cards .card {
@@ -125,7 +127,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   z-index: 1; /* pour avoir l'effet pop meme avec Joel */
 }
 
@@ -200,4 +201,75 @@
 
 #scroll-trigger {
   height: 50px;
+}
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+
+  .cards-with-image {
+    flex-direction: column;
+  }
+
+  .middle-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .infirmier {
+    position: relative;
+    left: 0;
+    top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .bubble {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-top: 1rem;
+  }
+
+  .chlamydia,
+  .papillomavirus,
+  .syphillis,
+  .VIH {
+    position: relative;
+    margin: 0.5rem;
+  }
+}
+
+/* Responsive tablette */
+@media (max-width: 1024px) {
+  .middle-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Responsive TV */
+@media (min-width: 1600px) {
+
+  .cards-with-image {
+    max-width: 1600px;
+  }
+
+  .characters {
+    max-height: 600px;
+  }
+
+  .bubble {
+    max-width: 320px;
+    font-size: 1.1rem;
+  }
+
+  .middle-cards .card {
+    padding: 2rem;
+    font-size: 1.1rem;
+  }
+
+  .quiz-table td {
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
 }

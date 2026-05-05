@@ -1,13 +1,15 @@
-.all {
-  height: 500px;
-  width: 200px;
+.allcarte {
+  height: 420px;
+  width: 240px;
   display: flex;
   flex-direction: column;
   text-align: center;
-  background: var(--green);
-
+  align-items: center;
   border-radius: 25px;
+  gap: 5px;
+  perspective: 900px;
 
+  color: white;
   cursor: pointer;
   transform-style: preserve-3d;
   transition:
@@ -15,7 +17,7 @@
     box-shadow 150ms ease;
 }
 
-.all:hover {
+.allcarte:hover {
   transform: translateY(-4px) scale(1.03);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
 }
@@ -38,7 +40,191 @@
   }
 }
 
-.ligne3 img {
-  width: 150px;
+.carte {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  transform-style: preserve-3d;
+  transition:
+    transform 0.08s ease-out,
+    box-shadow 0.08s ease-out;
+  will-change: transform;
+  background: linear-gradient(160deg, var(--green-deep) 0%, var(--green-dark) 60%, #011a1a 100%);
+}
+
+.ligne2 {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+}
+
+.ligne3 {
+  background: linear-gradient(
+    160deg,
+    var(--green-dark) 0%,
+    var(--green-light) 40%,
+    var(--green-deep) 100%
+  );
+  width: 70%;
   height: 150px;
+  margin: 10px;
+  border-radius: 20px;
+  box-shadow: inset 0 0 30px 10px rgba(0, 0, 0, 0.6);
+}
+
+.ligne3 img {
+  width: 130px;
+  height: 130px;
+  animation: float 3.5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(10px);
+  }
+  50% {
+    transform: translateY(18px);
+  }
+}
+
+.ligne4 {
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+}
+
+.ligne5 {
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 10px;
+  border-radius: 20px;
+  padding: 15px;
+  margin: 15px;
+}
+
+/* ---------------- Brillant arc en ciel ---------------- */
+.foil {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 0.3s;
+  mix-blend-mode: color-dodge;
+  /* ARC EN CIEL
+  background: conic-gradient(
+    from 0deg at var(--mx, 50%) var(--my, 50%),
+    #ff0080, #ff8c00, #ffe400, #00ff80, #00c8ff, #7b2fff, #ff0080
+  );
+  */
+
+  /* NOIR / VIOLET / ROUGE
+  background: conic-gradient(
+  from 0deg at var(--mx, 50%) var(--my, 50%),
+  #0a0a0a, #8b0000, #ff2200, #4b0082, #ff2200, #1a001a, #8b0000, #0a0a0a
+  );
+  */
+
+  background: conic-gradient(
+    from 0deg at var(--mx, 50%) var(--my, 50%),
+    var(--green-deep),
+    var(--pink),
+    var(--green-light),
+    var(--pink-pastel),
+    var(--green-dark),
+    var(--pink-light),
+    var(--green),
+    var(--pink-dark),
+    var(--green-deep)
+  );
+
+  /* DOREE
+  background: conic-gradient(
+  from 0deg at var(--mx, 50%) var(--my, 50%),
+  #7a4f00, #ffd700, #fffacd, #ffd700, #b8860b, #ffe066, #ffd700, #7a4f00
+  );
+  */
+  filter: blur(2px);
+}
+
+.allcarte:hover .foil {
+  opacity: 0.38;
+}
+
+.glare {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 21;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.22) 0%,
+    transparent 55%
+  );
+}
+
+.allcarte:hover .glare {
+  opacity: 1;
+}
+
+.shimmer {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 19;
+  opacity: 0;
+  transition: opacity 0.3s;
+  mix-blend-mode: overlay;
+  background: repeating-linear-gradient(
+    calc(var(--angle, 105deg)),
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 10%,
+    transparent 20%
+  );
+}
+
+.allcarte:hover .shimmer {
+  opacity: 1;
+}
+
+/* ---------------- Coins ---------------- */
+.corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: rgba(78, 255, 140, 0.4);
+  border-style: solid;
+  z-index: 15;
+}
+.corner-tl {
+  top: 8px;
+  left: 8px;
+  border-width: 1.5px 0 0 1.5px;
+  border-radius: 3px 0 0 0;
+}
+.corner-tr {
+  top: 8px;
+  right: 8px;
+  border-width: 1.5px 1.5px 0 0;
+  border-radius: 0 3px 0 0;
+}
+.corner-bl {
+  bottom: 8px;
+  left: 8px;
+  border-width: 0 0 1.5px 1.5px;
+  border-radius: 0 0 0 3px;
+}
+.corner-br {
+  bottom: 8px;
+  right: 8px;
+  border-width: 0 1.5px 1.5px 0;
+  border-radius: 0 0 3px 0;
 }
