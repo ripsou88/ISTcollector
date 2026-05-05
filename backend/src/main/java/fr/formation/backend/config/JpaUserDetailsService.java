@@ -7,21 +7,23 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import fr.formation.backend.repo.UtilisateurRepository;
+import fr.formation.backend.model.Admin;
+import fr.formation.backend.repo.CompteRepository;
 
 @Service
 public class JpaUserDetailsService implements UserDetailsService {
     @Autowired
-    private UtilisateurRepository daoUtilisateur;
+    private CompteRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return this.daoUtilisateur
+
+        return this.repository
             .findByUsernameOptional(username)
             .map(u -> User.builder()
                 .username(u.getUsername())
                 .password(u.getPassword())
-                .authorities(u.isAdmin() ? RoleEnum.ADMIN.getRole() : RoleEnum.USER.getRole())
+                .authorities((u instanceof Admin) ? RoleEnum.ADMIN.getRole() : RoleEnum.USER.getRole())
                 .build()
             )
             .orElseThrow(() -> new UsernameNotFoundException("L'utilisateur n'existe pas!"))

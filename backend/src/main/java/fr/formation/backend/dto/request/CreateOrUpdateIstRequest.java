@@ -19,7 +19,7 @@ public class CreateOrUpdateIstRequest {
 
     private int incidence;
 
-    private String image; //#TODO update en fonction du type défini dans model/Ist
+    private String image;
 
     private List<Symptome> symptomes = new ArrayList<>();
 
