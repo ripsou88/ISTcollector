@@ -1,39 +1,39 @@
 -- Script MySQL pour la base istdex
 -- 100 questions sur les IST, chacune avec 4 réponses dont 1 correcte.
--- Schéma inspiré du diagramme fourni : Question(ID, Question, id_bonne_reponse) et Reponse(ID, Reponse).
--- Une colonne id_question est ajoutée à Reponse pour matérialiser l'association 1 question -> plusieurs réponses.
--- Sources de vérification utilisées : OMS, Santé publique France / QuestionSexualité, Assurance Maladie (ameli).
+-- Schéma inspiré du diagramme fourni : question(id, question, id_bonne_reponse) et reponse(id, reponse).
+-- Une colonne id_question est ajoutée à reponse pour matérialiser l'association 1 question -> plusieurs réponses.
+-- Sources de vérification utilisées : OMS, Santé publique France / questionSexualité, Assurance Maladie (ameli).
 
 CREATE DATABASE IF NOT EXISTS `istdex` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `istdex`;
 
 SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE IF EXISTS `Question`;
-DROP TABLE IF EXISTS `Reponse`;
+DROP TABLE IF EXISTS `question`;
+DROP TABLE IF EXISTS `reponse`;
 SET FOREIGN_KEY_CHECKS = 1;
 
-CREATE TABLE `Question` (
-  `ID` INT NOT NULL,
-  `Question` VARCHAR(700) NOT NULL,
+CREATE TABLE `question` (
+  `id` INT NOT NULL,
+  `question` VARCHAR(700) NOT NULL,
   `id_bonne_reponse` INT NULL,
-  PRIMARY KEY (`ID`),
+  PRIMARY KEY (`id`),
   INDEX `idx_question_bonne_reponse` (`id_bonne_reponse`),
-  INDEX `idx_question_id_bonne` (`ID`, `id_bonne_reponse`)
+  INDEX `idx_question_id_bonne` (`id`, `id_bonne_reponse`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `Reponse` (
-  `ID` INT NOT NULL,
+CREATE TABLE `reponse` (
+  `id` INT NOT NULL,
   `id_question` INT NOT NULL,
-  `Reponse` VARCHAR(700) NOT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `uk_reponse_question_id` (`id_question`, `ID`),
+  `reponse` VARCHAR(700) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_reponse_question_id` (`id_question`, `id`),
   INDEX `idx_reponse_question` (`id_question`),
-  CONSTRAINT `fk_reponse_question` FOREIGN KEY (`id_question`) REFERENCES `Question` (`ID`) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT `fk_reponse_question` FOREIGN KEY (`id_question`) REFERENCES `question` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 START TRANSACTION;
 
-INSERT INTO `Question` (`ID`, `Question`, `id_bonne_reponse`) VALUES
+INSERT INTO `question` (`id`, `question`, `id_bonne_reponse`) VALUES
 (1, 'Que signifie le sigle IST ?', NULL),
 (2, 'Par quels types de rapports une IST peut-elle se transmettre ?', NULL),
 (3, 'Une personne peut-elle avoir une IST sans symptôme ?', NULL),
@@ -135,7 +135,7 @@ INSERT INTO `Question` (`ID`, `Question`, `id_bonne_reponse`) VALUES
 (99, 'Quelle combinaison décrit bien une prévention sexuelle complète ?', NULL),
 (100, 'Quel objectif principal vise l''éducation sur les IST ?', NULL);
 
-INSERT INTO `Reponse` (`ID`, `id_question`, `Reponse`) VALUES
+INSERT INTO `reponse` (`id`, `id_question`, `reponse`) VALUES
 (11, 1, 'Infection seulement tropicale'),
 (12, 1, 'Infection sexuellement transmissible'),
 (13, 1, 'Inflammation sanguine temporaire'),
@@ -279,8 +279,8 @@ INSERT INTO `Reponse` (`ID`, `id_question`, `Reponse`) VALUES
 (361, 36, 'Un dépistage sans ordonnance ni rendez-vous pour le VIH et certaines IST'),
 (362, 36, 'Une vaccination obligatoire contre toutes les IST'),
 (363, 36, 'Un traitement antibiotique automatique sans diagnostic'),
-(364, 36, 'Un remplacement définitif des CeGIDD'),
-(371, 37, 'Un CeGIDD'),
+(364, 36, 'Un remplacement définitif des CeGidD'),
+(371, 37, 'Un CeGidD'),
 (372, 37, 'Uniquement une salle de sport'),
 (373, 37, 'Uniquement une station-service'),
 (374, 37, 'Uniquement un garage automobile'),
@@ -516,7 +516,7 @@ INSERT INTO `Reponse` (`ID`, `id_question`, `Reponse`) VALUES
 (952, 95, 'Considérer que l''on est forcément immunisé'),
 (953, 95, 'Prendre son traitement sans diagnostic'),
 (954, 95, 'Attendre uniquement que les réseaux sociaux donnent une réponse'),
-(961, 96, 'Des lieux comme les CeGIDD peuvent proposer un accueil confidentiel et gratuit'),
+(961, 96, 'Des lieux comme les CeGidD peuvent proposer un accueil confidentiel et gratuit'),
 (962, 96, 'Tout dépistage est automatiquement public'),
 (963, 96, 'Un dépistage oblige à informer son employeur'),
 (964, 96, 'La confidentialité empêche le traitement'),
@@ -537,7 +537,7 @@ INSERT INTO `Reponse` (`ID`, `id_question`, `Reponse`) VALUES
 (1003, 100, 'Remplacer tous les professionnels de santé'),
 (1004, 100, 'Garantir qu''aucune infection n''existera plus jamais');
 
-UPDATE `Question` SET `id_bonne_reponse` = CASE `ID`
+UPDATE `question` SET `id_bonne_reponse` = CASE `id`
   WHEN 1 THEN 12
   WHEN 2 THEN 23
   WHEN 3 THEN 31
@@ -639,22 +639,22 @@ UPDATE `Question` SET `id_bonne_reponse` = CASE `ID`
   WHEN 99 THEN 991
   WHEN 100 THEN 1001
 END
-WHERE `ID` BETWEEN 1 AND 100;
+WHERE `id` BETWEEN 1 AND 100;
 
 COMMIT;
 
-ALTER TABLE `Question`
+ALTER TABLE `question`
   MODIFY `id_bonne_reponse` INT NOT NULL,
-  ADD CONSTRAINT `fk_question_bonne_reponse` FOREIGN KEY (`ID`, `id_bonne_reponse`) REFERENCES `Reponse` (`id_question`, `ID`) ON UPDATE CASCADE ON DELETE RESTRICT;
+  ADD CONSTRAINT `fk_question_bonne_reponse` FOREIGN KEY (`id`, `id_bonne_reponse`) REFERENCES `reponse` (`id_question`, `id`) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 -- Requête de vérification : doit retourner 100 lignes, chaque question avec sa bonne réponse.
--- SELECT q.ID, q.Question, r.Reponse AS bonne_reponse
--- FROM `Question` q
--- JOIN `Reponse` r ON r.ID = q.id_bonne_reponse
--- ORDER BY q.ID;
+-- SELECT q.id, q.question, r.reponse AS bonne_reponse
+-- FROM `question` q
+-- JOIN `reponse` r ON r.id = q.id_bonne_reponse
+-- ORDER BY q.id;
 
 -- Requête de vérification : doit retourner 100 si chaque question a exactement 4 réponses.
 -- SELECT COUNT(*) AS questions_avec_4_reponses
 -- FROM (
---   SELECT id_question FROM `Reponse` GROUP BY id_question HAVING COUNT(*) = 4
+--   SELECT id_question FROM `reponse` GROUP BY id_question HAVING COUNT(*) = 4
 -- ) x;
