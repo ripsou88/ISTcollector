@@ -41,7 +41,7 @@
 
 .syphillis {
   position: absolute;
-  top: clamp(60px, 8vw, 100px);
+  top: clamp(70px, 8vw, 100px);
   right: clamp(100px, 38vw, 430px);
   width: clamp(70px, 7vw, 110px);
   height: auto;
@@ -53,6 +53,33 @@
   top: clamp(-40px, -3vw, -20px);
   right: clamp(150px, 40vw, 340px);
   width: clamp(70px, 7vw, 90px);
+  height: auto;
+  object-fit: contain;
+}
+
+.hepatiteB {
+  position: absolute;
+  top: clamp(70px, 10vw, 110px);
+  right: clamp(50px, 20vw, 200px);
+  width: clamp(70px, 7vw, 90px);
+  height: auto;
+  object-fit: contain;
+}
+
+.Prevention {
+  position: absolute;
+  top: clamp(8px, 8vw, 200px);
+  right: clamp(125px, 8vw, 12px);
+  width: clamp(220px, 8vw, 70px);
+  height: auto;
+  object-fit: contain;
+}
+
+.Quizz {
+  position: absolute;
+  bottom: clamp(-70px, -15vw, -20px);
+  right: clamp(-30px, 15vw, 140px);
+  width: clamp(220px, 5vw, 80px);
   height: auto;
   object-fit: contain;
 }
@@ -127,6 +154,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
   z-index: 1; /* pour avoir l'effet pop meme avec Joel */
 }
 
