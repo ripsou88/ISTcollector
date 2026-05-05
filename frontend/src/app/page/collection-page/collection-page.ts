@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { CardPlaceholder } from '../../components/card-placeholder/card-placeholder';
+import { Ist } from '../../interface/ist';
+import { TypeIst } from '../../enum/type-ist';
+import { TypePrevention } from '../../enum/type-prevention';
+import { Transmission } from '../../enum/transmission';
 
 @Component({
   selector: 'app-collection-page',
@@ -8,5 +12,27 @@ import { CardPlaceholder } from '../../components/card-placeholder/card-placehol
   styleUrl: './collection-page.css',
 })
 export class CollectionPage {
-  protected cards = [1, 2, 3, 4, 5, 6, 7, 8];
+  protected vih: Ist = {
+    id: 1,
+    nom: 'vih',
+    gravite: 5,
+    img: '',
+    incidence: 5000,
+    symptome: [],
+    shortDesc: 'sympathic disease',
+    desc: 'Le VIH est un retrovirus qui va s’attaquer au systeme immunitaire et plus specifiquement aux lymphocyte T CD4, qui au stade final d’infection est connu sous le nom de sida',
+    typeIst: TypeIst.Virale,
+    traitements: [{ id: 1, nom: 'Antiretroviral', prise: 'Idk', duree: -1 }],
+    preventions: [{ id: 1, nom: 'Preservatif', typePrevention: TypePrevention.Barriere }],
+    transmissions: [
+      Transmission.Contact_Sanguin,
+      Transmission.Materno_Foetale,
+      Transmission.Sexuelle,
+    ],
+  };
+
+  protected cards: Ist[] = Array.from({ length: 10 }, (_, i) => ({
+    ...this.vih,
+    id: i + 1,
+  }));
 }
