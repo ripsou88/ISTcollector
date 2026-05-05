@@ -2,7 +2,13 @@
   <nav>
 
     <div class="nav-left">
-      <div class="hamburger" (click)="toggleMenu()">☰</div>
+      <div class="hamburger" (click)="toggleMenu()">
+        <svg viewBox="0 0 24 24" class="hamburger-icon">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </div>
 
       <div class="logo">
         <img src="img/front/LOGO.png" alt="logo">
@@ -16,24 +22,53 @@
 
     <!-- MENU -->
     <ul class="nav-menu" [class.open]="menuOpen">
-      <li><a [routerLink]="['/home']"
+
+      <li>
+        <a routerLink="/home"
         routerLinkActive="active"
-        (click)="menuOpen = false"
-        [routerLinkActiveOptions]="{ exact: true }">
-        ACCUEIL</a></li>
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="menuOpen = false">
+        ACCUEIL
+      </a>
+    </li>
 
-        <li><a [routerLink]="['/apprendre']" routerLinkActive="active">
-          APPRENDRE</a></li>
+    <li>
+      <a routerLink="/apprendre"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="menuOpen = false">
+      APPRENDRE
+    </a>
+  </li>
 
-          <li><a [routerLink]="['/collection']" routerLinkActive="active">
-            COLLECTION</a></li>
+  <li>
+    <a routerLink="/collection"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    (click)="menuOpen = false">
+    COLLECTION
+  </a>
+</li>
 
-            <li><a [routerLink]="['/quizz']" routerLinkActive="active">
-              QUIZZ</a></li>
+<li>
+  <a routerLink="/quizz"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="{ exact: true }"
+  (click)="menuOpen = false">
+  QUIZZ
+</a>
+</li>
 
-              <li><a [routerLink]="['/connexion']" routerLinkActive="active">
-                CONNEXION</a></li>
-              </ul>
+<li>
+  <a routerLink="/connexion"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="{ exact: true }"
+  (click)="menuOpen = false">
+  CONNEXION
+</a>
+</li>
 
-            </nav>
-          </header>
+</ul>
+
+</nav>
+</header>

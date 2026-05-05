@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.formation.backend.model.Prevention;
+import fr.formation.backend.model.Symptome;
 import fr.formation.backend.model.Traitement;
 import fr.formation.backend.model.Transmission;
 import fr.formation.backend.model.TypeIst;
@@ -18,9 +19,9 @@ public class CreateOrUpdateIstRequest {
 
     private int incidence;
 
-    private String image; //#TODO update en fonction du type défini dans model/Ist
+    private String image;
 
-    private List<String> symptomes = new ArrayList<>();
+    private List<Symptome> symptomes = new ArrayList<>();
 
     private String shortDescription;
 
@@ -31,10 +32,10 @@ public class CreateOrUpdateIstRequest {
     private Transmission transmission;
 
     @NotBlank
-    private Prevention prevention;
+    private List<Prevention> prevention;
 
     @NotBlank
-    private Traitement traitement;
+    private List<Traitement> traitement;
 
     public String getNom() {
         return nom;
@@ -68,11 +69,11 @@ public class CreateOrUpdateIstRequest {
         this.image = image;
     }
 
-    public List<String> getSymptomes() {
+    public List<Symptome> getSymptomes() {
         return symptomes;
     }
 
-    public void setSymptomes(List<String> symptomes) {
+    public void setSymptomes(List<Symptome> symptomes) {
         this.symptomes = symptomes;
     }
 
@@ -100,20 +101,22 @@ public class CreateOrUpdateIstRequest {
         this.transmission = transmission;
     }
 
-    public Prevention getPrevention() {
-        return prevention;
-    }
+	public List<Prevention> getPrevention() {
+		return prevention;
+	}
 
-    public void setPrevention(Prevention prevention) {
-        this.prevention = prevention;
-    }
+	public void setPrevention(List<Prevention> prevention) {
+		this.prevention = prevention;
+	}
 
-    public Traitement getTraitement() {
-        return traitement;
-    }
+	public List<Traitement> getTraitement() {
+		return traitement;
+	}
 
-    public void setTraitement(Traitement traitement) {
-        this.traitement = traitement;
-    }
+	public void setTraitement(List<Traitement> traitement) {
+		this.traitement = traitement;
+	}
+
+    
 
 }

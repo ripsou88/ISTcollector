@@ -27,11 +27,11 @@ public class JwtUtils {
 
         // Si la connexion est OK, on génère un jeton JWT
         return Jwts.builder()
-            .subject(auth.getName()) // Souvent, c'est le username ici
-            .issuedAt(now)
-            .expiration(new Date(now.getTime() + 3_600_000)) // Durée de validité = 1 heure
-            .signWith(secretKey)
-            .compact() // Le jeton JWT sous forme de String
+                .subject(auth.getName()) // Souvent, c'est le username ici
+                .issuedAt(now)
+                .expiration(new Date(now.getTime() + 3_600_000)) // Durée de validité = 1 heure
+                .signWith(secretKey)
+                .compact() // Le jeton JWT sous forme de String
         ;
     }
 
@@ -52,6 +52,5 @@ public class JwtUtils {
             return Optional.empty();
         }
     }
-
 
 }

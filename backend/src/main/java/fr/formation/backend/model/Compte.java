@@ -1,19 +1,34 @@
 package fr.formation.backend.model;
 
+import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
 
 @Entity
-public class Utilisateur {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "account")
+@DiscriminatorColumn(name = "type_compte", columnDefinition = "ENUM('adm', 'usr')")
+public abstract class Compte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String username;
     private String password;
-    private boolean admin;
+
+    public Compte() {
+    }
+
+    public Compte(Integer id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
 
     public Integer getId() {
         return id;
@@ -39,11 +54,4 @@ public class Utilisateur {
         this.password = password;
     }
 
-    public boolean isAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
 }
