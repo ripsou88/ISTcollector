@@ -2,7 +2,7 @@ import { Component, AfterViewInit, ViewChild, ElementRef, input } from '@angular
 import { Ist } from '../../interface/ist';
 import { CardPopup } from '../card-popup/card-popup';
 import { Transmission, TransmissionEmoji } from '../../enum/transmission';
-import { TypeIst } from '../../enum/type-ist';
+import { TypeIst, TypeIstEmoji } from '../../enum/type-ist';
 import { TypePrevention } from '../../enum/type-prevention';
 import { NgFor } from '@angular/common';
 
@@ -15,6 +15,7 @@ import { NgFor } from '@angular/common';
 export class CardPlaceholder implements AfterViewInit{
   ist = input.required<Ist>();
 
+  protected typeIstEmoji = TypeIstEmoji;
   protected transmissionEmoji = TransmissionEmoji;
   protected vih: Ist = {
     id: 1,
