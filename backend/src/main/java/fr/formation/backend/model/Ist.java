@@ -30,7 +30,7 @@ public class Ist {
     @Column
     private int incidence;
     @Column(length = 20, nullable = false)
-    private String image; //#TODO define type
+    private String image;
     @ManyToMany
     @JoinTable(
         name = "ist-symptome",
