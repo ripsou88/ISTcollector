@@ -57,7 +57,6 @@ public class PreventionController {
 
         prevention.setNom(request.getNom());
         prevention.setTypePrevention(request.getTypePrevention());
-        prevention.setIsts(request.getIsts());
 
         this.repository.save(prevention);
 
@@ -75,7 +74,6 @@ public class PreventionController {
 
         prevention.setNom(request.getNom());
         prevention.setTypePrevention(request.getTypePrevention());
-        prevention.setIsts(request.getIsts());
 
         this.repository.save(prevention);
 
