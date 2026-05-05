@@ -22,7 +22,7 @@ import fr.formation.backend.repo.CompteRepository;
 
 @RestController
 @RequestMapping("/api")
-public class UtilisateurController {
+public class CompteController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
