@@ -39,6 +39,12 @@ nav {
     cursor: pointer;
   }
 
+.hamburger:hover {
+  color: var(--pink);
+  transform: scale(1.1);
+  transition: 0.2s ease;
+}
+
   .hamburger:hover {
     color: var(--pink);
     transform: scale(1.1);
