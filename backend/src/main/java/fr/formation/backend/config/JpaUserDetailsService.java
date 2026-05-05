@@ -12,11 +12,11 @@ import fr.formation.backend.repo.UtilisateurRepository;
 @Service
 public class JpaUserDetailsService implements UserDetailsService {
     @Autowired
-    private UtilisateurRepository daoUtilisateur;
+    private UtilisateurRepository repoUtilisateur;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return this.daoUtilisateur
+        return this.repoUtilisateur
             .findByUsernameOptional(username)
             .map(u -> User.builder()
                 .username(u.getUsername())

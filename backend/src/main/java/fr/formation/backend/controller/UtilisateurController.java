@@ -29,7 +29,7 @@ public class UtilisateurController {
     private JwtUtils jwtUtils;
 
     @Autowired
-    private UtilisateurRepository daoUtilisateur;
+    private UtilisateurRepository repoUtilisateur;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -53,7 +53,7 @@ public class UtilisateurController {
         utilisateur.setPassword(this.passwordEncoder.encode(request.getPassword()));
         utilisateur.setAdmin(false);
 
-        utilisateur = this.daoUtilisateur.save(utilisateur);
+        utilisateur = this.repoUtilisateur.save(utilisateur);
 
         return new EntityCreatedOrUpdatedResponse(utilisateur.getId());
     }
