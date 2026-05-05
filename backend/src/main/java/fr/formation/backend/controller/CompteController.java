@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +31,7 @@ import fr.formation.backend.model.Admin;
 import fr.formation.backend.model.Compte;
 import fr.formation.backend.model.User;
 import fr.formation.backend.repo.CompteRepository;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
@@ -59,8 +62,9 @@ public class CompteController {
     }
 
     @PostMapping("/auth")
-    public TokenResponse auth(@RequestBody AuthRequest request) {
+    public TokenResponse auth(@Valid @RequestBody AuthRequest request) {
         log.debug("Tentative de connexion ...");
+
         // On authentifie l'utilisateur ...
         Authentication authentication = new UsernamePasswordAuthenticationToken(request.getUsername(),
                 request.getPassword());
@@ -74,7 +78,7 @@ public class CompteController {
 
     @PostMapping("/subscription")
     @ResponseStatus(HttpStatus.CREATED)
-    public EntityCreatedOrUpdatedResponse add(@RequestBody AuthRequest request) {
+    public EntityCreatedOrUpdatedResponse add(@Valid @RequestBody AuthRequest request) {
         log.debug("Création d'un compte utilisateur ...");
 
         // La création de compte ne concerne que les utilisateurs, pas les admins
@@ -93,7 +97,7 @@ public class CompteController {
     @PostMapping("/newadmin")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ADMIN')")
-    public EntityCreatedOrUpdatedResponse newAdmin(@RequestBody AuthRequest request) {
+    public EntityCreatedOrUpdatedResponse newAdmin(@Valid @RequestBody AuthRequest request) {
         log.debug("Création d'un compte admin ...");
         Compte admin = new Admin();
 
