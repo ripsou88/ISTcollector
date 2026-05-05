@@ -16,7 +16,6 @@ export class CollectionPage {
     id: 1,
     nom: 'vih',
     gravite: 5,
-    img: '/img/virus/papillomavirus.PNG',
     incidence: 5000,
     symptomes: ['Generique'],
     shortDesc: 'sympathic disease',

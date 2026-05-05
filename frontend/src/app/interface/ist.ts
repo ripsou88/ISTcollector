@@ -7,7 +7,6 @@ export interface Ist {
   id: number;
   nom: string;
   gravite: number;
-  img: string;
   incidence: number;
   symptomes: string[];
   shortDesc: string;
