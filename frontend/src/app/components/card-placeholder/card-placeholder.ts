@@ -1,9 +1,8 @@
-import { Component, AfterViewInit, ViewChild, ElementRef, input } from '@angular/core';
 import { Ist } from '../../interface/ist';
 import { CardPopup } from '../card-popup/card-popup';
-import { Transmission, TransmissionEmoji } from '../../enum/transmission';
-import { TypeIst, TypeIstEmoji } from '../../enum/type-ist';
-import { TypePrevention } from '../../enum/type-prevention';
+import { Component, AfterViewInit, ViewChild, ElementRef, input, signal } from '@angular/core';
+import { TransmissionEmoji } from '../../enum/transmission';
+import { TypeIstEmoji } from '../../enum/type-ist';
 import { NgFor } from '@angular/common';
 
 @Component({
@@ -12,29 +11,30 @@ import { NgFor } from '@angular/common';
   templateUrl: './card-placeholder.html',
   styleUrl: './card-placeholder.css',
 })
-export class CardPlaceholder implements AfterViewInit{
-  ist = input.required<Ist>();
+export class CardPlaceholder implements AfterViewInit {
+  public readonly ist = input.required<Ist>();
 
+  protected readonly isModalOpen = signal(false);
+  protected readonly isAnimating = signal(false);
+
+  protected openModal(): void {
+    if (this.isAnimating() || this.isModalOpen()) {
+      return;
+    }
+
+    this.isAnimating.set(true);
+
+    setTimeout(() => {
+      this.isModalOpen.set(true);
+      this.isAnimating.set(false);
+    }, 300);
+  }
+
+  protected closeModal(): void {
+    this.isModalOpen.set(false);
+  }
   protected typeIstEmoji = TypeIstEmoji;
   protected transmissionEmoji = TransmissionEmoji;
-  protected vih: Ist = {
-    id: 1,
-    nom: 'vih',
-    gravite: 5,
-    img: '/img/virus/papillomavirus.PNG',
-    incidence: 5000,
-    symptome: [],
-    shortDesc: 'sympathic disease',
-    desc: `Le VIH est un retrovirus qui va s’attaquer au systeme immunitaire et plus specifiquement aux lymphocyte T CD4, qui au stade final d’infection est connu sous le nom de sida`,
-    typeIst: TypeIst.Virale,
-    traitements: [{ id: 1, nom: 'Antiretroviral', prise: 'Idk', duree: -1 }],
-    preventions: [{ id: 1, nom: 'Preservatif', typePrevention: TypePrevention.Barriere }],
-    transmissions: [
-      Transmission.Contact_Sanguin,
-      Transmission.Materno_Foetale,
-      Transmission.Sexuelle,
-    ],
-  };
 
   @ViewChild('allcarte') wrapRef!: ElementRef;
   @ViewChild('carte') cardRef!: ElementRef;
@@ -56,7 +56,7 @@ export class CardPlaceholder implements AfterViewInit{
       bounds = wrap!.getBoundingClientRect();
     }
 
-    function applyTilt(e: MouseEvent | { clientX: number, clientY: number }) {
+    function applyTilt(e: MouseEvent | { clientX: number; clientY: number }) {
       if (!bounds) refreshBounds();
 
       const mx = e.clientX - bounds!.left;
@@ -92,7 +92,7 @@ export class CardPlaceholder implements AfterViewInit{
 
   getStars(): number[] {
     const stars = [];
-    for (let i = 0; i < this.vih.gravite; i++) {
+    for (let i = 0; i < this.ist().gravite; i++) {
       stars.push(i);
     }
     return stars;
