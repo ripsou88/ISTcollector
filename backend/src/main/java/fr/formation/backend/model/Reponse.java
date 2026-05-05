@@ -26,9 +26,13 @@ public class Reponse {
     @JoinColumn(name = "id_question")
     private Question question;
 
-    public Reponse(String reponseString, Question question) {
+    @Column(name = "correct", nullable = false) 
+    private boolean correct;
+
+    public Reponse(String reponseString, Question question, boolean correct) {
         this.reponseString = reponseString;
         this.question = question;
+        this.correct = correct;
     }
 
     public Reponse(){}
@@ -56,6 +60,16 @@ public class Reponse {
     public void setQuestion(Question question) {
         this.question = question;
     }
+
+    public boolean isCorrect() {
+        return correct;
+    }
+
+    public void setCorrect(boolean correct) {
+        this.correct = correct;
+    }
+
+    
     
     
 
