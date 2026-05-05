@@ -27,7 +27,7 @@ public class Traitement {
     @Column
     private int duree; // #TODO Choisir si durée en entier ou en string (en fonction si calculs automatiques ou non ?)
 
-    private List<Ist> ist = new ArrayList<>();
+    private List<Ist> ists = new ArrayList<>();
 
     public Traitement() {
     }
@@ -71,12 +71,12 @@ public class Traitement {
         this.duree = duree;
     }
 
-    public List<Ist> getIst() {
-        return ist;
+    public List<Ist> getIsts() {
+        return ists;
     }
 
-    public void setIst(List<Ist> ist) {
-        this.ist = ist;
+    public void setIsts(List<Ist> ists) {
+        this.ists = ists;
     }
 
 }

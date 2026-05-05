@@ -24,7 +24,7 @@ public class Prevention {
     @Column
     private TypePrevention typePrevention;
 
-    private List<Ist> ist = new ArrayList<>();
+    private List<Ist> ists = new ArrayList<>();
 
     public Prevention() {
     }
@@ -59,12 +59,12 @@ public class Prevention {
         this.typePrevention = typePrevention;
     }
 
-    public List<Ist> getIst() {
-        return ist;
+    public List<Ist> getIsts() {
+        return ists;
     }
 
-    public void setIst(List<Ist> ist) {
-        this.ist = ist;
+    public void setIsts(List<Ist> ists) {
+        this.ists = ists;
     }
 
 }
