@@ -111,7 +111,7 @@ public class QuestionController {
                     .toList();
         }
 
-        return this.questionRepository.findAll(PageRequest.of(user.getLevel() * 5, 5, Sort.by("id")))
+        return this.questionRepository.findAll(PageRequest.of(user.getLevel() , 5, Sort.by("id")))
                 .stream()
                 .map(QuestionResponse::convert)
                 .toList();
