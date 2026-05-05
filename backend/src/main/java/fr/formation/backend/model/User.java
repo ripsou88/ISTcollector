@@ -26,8 +26,8 @@ public class User extends Compte {
 	private List<Ist> ist = new ArrayList<>();
 
 	@Column(name = "level")
-	@ColumnDefault("1")
-	private Integer Level = 1;
+	@ColumnDefault("0")
+	private Integer Level = 0;
 	
     public User() {
     }
