@@ -34,6 +34,10 @@ public class JwtHeaderFilter extends OncePerRequestFilter {
             String token = authHeader.substring(7);
 
             Optional<String> optUsername = this.jwtUtils.validate(token);
+            
+            System.out.println("Authorization header = " + authHeader);
+            System.out.println("Username JWT = " + optUsername);
+
 
             if (optUsername.isPresent() && SecurityContextHolder.getContext().getAuthentication() == null) {
                 String username = optUsername.get();
@@ -51,6 +55,8 @@ public class JwtHeaderFilter extends OncePerRequestFilter {
 
                 catch (UsernameNotFoundException ex) {
                     SecurityContextHolder.clearContext();
+                    System.out.println("Utilisateur introuvable : " + username);
+
                 }
             }
         }
