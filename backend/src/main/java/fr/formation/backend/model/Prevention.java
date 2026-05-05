@@ -1,13 +1,15 @@
 package fr.formation.backend.model;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,13 +20,13 @@ public class Prevention {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true)
+    @Column(unique = true, length = 20, nullable = false)
     private String nom;
 
-    @Column
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20, nullable = false)
     private TypePrevention typePrevention;
-
-    private List<Ist> ist = new ArrayList<>();
+    
 
     public Prevention() {
     }
@@ -59,12 +61,5 @@ public class Prevention {
         this.typePrevention = typePrevention;
     }
 
-    public List<Ist> getIst() {
-        return ist;
-    }
-
-    public void setIst(List<Ist> ist) {
-        this.ist = ist;
-    }
 
 }

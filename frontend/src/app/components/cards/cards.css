@@ -6,8 +6,10 @@
 
 .infirmier {
   position: absolute;
-  left: -310px;
+  left: -330px;
+  top:-30px;
   bottom: 0;
+  z-index: 20;
 }
 
 .characters {
@@ -57,7 +59,7 @@
 .bubble {
   position: absolute;
   bottom: 85%;
-  left: 400px;
+  left: 420px;
   max-width: 250px;
   padding: 1rem 1.2rem;
   background: var(--yellow-soft);
@@ -112,7 +114,7 @@
 }
 
 .middle-cards .card {
-  padding: 1.5rem;
+  padding: 1.4rem;
   border-radius: 20px;
   border: 2px solid var(--green-light);
   background: var(--white);
@@ -123,6 +125,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   z-index: 1; /* pour avoir l'effet pop meme avec Joel */
 }
 
@@ -143,7 +146,7 @@
 }
 
 #middle-cards p {
-  max-width: 600px;
+  max-width: 500px;
   margin: 0 auto 2rem;
   font-size: 1rem;
   color: var(--text-color);
@@ -166,19 +169,22 @@
 }
 .quiz-table {
   width: 100%;
-  border-spacing: 0 10px;
+  border-spacing: 0 4px;
+  margin-top: 0.1rem;
+  margin-bottom: 0;
 }
 
 .quiz-table td {
   background: white;
   text-align : left;
   vertical-align: middle;
-  padding: 1rem;
+  padding: 0.6rem;
   border-radius: 12px;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: all 0.3s ease;
   border-left: 6px solid var(--green-light);
+
 }
 
 .quiz-table td:hover {
