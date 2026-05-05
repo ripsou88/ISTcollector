@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.formation.backend.config.CustomUserDetails;
 import fr.formation.backend.dto.request.CreateOrUpdateQuestionReponseRequest;
 import fr.formation.backend.dto.request.CreateOrUpdateQuestionRequest;
 import fr.formation.backend.dto.response.EntityCreatedOrUpdatedResponse;
@@ -99,7 +101,7 @@ public class QuestionController {
 
     @GetMapping("/ten")
     @Transactional(readOnly = true)
-    public List<QuestionResponse> getQuestionReponse() {
+    public List<QuestionResponse> getQuestionReponse(@AuthenticationPrincipal CustomUserDetails User) {
         log.debug("Retour des 10 questions");
         return this.questionRepository.findAll(PageRequest.of(0, 10, Sort.by("id")))
                 .stream()

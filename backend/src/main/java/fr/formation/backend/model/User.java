@@ -3,6 +3,10 @@ package fr.formation.backend.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -20,6 +24,10 @@ public class User extends Compte {
 	        inverseJoinColumns = @JoinColumn(name = "ist_id")
 	    )
 	private List<Ist> ist = new ArrayList<>();
+
+	@Column(name = "level")
+	@ColumnDefault("1")
+	private Integer Level = 1;
 	
     public User() {
     }
@@ -27,6 +35,23 @@ public class User extends Compte {
     public User(Integer id, String username, String password) {
         super(id, username, password);
     }
+
+	public List<Ist> getIst() {
+		return ist;
+	}
+
+	public void setIst(List<Ist> ist) {
+		this.ist = ist;
+	}
+
+	public Integer getLevel() {
+		return Level;
+	}
+
+	public void setLevel(Integer level) {
+		Level = level;
+	}
     
+	
 
 }
