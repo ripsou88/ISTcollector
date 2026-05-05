@@ -18,7 +18,7 @@ export class CollectionPage {
     gravite: 5,
     img: '',
     incidence: 5000,
-    symptome: ['Generique'],
+    symptomes: ['Generique'],
     shortDesc: 'sympathic disease',
     desc: 'Le VIH est un retrovirus qui va s’attaquer au systeme immunitaire et plus specifiquement aux lymphocyte T CD4, qui au stade final d’infection est connu sous le nom de sida',
     typeIst: TypeIst.Virale,

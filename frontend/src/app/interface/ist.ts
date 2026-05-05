@@ -9,7 +9,7 @@ export interface Ist {
   gravite: number;
   img: string;
   incidence: number;
-  symptome: string[];
+  symptomes: string[];
   shortDesc: string;
   desc: string;
   typeIst: TypeIst;

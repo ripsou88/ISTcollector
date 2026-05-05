@@ -1,16 +1,20 @@
-<div class="all">
-  <div class="ligne1">VIH</div>
+<div class="all" [class.card-opening]="isAnimating()" (click)="openModal()">
+  <div class="ligne1">{{ ist().nom }}</div>
 
   <div class="ligne2">
     <div class="ist-type">🦠</div>
     <div class="power">⭐⭐⭐⭐⭐</div>
   </div>
 
-  <div class="ligne3"><img src="/img/virus/VIH.PNG"/></div>
+  <div class="ligne3">
+    <img src="/img/virus/VIH.PNG" />
+  </div>
 
   <div class="ligne4">💉🍆</div>
 
-  <div class="ligne5">{{ vih.desc }}</div>
-
-  <!-- <app-card-popup [ist]="ist()" /> -->
+  <div class="ligne5">{{ ist().shortDesc }}</div>
 </div>
+
+@if (isModalOpen()) {
+  <app-card-popup [ist]="ist()" (close)="closeModal()"></app-card-popup>
+}
