@@ -1,11 +1,15 @@
 package fr.formation.backend.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +20,8 @@ import fr.formation.backend.config.JwtUtils;
 import fr.formation.backend.dto.request.AuthRequest;
 import fr.formation.backend.dto.response.EntityCreatedOrUpdatedResponse;
 import fr.formation.backend.dto.response.TokenResponse;
+import fr.formation.backend.dto.response.UserResponse;
+import fr.formation.backend.model.Admin;
 import fr.formation.backend.model.Compte;
 import fr.formation.backend.model.User;
 import fr.formation.backend.repo.CompteRepository;
@@ -35,10 +41,16 @@ public class CompteController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @GetMapping("/users")
+    public List<UserResponse> findAllUser() {
+        return this.repository.findAllUser().stream().map(UserResponse::convert).toList();
+    }
+
     @PostMapping("/auth")
     public TokenResponse auth(@RequestBody AuthRequest request) {
         // On authentifie l'utilisateur ...
-        Authentication authentication = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(request.getUsername(),
+                request.getPassword());
 
         authentication = this.authenticationManager.authenticate(authentication);
 
@@ -58,4 +70,19 @@ public class CompteController {
 
         return new EntityCreatedOrUpdatedResponse(utilisateur.getId());
     }
+
+    @PostMapping("/newadmin")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN')")
+    public EntityCreatedOrUpdatedResponse newAdmin(@RequestBody AuthRequest request) {
+        Compte admin = new Admin();
+
+        admin.setUsername(request.getUsername());
+        admin.setPassword(this.passwordEncoder.encode(request.getPassword()));
+
+        admin = this.repository.save(admin);
+
+        return new EntityCreatedOrUpdatedResponse(admin.getId());
+    }
+
 }
