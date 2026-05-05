@@ -61,10 +61,10 @@ export class CardPlaceholder implements AfterViewInit{
       const mxPct = mx / bounds!.width;
       const myPct = my / bounds!.height;
 
-      const rotateY = (mxPct - 0.5) * 36;
-      const rotateX = -(myPct - 0.5) * 28;
-      const shadowX = rotateY * 0.6;
-      const shadowY = -rotateX * 0.6;
+      const rotateY = -(mxPct - 0.5) * 46;
+      const rotateX = (myPct - 0.5) * 38;
+      const shadowX = -rotateY * 0.6;
+      const shadowY = rotateX * 0.6;
       const angle = Math.atan2(myPct - 0.5, mxPct - 0.5) * (180 / Math.PI);
 
       card!.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.04)`;
