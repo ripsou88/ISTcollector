@@ -11,7 +11,7 @@ import fr.formation.backend.model.User;
 
 public interface CompteRepository extends JpaRepository<Compte, Integer> {
 
-    public Compte findByUsername(String username);
+    public Optional<Compte> findByUsername(String username);
 
     @Query("From User")
     public List<User> findAllUser();
