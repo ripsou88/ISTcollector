@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-
+  align-items: center;
   border-radius: 25px;
   gap: 5px;
   perspective: 900px;
@@ -12,6 +12,9 @@
 }
 
 .carte {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
   width: 100%;
   height: 100%;
@@ -26,15 +29,24 @@
   justify-content: space-around;
 }
 
-.ligne3 img{
-  width: 150px;
+.ligne3 {
+  background: linear-gradient(160deg, var(--green-dark) 0%, var(--green-light) 40%, var(--green-deep) 100%);
+  width: 70%;
   height: 150px;
+  margin: 10px;
+  border-radius: 20px;
+  box-shadow: inset 0 0 30px 10px rgba(0,0,0,0.6);
+}
+
+.ligne3 img{
+  width: 130px;
+  height: 130px;
   animation: float 3.5s ease-in-out infinite;
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+  0%, 100% { transform: translateY(10px); }
+  50% { transform: translateY(18px); }
 }
 
 /* ---------------- Brillant arc en ciel ---------------- */
@@ -54,18 +66,19 @@
   );
   */
   
-
+  /* NOIR / VIOLET / ROUGE
   background: conic-gradient(
   from 0deg at var(--mx, 50%) var(--my, 50%),
   #0a0a0a, #8b0000, #ff2200, #4b0082, #ff2200, #1a001a, #8b0000, #0a0a0a
   );
+  */
 
-  /*
+  
   background: conic-gradient(
   from 0deg at var(--mx, 50%) var(--my, 50%),
-  #02333a, #ff6f91, #4db6ac, #ffc1e3, #055c5c, #ff9ac1, #63ceaa, #8b3065, #02333a
+  var(--green-deep), var(--pink), var(--green-light), var(--pink-pastel), var(--green-dark), var(--pink-light), var(--green), var(--pink-dark), var(--green-deep)
   );
-  */
+  
 
   /* DOREE
   background: conic-gradient(

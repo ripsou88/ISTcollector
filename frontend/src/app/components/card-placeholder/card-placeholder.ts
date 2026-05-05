@@ -1,24 +1,26 @@
 import { Component, AfterViewInit, ViewChild, ElementRef, input } from '@angular/core';
 import { Ist } from '../../interface/ist';
 import { CardPopup } from '../card-popup/card-popup';
-import { Transmission } from '../../enum/transmission';
+import { Transmission, TransmissionEmoji } from '../../enum/transmission';
 import { TypeIst } from '../../enum/type-ist';
 import { TypePrevention } from '../../enum/type-prevention';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-card-placeholder',
-  imports: [CardPopup],
+  imports: [CardPopup, NgFor],
   templateUrl: './card-placeholder.html',
   styleUrl: './card-placeholder.css',
 })
 export class CardPlaceholder implements AfterViewInit{
   ist = input.required<Ist>();
 
+  protected transmissionEmoji = TransmissionEmoji;
   protected vih: Ist = {
     id: 1,
     nom: 'vih',
     gravite: 5,
-    img: '',
+    img: '/img/virus/papillomavirus.PNG',
     incidence: 5000,
     symptome: [],
     shortDesc: 'sympathic disease',
@@ -39,7 +41,7 @@ export class CardPlaceholder implements AfterViewInit{
   @ViewChild('shimmer') shimmerRef!: ElementRef;
   @ViewChild('glare') glareRef!: ElementRef;
 
-    ngAfterViewInit() {
+  ngAfterViewInit() {
     const wrap = this.wrapRef.nativeElement;
     const card = this.cardRef.nativeElement;
     const foil = this.foilRef.nativeElement;
@@ -85,5 +87,13 @@ export class CardPlaceholder implements AfterViewInit{
       raf = requestAnimationFrame(() => applyTilt(e));
     });
     wrap!.addEventListener('mouseleave', resetTilt);
+  }
+
+  getStars(): number[] {
+    const stars = [];
+    for (let i = 0; i < this.vih.gravite; i++) {
+      stars.push(i);
+    }
+    return stars;
   }
 }
