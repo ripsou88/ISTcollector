@@ -32,8 +32,9 @@ public class User extends Compte {
     public User() {
     }
 
-    public User(Integer id, String username, String password) {
+    public User(Integer id, String username, String password,List<Ist> ist) {
         super(id, username, password);
+        this.ist=ist;
     }
 
 	public List<Ist> getIst() {
