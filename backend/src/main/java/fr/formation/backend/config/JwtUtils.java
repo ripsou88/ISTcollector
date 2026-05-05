@@ -17,7 +17,7 @@ import io.jsonwebtoken.security.Keys;
 public class JwtUtils {
     private final String jwtKey;
 
-    public JwtUtils(@Value("${jwt.key}") String jwtKey) {
+    public JwtUtils(@Value("${JWT_KEY}") String jwtKey) {
         this.jwtKey = jwtKey;
     }
 
