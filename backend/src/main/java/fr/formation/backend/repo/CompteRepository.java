@@ -12,8 +12,9 @@ import fr.formation.backend.model.User;
 
 public interface CompteRepository extends JpaRepository<Compte, Integer> {
 
-    public List<User> findAllUser();
-    public List<Admin> findAllAdmin();
+    // TODO comment because doesn't work when running
+    // public List<User> findAllUser();
+    // public List<Admin> findAllAdmin();
 
     public Compte findByUsername(String username);
 
