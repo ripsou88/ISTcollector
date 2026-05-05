@@ -25,7 +25,7 @@ public class Ist {
 
     private int incidence;
 
-    private String image; //#TODO define type
+    private String image;
 
     private List<String> symptomes = new ArrayList<>();
 
