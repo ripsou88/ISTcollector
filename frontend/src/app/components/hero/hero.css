@@ -1,6 +1,6 @@
 .hero {
   text-align: center;
-  padding: 6rem 2rem;
+  padding: clamp(3rem, 6vw, 6rem) 1.5rem;
   background: linear-gradient(135deg,
     var(--pink),
     var(--pink-light),
@@ -13,20 +13,28 @@
   }
 
   .hero h1 {
-    font-size: 2.4rem;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
     margin-bottom: 1rem;
     text-shadow: var(--text-shadow);
   }
 
+  .hero h2 {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  margin-bottom: 2rem;
+  text-shadow: var(--text-shadow);
+  opacity: 0.95;
+}
+
   .hero p {
-    font-size: 1.1rem;
-    margin-bottom: 2.5rem;
+    font-size: clamp(0.95rem, 2vw, 1.2rem);
+    margin-bottom: 2rem;
     text-shadow: var(--text-shadow);
   }
 
   .hero .btn {
     display: inline-block;
-    padding: 0.9rem 2.2rem;
+    padding: clamp(0.7rem, 2vw, 0.9rem) clamp(1.4rem, 3vw, 2.2rem);
     margin: 0.4rem;
     background: var(--green-light);
     font-weight: 600;
@@ -44,22 +52,34 @@
     box-shadow: 0 8px 20px rgba(0,0,0,0.4);
   }
 
+/* Responsive mobile */
   @media (max-width: 768px) {
+
     .hero {
-      padding: 4rem 1.5rem;
-    }
-
-    .hero h1 {
-      font-size: 1.8rem;
-    }
-
-    .hero p {
-      font-size: 1rem;
-      margin-bottom: 2rem;
+      border-radius: 0 0 25% 25% / 0 0 8% 8%;
     }
 
     .hero .btn {
-      padding: 0.8rem 1.8rem;
-      margin: 0.3rem;
+      display: block;
+      width: 80%;
+      margin: 0.5rem auto;
     }
   }
+
+/* Responsive tablette */
+  @media (min-width: 769px) and (max-width: 1024px) {
+  .hero {
+    padding: 4.5rem 2rem;
+  }
+}
+
+/* Responsive TV */
+@media (min-width: 1600px) {
+  .hero {
+    padding: 8rem 3rem;
+  }
+
+  .hero h1 {
+    font-size: 3.2rem;
+  }
+}
