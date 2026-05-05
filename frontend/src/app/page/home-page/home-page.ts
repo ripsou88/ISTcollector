@@ -1,13 +1,11 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { Header } from '../../components/header/header';
 import { Hero } from '../../components/hero/hero';
 import { Cards } from '../../components/cards/cards';
-import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [Header, Hero, Cards, Footer],
+  imports: [Hero, Cards],
   templateUrl: './home-page.html',
   styleUrls: ['./home-page.css'],
 })
