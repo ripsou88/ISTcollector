@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import fr.formation.backend.config.JwtUtils;
 import fr.formation.backend.dto.request.AuthRequest;
@@ -118,11 +118,10 @@ public class CompteController {
     }
 
     @PostMapping("/subscription")
-    @ResponseStatus(HttpStatus.CREATED)
-    public EntityCreatedOrUpdatedResponse add(@Valid @RequestBody AuthRequest request) {
+    public ResponseEntity<Object> add(@Valid @RequestBody AuthRequest request) {
         // Vérification de l'unicité du username
         if (this.repository.findByUsername(request.getUsername()).isPresent()) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Ce nom d'utilisateur existe déjà.");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Ce nom d'utilisateur existe déjà.");
         }
 
         log.debug("Création d'un compte utilisateur ...");
@@ -137,7 +136,7 @@ public class CompteController {
 
         log.debug("Compte créé : {} ...", utilisateur.getId());
 
-        return new EntityCreatedOrUpdatedResponse(utilisateur.getId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(new EntityCreatedOrUpdatedResponse(utilisateur.getId()));
     }
 
     @PostMapping("/subscription-admin")
