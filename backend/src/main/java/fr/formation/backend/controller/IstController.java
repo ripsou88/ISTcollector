@@ -62,7 +62,7 @@ public class IstController {
         ist.setShortDescription(request.getShortDescription());
         ist.setLongDescription(request.getLongDescription());
         ist.setTypeIst(request.getTypeIst());
-        ist.setTransmission(request.getTransmission());
+        ist.setTransmissions(request.getTransmissions());
         ist.setPreventions(request.getPrevention());
         ist.setTraitements(request.getTraitement());
 
@@ -87,7 +87,7 @@ public class IstController {
         ist.setShortDescription(request.getShortDescription());
         ist.setLongDescription(request.getLongDescription());
         ist.setTypeIst(request.getTypeIst());
-        ist.setTransmission(request.getTransmission());
+        ist.setTransmissions(request.getTransmissions());
         ist.setPreventions(request.getPrevention());
         ist.setTraitements(request.getTraitement());
 

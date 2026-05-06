@@ -13,11 +13,11 @@ public record IstResponse(
     String nom,
     int gravite,
     Integer incidence,
-    List<Symptome> symptomes,
     String shortDescription,
     String longDescription,
     TypeIst typeIst,
-    Transmission transmission,
+    List<Symptome> symptomes,
+    List<Transmission> transmissions,
     List<Prevention> preventions,
     List<Traitement> traitements) {
 
@@ -27,11 +27,11 @@ public record IstResponse(
         ist.getNom(),
         ist.getGravite(),
         ist.getIncidence(),
-        ist.getSymptomes(),
         ist.getShortDescription(),
         ist.getLongDescription(),
         ist.getTypeIst(),
-        ist.getTransmission(),
+        ist.getSymptomes(),
+        ist.getTransmissions(),
         ist.getPreventions(),
         ist.getTraitements());
   }
