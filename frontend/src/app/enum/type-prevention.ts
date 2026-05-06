@@ -1,11 +1,7 @@
-export enum TypePrevention {
-  Medical = 'MEDICAL',
-  Barriere = 'BARRIERE',
-  Comportemental = 'COMPORTEMENTAL',
-}
+export type TypePrevention = 'medical' | 'barriere' | 'comportement';
 
-export const TypePreventionEmoji: Record<TypePrevention, { emoji: string, label: string }> = {
-  [TypePrevention.Medical]: { emoji: '💊', label: 'Médical' },
-  [TypePrevention.Barriere]: { emoji: '🛡️', label: 'Barrière' },
-  [TypePrevention.Comportemental]: { emoji: '👥', label: 'Comportemental' },
+export const TypePreventionEmoji: Record<TypePrevention, { emoji: string; label: string }> = {
+  medical: { emoji: '💊', label: 'Médical' },
+  barriere: { emoji: '🛡️', label: 'Barrière' },
+  comportement: { emoji: '👥', label: 'Comportemental' },
 };
