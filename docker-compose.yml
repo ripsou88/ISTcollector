@@ -23,17 +23,17 @@ services:
       - 8082:8082
 
 
-#  web:
-#    build:
-#      context: .
-#      dockerfile: frontend/Dockerfile
-#    container_name: ist-front
-#    ports:
-#      - 8083:8083
-#    networks:
-#      - biblio-network
-#    depends_on:
-#      - java
+  web:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: ist-front
+    ports:
+      - 8083:8083
+    networks:
+      - ist-network
+    depends_on:
+      - java
 
 networks:
   ist-network:

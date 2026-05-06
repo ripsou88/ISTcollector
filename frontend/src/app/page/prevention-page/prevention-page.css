@@ -1,0 +1,245 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, var(--cream), var(--field-bg));
+  font-family: var(--font-petit);
+}
+
+.prevention-page {
+  max-width: 1250px;
+  margin: auto;
+  text-align: center;
+}
+
+.title-card {
+  background: var(--white);
+  border: 3px solid var(--green-light);
+  border-radius: 30px;
+  padding: 1.5rem 3rem;
+  display: inline-block;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+   animation: popIn 0.5s ease-out;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.title-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--pink);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+.title {
+  font-family: var(--font-grand);
+  font-size: 3rem;
+  color: var(--green-light);
+  letter-spacing: 4px;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  margin: 0;
+}
+
+.subtitle {
+  max-width: 750px;
+  margin: auto;
+  font-size: 1.15rem;
+  color: var(--green-dark);
+  line-height: 1.6;
+  margin-bottom: 3rem;
+}
+
+.legend-container {
+  display: grid;
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+.legend-card {
+  background: var(--white);
+  border-radius: 22px;
+  padding: 1.2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  text-align: left;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+  transition: 0.3s ease;
+}
+
+.legend-card:hover {
+  transform: translateX(8px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+
+.dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.pink .dot { background: var(--pink); }
+.green .dot { background: var(--green-light); }
+.blue .dot { background: var(--blue-electric); }
+
+.legend-card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.1rem;
+}
+
+.legend-card p {
+  margin: 0;
+  color: #444;
+  line-height: 1.5;
+}
+
+.grid-prevention {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 28px;
+  padding: 2rem;
+  text-align: left;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+  border: 3px solid transparent;
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.barrieres {
+  border-color: var(--pink);
+}
+
+.medical {
+  border-color: var(--green-light);
+}
+
+.comportement {
+  border-color: var(--blue-electric);
+}
+
+.card h2 {
+  font-family: var(--font-grand);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+
+.barrieres h2 { color: var(--pink-dark); }
+.medical h2 { color: var(--green-dark); }
+.comportement h2 { color: var(--blue-electric); }
+
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card li {
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  color: #333;
+  font-weight: 600;
+}
+
+.card li:last-child {
+  border-bottom: none;
+}
+
+/* Responsive mobile */
+
+@media (max-width: 768px) {
+
+  .title {
+    font-size: 2.6rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .legend-card {
+    flex-direction: column;
+  }
+}
+
+/* Responsive Tablette */
+@media (max-width: 1024px) {
+
+  .prevention-page {
+    max-width: 95%;
+  }
+
+  .title {
+    font-size: 2.8rem;
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+    max-width: 600px;
+  }
+
+  .grid-prevention {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+}
+
+/* Responsive TV */
+@media (min-width: 1440px) {
+
+  .prevention-page {
+    max-width: 1400px;
+  }
+
+  .title {
+    font-size: 3.8rem;
+    letter-spacing: 5px;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+    max-width: 900px;
+  }
+
+  .grid-prevention {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .card {
+    padding: 2.5rem;
+    border-radius: 32px;
+  }
+
+  .title-card {
+    padding: 2rem 4rem;
+  }
+}
