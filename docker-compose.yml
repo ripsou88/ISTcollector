@@ -15,11 +15,6 @@ services:
 
     env_file:
       - backend/.env
-    
-    environment:
-      - SPRING_DATASOURCE_URL=${SQL_URL}
-      - SPRING_DATASOURCE_USERNAME=${SQL_USER}
-      - SPRING_DATASOURCE_PASSWORD=${SQL_PWD}
 
     networks:
       - ist-network
