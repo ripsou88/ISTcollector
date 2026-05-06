@@ -38,6 +38,9 @@ public class Ist {
     @Column(length = 20, nullable = false)
     private String shortDescription;
 
+    @Column(length = 700, nullable = false)
+    private String longDescription;
+
     @Enumerated(EnumType.STRING)
     @Column
     private TypeIst typeIst;
@@ -58,13 +61,14 @@ public class Ist {
     }
 
     public Ist(Integer id, String nom, int gravite, int incidence,
-            String shortDescription, TypeIst typeIst, Transmission transmission,
+            String shortDescription,String longDescription, TypeIst typeIst, Transmission transmission,
             List<Prevention> preventions, List<Traitement> traitements) {
         this.id = id;
         this.nom = nom;
         this.gravite = gravite;
         this.incidence = incidence;
         this.shortDescription = shortDescription;
+        this.longDescription = longDescription;
         this.typeIst = typeIst;
         this.transmission = transmission;
         this.preventions = preventions;
@@ -118,6 +122,7 @@ public class Ist {
     public String getShortDescription() {
         return shortDescription;
     }
+    
 
     public TypeIst getTypeIst() {
         return typeIst;
@@ -153,6 +158,14 @@ public class Ist {
 
     public double calculerPourcentageDeTransmission() {
         return 0;
+    }
+
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
     }
 
 }
