@@ -23,6 +23,8 @@ public class CreateOrUpdateIstRequest {
 
     private String shortDescription;
 
+    private String longDescription;
+
     @NotBlank
     private TypeIst typeIst;
 
@@ -106,5 +108,15 @@ public class CreateOrUpdateIstRequest {
     public void setTraitement(List<Traitement> traitement) {
         this.traitement = traitement;
     }
+
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
+    }
+
+    
 
 }
