@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class QuizzComponent {
 
+  gameStarted = false;
+
+  startQuizz() {
+    this.gameStarted = true;
+  }
 }
