@@ -7,16 +7,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.lang.NonNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -31,6 +32,7 @@ import fr.formation.backend.model.Admin;
 import fr.formation.backend.model.Compte;
 import fr.formation.backend.model.User;
 import fr.formation.backend.repo.CompteRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 @RestController
@@ -61,6 +63,40 @@ public class CompteController {
         return this.repository.findByUsername(name).map(CompteResponse::convert);
     }
 
+    @GetMapping("/{id}")
+    public CompteResponse findById(@PathVariable @NonNull Integer id) {
+        log.debug("Recherche d'un utilisateur avec id : {} ...", id);
+        return this.repository.findById(id).map(CompteResponse::convert).orElseThrow(EntityNotFoundException::new);
+    }
+
+    @PutMapping("/user={name}")
+    @PreAuthorize("hasRole({'USER', 'ADMIN'})")
+    public EntityCreatedOrUpdatedResponse update(@PathVariable String name, @Valid @RequestBody AuthRequest request) {
+        log.debug("Modification du user {} ...", name);
+
+        Compte compte = this.repository.findByUsername(name).orElseThrow(EntityNotFoundException::new);
+
+        compte.setUsername(request.getUsername());
+        compte.setPassword(request.getPassword());
+
+        this.repository.save(compte);
+
+        log.debug("Informations du user {} modifiées !", name);
+
+        return new EntityCreatedOrUpdatedResponse(compte.getId());
+    }
+
+    @DeleteMapping
+    @PreAuthorize("hasRole({'USER', 'ADMIN'})")
+    public void deleteById(@PathVariable @NonNull Integer id) {
+        log.debug("Suppression du compte {} ...", id);
+
+        this.repository.deleteById(id);
+
+        log.debug("Compte {} supprimée !", id);
+    }
+
+    // Méthodes d'authentification et d'inscription
     @PostMapping("/auth")
     public TokenResponse auth(@Valid @RequestBody AuthRequest request) {
         log.debug("Tentative de connexion ...");
@@ -94,7 +130,7 @@ public class CompteController {
         return new EntityCreatedOrUpdatedResponse(utilisateur.getId());
     }
 
-    @PostMapping("/newadmin")
+    @PostMapping("/subscription-admin")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ADMIN')")
     public EntityCreatedOrUpdatedResponse newAdmin(@Valid @RequestBody AuthRequest request) {
