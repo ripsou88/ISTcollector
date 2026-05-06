@@ -1,15 +1,20 @@
 <div class="overlay">
     <div id="pannel-booster">
         <div class="booster" (click)="isOpen = true">
-            
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
 
-                <div class="booster-top" [class.open]="isOpen">TOP
-                    <div class="booster-shine"></div> 
-                </div>
+            <div class="booster-top" [class.open]="isOpen">
+                <div class="istedex-img"><img src="/img/front/LOGO.png"></div>
+                <div class="booster-shine"></div> 
+            </div>
 
-                <div class="booster-bottom" [class.open]="isOpen">BOTTOM
-                    <div class="booster-shine"></div> 
-                </div>
+            <div class="booster-bottom" [class.open]="isOpen">
+                <div class="emoji-bact">🦠</div>
+                <div class="booster-shine"></div> 
+            </div>
 
 
         </div>
