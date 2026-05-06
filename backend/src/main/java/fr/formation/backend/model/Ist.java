@@ -37,7 +37,7 @@ public class Ist {
       inverseJoinColumns = @JoinColumn(name = "symptome_id"))
   private List<Symptome> symptomes = new ArrayList<>();
 
-  @Column(length = 20, nullable = false)
+  @Column(length = 100, nullable = false)
   private String shortDescription;
 
   @Column(length = 700, nullable = false)
@@ -51,7 +51,7 @@ public class Ist {
   @Enumerated(EnumType.STRING)
   @CollectionTable(name = "ist_transmission", joinColumns = @JoinColumn(name = "ist_id"))
   @Column(name = "transmission")
-  private List<Transmission> transmissions;
+  private List<Transmission> transmissions = new ArrayList<>();
 
   @ManyToMany
   @JoinTable(
