@@ -10,6 +10,6 @@ export class CardsService {
   private http = inject(HttpClient);
 
   public findAll(): Observable<Ist[]> {
-    return this.http.get<Ist[]>('/api/ist');
+    return this.http.get<Ist[]>('/ist');
   }
 }
