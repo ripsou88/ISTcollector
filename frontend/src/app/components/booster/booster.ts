@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './booster.css',
 })
 export class Booster {
-
+  protected isOpen: boolean = false;
 }

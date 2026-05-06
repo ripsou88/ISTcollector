@@ -1,1 +1,6 @@
-<p>booster works!</p>
+<div id="pannel-booster">
+    <div class="booster" (click)="isOpen = true">
+        <div class="booster-top" [class.open]="isOpen">TOP</div>
+        <div class="booster-bottom" [class.open]="isOpen">BOTTOM</div>
+    </div>
+</div>
