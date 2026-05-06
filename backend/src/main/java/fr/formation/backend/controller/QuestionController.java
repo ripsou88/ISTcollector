@@ -99,19 +99,19 @@ public class QuestionController {
         log.debug("Question {} supprimée !", id);
     }
 
-    @GetMapping("/five")
+    @GetMapping("/ten")
     @Transactional(readOnly = true)
     public List<QuestionResponse> getQuestionReponse(@AuthenticationPrincipal CustomUserDetails user) {
-        log.debug("Retour des 5 questions");
+        log.debug("Retour des 10 questions");
 
         if (Integer.valueOf(20).equals(user.getLevel())) {
-            return this.questionRepository.findFiveRandom()
+            return this.questionRepository.findTenRandom()
                     .stream()
                     .map(QuestionResponse::convert)
                     .toList();
         }
 
-        return this.questionRepository.findAll(PageRequest.of(user.getLevel() , 5, Sort.by("id")))
+        return this.questionRepository.findAll(PageRequest.of(user.getLevel() , 10, Sort.by("id")))
                 .stream()
                 .map(QuestionResponse::convert)
                 .toList();

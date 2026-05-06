@@ -1,0 +1,55 @@
+@if (!gameStarted) {
+  <button class="quizz-start" type="button" (click)="startQuizz()">
+    <h1 class="title">QUIZZ</h1>
+
+    <p>
+      Teste tes connaissances sur les IST !<br>
+      Plus ton score est eleve, plus tu debloques des cartes rares pour ton ISTedex!
+    </p>
+
+    <span class="commencer">Clique pour commencer</span>
+  </button>
+}
+
+@if (gameStarted) {
+  <section class="quizz-game">
+    <h1 class="title">QUIZZ</h1>
+
+    @if (loading) {
+      <p class="loading">Chargement du quizz...</p>
+    }
+
+    @for (question of questions; track question.id; let questionIndex = $index) {
+      <article class="question-block">
+        <h2>{{ questionIndex + 1 }}. {{ question.question }}</h2>
+
+        <div class="answers">
+          @for (reponse of question.reponses; track reponse.id) {
+            <button
+              class="answer"
+              type="button"
+              [class.selected]="isSelected(question.id, reponse.id)"
+              (click)="selectReponse(question.id, reponse.id)"
+            >
+              {{ reponse.reponse }}
+            </button>
+          }
+        </div>
+      </article>
+    }
+
+    @if (questions.length > 0) {
+      <button class="validate" type="button" [disabled]="validating" (click)="checkQuizz()">
+        Verifier
+      </button>
+    }
+
+    @if (resultMessage) {
+      <p class="result-message">{{ resultMessage }}</p>
+    }
+
+    @if (canRetry) {
+      <button class="retry" type="button" (click)="retryQuizz()">Refaire le quizz</button>
+    }
+  </section>
+}
