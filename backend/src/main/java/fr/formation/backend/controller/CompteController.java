@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.formation.backend.config.CustomUserDetails;
 import fr.formation.backend.config.JwtUtils;
 import fr.formation.backend.dto.request.AuthRequest;
 import fr.formation.backend.dto.response.CompteResponse;
@@ -94,6 +97,19 @@ public class CompteController {
         }
         // Sinon, la requête renvoie une erreur
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Vous n'avez pas le droit de modifier ce compte");
+    }
+
+    @Transactional
+    @GetMapping("/increase_level")
+    public ResponseEntity<Object> increaseLevel(@AuthenticationPrincipal CustomUserDetails userDetails){
+        User user = (User) this.repository.findById(userDetails.getId()).orElseThrow(EntityNotFoundException::new);
+
+        user.setLevel(user.getLevel()+1);
+
+        this.repository.save(user);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+
     }
 
     @Transactional
