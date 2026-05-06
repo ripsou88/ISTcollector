@@ -70,14 +70,14 @@ public class CompteController {
     }
 
     @PutMapping("/user={name}")
-    @PreAuthorize("hasRole({'USER', 'ADMIN'})")
+    @PreAuthorize("hasAnyRole({'USER', 'ADMIN'})")
     public EntityCreatedOrUpdatedResponse update(@PathVariable String name, @Valid @RequestBody AuthRequest request) {
         log.debug("Modification du user {} ...", name);
 
         Compte compte = this.repository.findByUsername(name).orElseThrow(EntityNotFoundException::new);
 
         compte.setUsername(request.getUsername());
-        compte.setPassword(request.getPassword());
+        compte.setPassword(this.passwordEncoder.encode(request.getPassword()));
 
         this.repository.save(compte);
 
@@ -87,7 +87,7 @@ public class CompteController {
     }
 
     @DeleteMapping
-    @PreAuthorize("hasRole({'USER', 'ADMIN'})")
+    @PreAuthorize("hasAnyRole({'USER', 'ADMIN'})")
     public void deleteById(@PathVariable @NonNull Integer id) {
         log.debug("Suppression du compte {} ...", id);
 
@@ -96,7 +96,11 @@ public class CompteController {
         log.debug("Compte {} supprimée !", id);
     }
 
-    // Méthodes d'authentification et d'inscription
+    /**
+     * ---------------------------------------------
+     * METHODES D'AUTHENTIFICATION ET D'INSCRIPTIONS
+     * ---------------------------------------------
+     */
     @PostMapping("/auth")
     public TokenResponse auth(@Valid @RequestBody AuthRequest request) {
         log.debug("Tentative de connexion ...");
