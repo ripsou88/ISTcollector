@@ -10,12 +10,12 @@ import fr.formation.backend.model.Transmission;
 import fr.formation.backend.model.TypeIst;
 
 public record IstResponse(Integer id, String nom, int gravite, int incidence, List<Symptome> symptomes,
-        String shortDescription, TypeIst typeIst, Transmission transmission, List<Prevention> preventions,
+        String shortDescription, String longDescription, TypeIst typeIst, Transmission transmission, List<Prevention> preventions,
         List<Traitement> traitements) {
 
     public static IstResponse convert(Ist ist) {
         return new IstResponse(ist.getId(), ist.getNom(), ist.getGravite(), ist.getIncidence(),
-                ist.getSymptomes(), ist.getShortDescription(), ist.getTypeIst(), ist.getTransmission(),
+                ist.getSymptomes(), ist.getShortDescription(), ist.getLongDescription(), ist.getTypeIst(), ist.getTransmission(),
                 ist.getPreventions(), ist.getTraitements());
     }
 
