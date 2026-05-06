@@ -23,7 +23,7 @@ export class HomePage implements AfterViewInit {
   }
 
 
-  Quizz() {
+  goQuizz() {
     this.router.navigate(['/quizz']);
   }
 
