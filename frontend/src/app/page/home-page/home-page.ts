@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Hero } from '../../components/hero/hero';
 import { Cards } from '../../components/cards/cards';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -15,8 +16,15 @@ export class HomePage implements AfterViewInit {
   //Menu hamburger
   menuActive = false;
 
+  constructor(private router: Router) {}
+
   toggleMenu() {
     this.menuActive = !this.menuActive;
+  }
+
+
+  Quizz() {
+    this.router.navigate(['/quizz']);
   }
 
   //Bulle

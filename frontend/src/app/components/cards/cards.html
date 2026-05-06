@@ -30,20 +30,20 @@
 
         </div>
 
-        <div class="card">
+        <div class="card" routerLink="/quizz">
           <h3>QCM</h3>
           <img src="img/front/Quizz.png" alt="Quizz" class="Quizz">
 
           <p class="question">
             Pourquoi faut-il éviter les corps gras avec un préservatif en latex ?</p>
 
-            <table class="quiz-table">
-              <tr><td>Ils peuvent fragiliser le latex et favoriser la rupture</td></tr>
-              <tr><td>Ils rendent le test VIH faussement positif</td></tr>
-              <tr><td>Ils annulent la vaccination HPV</td></tr>
-              <tr><td>Ils provoquent toujours une IST</td></tr>
-            </table>
-          </div>
+             <table class="quiz-table">
+    <tr><td (click)="goQuizz()">Ils peuvent fragiliser le latex et favoriser la rupture</td></tr>
+    <tr><td (click)="goQuizz()">Ils rendent le test VIH faussement positif</td></tr>
+    <tr><td (click)="goQuizz()">Ils annulent la vaccination HPV</td></tr>
+    <tr><td (click)="goQuizz()">Ils provoquent toujours une IST</td></tr>
+  </table>
+</div>
 
         </div>
       </div>

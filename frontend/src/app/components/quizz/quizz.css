@@ -1,0 +1,65 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding-top: 6vh;
+  background: linear-gradient(135deg, var(--cream), var(--field-bg));
+  font-family: var(--font-petit);
+}
+
+.quizz-start {
+  background: var(--white);
+  border: 3px solid var(--green-light);
+  border-radius: 30px;
+  padding: 2.5rem;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.quizz-start:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--pink);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+.title {
+  font-family: var(--font-grand);
+  font-size: 3rem;
+  color: var(--green-light);
+  margin-bottom: 1rem;
+  letter-spacing: 3px;
+  text-shadow: var(--text-shadow);
+}
+
+.quizz-start p {
+  font-size: 1.1rem;
+  color: var(--green-dark);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.commencer {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: var(--pink);
+  color: white;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.quizz-start:hover .commencer {
+  transform: scale(1.1);
+}
+
+.quizz-game {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+}

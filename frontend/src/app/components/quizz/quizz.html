@@ -1,0 +1,15 @@
+<div class="quizz-start" (click)="startQuizz()">
+  <h1 class="title">QUIZZ</h1>
+
+  <p> Teste tes connaissances sur les IST !<br>
+    Plus ton score est élevé, plus tu débloques des cartes rares pour ton ISTédex! </p>
+
+  <div class="commencer">
+    Clique pour commencer
+  </div>
+</div>
+
+<!-- zone questions (cachée au début) -->
+<div class="quizz-game" *ngIf="gameStarted">
+  <h2>Question ici</h2>
+</div>

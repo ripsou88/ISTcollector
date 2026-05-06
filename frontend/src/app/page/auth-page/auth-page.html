@@ -5,7 +5,7 @@
                 <!-- PAGE DE CREATION D'UN COMPTE -->
                 <form *ngIf="newUser" (submit)="addUser()" [formGroup]="formAuth" class="form-zone">
                     <div class="create-account">CRéé TON COMPTE :</div><br>
-                    <div>Déjà dans la team ? : <button (click)="newUser = false">Connecte-toi !</button></div><br>
+                    <div>Déjà dans la team ? : <button (click)="newUser = false; errorMessage='' " type="button">Connecte-toi !</button></div><br>
                             
                     <div class="form-input">
                         <label for="username" class="form-username">Username</label>
@@ -34,20 +34,20 @@
                     <div class="create-account">CONNEXION</div>
                     <br>
 
-                    <div><button (click)="newUser = true">Retourner au formulaire de création</button></div>
+                    <div><button (click)="newUser = true; errorMessage='' " type="button">Retourner au formulaire de création</button></div>
                     
                     <br>
 
                     <div class="form-input">
                         <label for="username" class="form-username">Username</label>
-                        <input type="text" class="form-control" id="username" placeholder="JeanMichelDu44" formControlName="username" [class.is-invalid]="formUsernameCtrl.invalid" />
+                        <input type="text" id="username" placeholder="JeanMichelDu44" formControlName="username" [class.is-invalid]="formUsernameCtrl.invalid" />
                         <div *ngIf="formUsernameCtrl.hasError('required')" class="invalid-feedback">Le username est obligatoire</div>
                     </div>
 
                     
                     <div class="form-input">
                         <label for="password" class="form-password">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" placeholder="********" formControlName="password" [class.is-invalid]="formPasswordCtrl.invalid" />
+                        <input type="password" id="password" placeholder="********" formControlName="password" [class.is-invalid]="formPasswordCtrl.invalid" />
                         <div *ngIf="formPasswordCtrl.hasError('required')" class="invalid-feedback">Le mot de passe est obligatoire</div>
                     </div>
 

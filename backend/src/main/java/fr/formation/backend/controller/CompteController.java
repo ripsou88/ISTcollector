@@ -7,12 +7,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import fr.formation.backend.config.JwtUtils;
 import fr.formation.backend.dto.request.AuthRequest;
@@ -70,31 +72,48 @@ public class CompteController {
         return this.repository.findById(id).map(CompteResponse::convert).orElseThrow(EntityNotFoundException::new);
     }
 
-    @PutMapping("/user={name}")
+    @Transactional
+    @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole({'USER', 'ADMIN'})")
-    public EntityCreatedOrUpdatedResponse update(@PathVariable String name, @Valid @RequestBody AuthRequest request) {
-        log.debug("Modification du user {} ...", name);
+    public ResponseEntity<Object> update(@PathVariable @NonNull Integer id, @Valid @RequestBody AuthRequest request,
+            Authentication auth) {
+        boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")); // Vérifie si l'utilisateur est un admin ou non
+        Compte compte = this.repository.findById(id).orElseThrow(EntityNotFoundException::new); // Créé un compte temporaire à partir de l'ID donné dans l'URL de la requête
 
-        Compte compte = this.repository.findByUsername(name).orElseThrow(EntityNotFoundException::new);
+        log.debug("Modification du compte {} ...", id);
 
-        compte.setUsername(request.getUsername());
-        compte.setPassword(this.passwordEncoder.encode(request.getPassword()));
+        if (compte.getUsername().equals(auth.getName()) || isAdmin) {
+            // Si l'utilisateur est le propriétaire du compte ou qu'il est admin, il peut modifier le compte
+            compte.setUsername(request.getUsername());
+            compte.setPassword(this.passwordEncoder.encode(request.getPassword()));
 
-        this.repository.save(compte);
+            this.repository.save(compte);
+            log.debug("Informations du compte {} modifiées !", id);
 
-        log.debug("Informations du user {} modifiées !", name);
-
-        return new EntityCreatedOrUpdatedResponse(compte.getId());
+            return ResponseEntity.status(HttpStatus.CREATED).body(new EntityCreatedOrUpdatedResponse(compte.getId()));
+        }
+        // Sinon, la requête renvoie une erreur
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Vous n'avez pas le droit de modifier ce compte");
     }
 
-    @DeleteMapping
+    @Transactional
+    @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole({'USER', 'ADMIN'})")
-    public void deleteById(@PathVariable @NonNull Integer id) {
+    public ResponseEntity<Object> deleteById(@PathVariable @NonNull Integer id, Authentication auth) {
+        boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")); // Vérifie si l'utilisateur est un admin ou non
+        Compte compte = this.repository.findById(id).orElseThrow(EntityNotFoundException::new);// Créé un compte temporaire à partir de l'ID donné dans l'URL de la requête
+
         log.debug("Suppression du compte {} ...", id);
 
-        this.repository.deleteById(id);
+        if (compte.getUsername().equals(auth.getName()) || isAdmin) {
+            // Si l'utilisateur est le propriétaire du compte ou qu'il est admin, il peut supprimer le compte
+            this.repository.deleteById(id);
+            log.debug("Compte {} supprimée !", id);
 
-        log.debug("Compte {} supprimée !", id);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new EntityCreatedOrUpdatedResponse(compte.getId()));
+        }
+        // Sinon, la requête renvoie une erreur
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Vous n'avez pas le droit de supprimer ce compte");
     }
 
     /**
@@ -102,27 +121,31 @@ public class CompteController {
      * METHODES D'AUTHENTIFICATION ET D'INSCRIPTIONS
      * ---------------------------------------------
      */
+    @Transactional
     @PostMapping("/auth")
-    public TokenResponse auth(@Valid @RequestBody AuthRequest request) {
+    public ResponseEntity<Object> auth(@Valid @RequestBody AuthRequest request) {
         log.debug("Tentative de connexion ...");
 
         // On authentifie l'utilisateur ...
         Authentication authentication = new UsernamePasswordAuthenticationToken(request.getUsername(),
                 request.getPassword());
-
-        authentication = this.authenticationManager.authenticate(authentication);
+        try{
+            authentication = this.authenticationManager.authenticate(authentication);
+        }catch(BadCredentialsException e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("nom d'utilisateur ou mot de passe incorrect.");
+        }
 
         log.debug("Connexion réussie, login {} ...", request.getUsername());
 
-        return new TokenResponse(this.jwtUtils.generate(authentication));
+        return ResponseEntity.status(HttpStatus.OK).body(new TokenResponse(this.jwtUtils.generate(authentication)));
     }
 
+    @Transactional
     @PostMapping("/subscription")
-    @ResponseStatus(HttpStatus.CREATED)
-    public EntityCreatedOrUpdatedResponse add(@Valid @RequestBody AuthRequest request) {
+    public ResponseEntity<Object> add(@Valid @RequestBody AuthRequest request) {
         // Vérification de l'unicité du username
         if (this.repository.findByUsername(request.getUsername()).isPresent()) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Ce nom d'utilisateur existe déjà.");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Ce nom d'utilisateur existe déjà.");
         }
 
         log.debug("Création d'un compte utilisateur ...");
@@ -137,9 +160,10 @@ public class CompteController {
 
         log.debug("Compte créé : {} ...", utilisateur.getId());
 
-        return new EntityCreatedOrUpdatedResponse(utilisateur.getId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(new EntityCreatedOrUpdatedResponse(utilisateur.getId()));
     }
 
+    @Transactional
     @PostMapping("/subscription-admin")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ADMIN')")
