@@ -4,6 +4,7 @@ import { HomePage } from './page/home-page/home-page';
 import { CollectionPage } from './page/collection-page/collection-page';
 import { JeuxComponent } from './components/jeux/jeux';
 import { QuizzComponent } from './components/quizz/quizz';
+import { Testenora } from './page/testenora/testenora';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -12,5 +13,6 @@ export const routes: Routes = [
   { path: 'guides', component: HomePage, title: 'Guides IST' },
   { path: 'collection', component: CollectionPage, title: 'Collection IST' },
   { path: 'jeux', component: JeuxComponent, title: 'Jeux' },
-  { path: 'quizz', component: QuizzComponent, title: 'Quizz' }
+  { path: 'quizz', component: QuizzComponent, title: 'Quizz' },
+  { path: 'testenora', component: Testenora, title: 'Tests Enora' }
 ];
