@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,11 +35,11 @@ public class QuizzController {
     @Autowired
     private CompteRepository compteRepository;
 
-        /**
-     * ---------------------------------------------
-     * METHODES LIEE AU COLLECTION DE CARTE
-     * ---------------------------------------------
-     */
+    /**
+    * ---------------------------------------------
+    * METHODES LIEE AU COLLECTION DE CARTE
+    * ---------------------------------------------
+    */
 
     @GetMapping("")
     public List<IstResponse> findThreeRandom() {
@@ -48,14 +47,15 @@ public class QuizzController {
 
         return this.istRepository.findThreeRandom().stream().map(IstResponse::convert).toList();
     }
-    
-    @Transactional
-    @GetMapping({"/increase_level"})
-    public ResponseEntity<Object> increaseLevel(@AuthenticationPrincipal CustomUserDetails userDetails){
-        // userDetails.getId ne peut être null car il provient du customUserDetails
-        User user = (User) this.compteRepository.findById(userDetails.getId()).orElseThrow(EntityNotFoundException::new);
 
-        user.setLevel(user.getLevel()+1);
+    @Transactional
+    @GetMapping({ "/increase_level" })
+    public ResponseEntity<Object> increaseLevel(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        // userDetails.getId ne peut être null car il provient du customUserDetails
+        User user = (User) this.compteRepository.findById(userDetails.getId())
+                .orElseThrow(EntityNotFoundException::new);
+
+        user.setLevel(user.getLevel() + 1);
 
         this.compteRepository.save(user);
 
@@ -65,20 +65,21 @@ public class QuizzController {
 
     @Transactional
     @GetMapping("/addCard/{idCard}")
-    public ResponseEntity<Object> postMethodName(@PathVariable @NonNull Integer idCard, @AuthenticationPrincipal CustomUserDetails userDetails) {
+    public ResponseEntity<Object> postMethodName(@PathVariable @NonNull Integer idCard,
+            @AuthenticationPrincipal CustomUserDetails userDetails) {
 
         Ist ist = this.istRepository.findById(idCard).orElseThrow(EntityNotFoundException::new);
 
         // userDetails.getId ne peut être null car il provient du customUserDetails
-        User user = (User) this.compteRepository.findById(userDetails.getId()).orElseThrow(EntityNotFoundException::new);
+        User user = (User) this.compteRepository.findById(userDetails.getId())
+                .orElseThrow(EntityNotFoundException::new);
 
         // Ajoute l'ist à l'utilisateur
         List<Ist> istList = user.getIst();
         istList.add(ist);
         user.setIst(istList);
 
-        
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    
+
 }
