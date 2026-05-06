@@ -5,37 +5,37 @@
                 <!-- PAGE DE CREATION D'UN COMPTE -->
                 <form *ngIf="newUser" (submit)="addUser()" [formGroup]="formAuth" class="form-zone">
                     <div class="create-account">CRéé TON COMPTE :</div><br>
-                    <div>Déjà dans la team ? : <button (click)="newUser = false; errorMessage='' " type="button">Connecte-toi !</button></div><br>
-                            
+                    <div>Déjà dans la team ? <button (click)="newUser = false; errorMessage='' " type="button">Connecte-toi !</button></div><br>
+
                     <div class="form-input">
                         <label for="username" class="form-username">Username</label>
                         <input type="text" id="username" formControlName="username" placeholder="JacquelineDu38" [class.is-invalid]="formUsernameCtrl.invalid" />
                         <div *ngIf="formUsernameCtrl.hasError('required')" class="invalid-feedback">Le username est obligatoire</div>
                     </div>
-                    
+
                     <div class="form-input">
                         <label for="password" class="form-password">Mot de passe</label>
                         <input type="password" id="password" formControlName="password" placeholder="********" [class.is-invalid]="formPasswordCtrl.invalid" />
                         <div *ngIf="formPasswordCtrl.hasError('required')" class="invalid-feedback">Le mot de passe est obligatoire</div>
                     </div>
-                    
+
                     <br>
 
                     <div>
                         <input [disabled]="formAuth.invalid" type="submit" class="btn-success" value="Créer le compte" />
                         <div *ngIf="errorMessage" class="error-message">
                             {{ errorMessage }}
-                        </div>                    
-                    </div>  
+                        </div>
+                    </div>
                     </form>
-                
+
                 <!-- PAGE DE CONNEXION -->
                 <form *ngIf="!newUser" (submit)="login()" [formGroup]="formAuth" class="form-zone">
                     <div class="create-account">CONNEXION</div>
                     <br>
 
                     <div><button (click)="newUser = true; errorMessage='' " type="button">Retourner au formulaire de création</button></div>
-                    
+
                     <br>
 
                     <div class="form-input">
@@ -44,7 +44,7 @@
                         <div *ngIf="formUsernameCtrl.hasError('required')" class="invalid-feedback">Le username est obligatoire</div>
                     </div>
 
-                    
+
                     <div class="form-input">
                         <label for="password" class="form-password">Mot de passe</label>
                         <input type="password" id="password" placeholder="********" formControlName="password" [class.is-invalid]="formPasswordCtrl.invalid" />
@@ -58,12 +58,12 @@
                         <div *ngIf="errorMessage" class="error-message">
                             {{ errorMessage }}
                         </div>
-                    </div>  
-                </form> 
-        </div> 
+                    </div>
+                </form>
+        </div>
 
         <div id="img-zone">
                 <img src="img/front/user_h_piedestal.png" alt="Image d'un jeune personnage style chercheur-aventurier qui capture des virus"/>
-        </div>  
+        </div>
     </div>
 </body>

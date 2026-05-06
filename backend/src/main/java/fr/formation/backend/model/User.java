@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.annotations.ColumnDefault;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -16,11 +17,11 @@ import jakarta.persistence.ManyToMany;
 @DiscriminatorValue("usr")
 public class User extends Compte {
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
 	        name = "user-card",
 	        joinColumns = @JoinColumn(name = "user_id"),
-	        inverseJoinColumns = @JoinColumn(name = "ist_id")
+	        inverseJoinColumns = @JoinColumn(name = "ist_id")			
 	    )
 	private List<Ist> ist = new ArrayList<>();
 
