@@ -76,13 +76,13 @@ public class CompteController {
     @PreAuthorize("hasAnyRole({'USER', 'ADMIN'})")
     public ResponseEntity<Object> update(@PathVariable @NonNull Integer id, @Valid @RequestBody AuthRequest request,
             Authentication auth) {
-        boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
-        Compte compte = this.repository.findById(id).orElseThrow(EntityNotFoundException::new);
+        boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")); // Vérifie si l'utilisateur est un admin ou non
+        Compte compte = this.repository.findById(id).orElseThrow(EntityNotFoundException::new); // Créé un compte temporaire à partir de l'ID donné dans l'URL de la requête
 
         log.debug("Modification du compte {} ...", id);
 
         if (compte.getUsername().equals(auth.getName()) || isAdmin) {
-
+            // Si l'utilisateur est le propriétaire du compte ou qu'il est admin, il peut modifier le compte
             compte.setUsername(request.getUsername());
             compte.setPassword(this.passwordEncoder.encode(request.getPassword()));
 
@@ -91,26 +91,27 @@ public class CompteController {
 
             return ResponseEntity.status(HttpStatus.CREATED).body(new EntityCreatedOrUpdatedResponse(compte.getId()));
         }
-
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body("Vous n'avez pas le droit de modifier ce compte");
+        // Sinon, la requête renvoie une erreur
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Vous n'avez pas le droit de modifier ce compte");
     }
 
     @Transactional
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole({'USER', 'ADMIN'})")
     public ResponseEntity<Object> deleteById(@PathVariable @NonNull Integer id, Authentication auth) {
-        boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
-        Compte compte = this.repository.findById(id).orElseThrow(EntityNotFoundException::new);
+        boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")); // Vérifie si l'utilisateur est un admin ou non
+        Compte compte = this.repository.findById(id).orElseThrow(EntityNotFoundException::new);// Créé un compte temporaire à partir de l'ID donné dans l'URL de la requête
 
         log.debug("Suppression du compte {} ...", id);
 
         if (compte.getUsername().equals(auth.getName()) || isAdmin) {
+            // Si l'utilisateur est le propriétaire du compte ou qu'il est admin, il peut supprimer le compte
             this.repository.deleteById(id);
             log.debug("Compte {} supprimée !", id);
 
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(new EntityCreatedOrUpdatedResponse(compte.getId()));
         }
+        // Sinon, la requête renvoie une erreur
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Vous n'avez pas le droit de supprimer ce compte");
     }
 
