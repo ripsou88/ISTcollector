@@ -18,13 +18,13 @@ WORKDIR /usr/src/app
 
 
 # Copy package-related files first to leverage Docker's caching mechanism
-COPY backend/package.json *backend/package-lock.json* ./
+COPY frontend/package.json *frontend/package-lock.json* ./
 
 # Install project dependencies using npm ci (ensures a clean, reproducible install)
 RUN --mount=type=cache,target=/root/.npm npm ci
 
 # Copy the rest of the source files into the image.
-COPY backend/. .
+COPY frontend/. .
 # Run the build script.
 RUN npm run build
 RUN pwd
@@ -33,10 +33,10 @@ RUN pwd
 FROM nginxinc/nginx-unprivileged:${NGINX_VERSION} AS runner
 
 # Copy custom Nginx config
-COPY backend/nginx.conf /etc/nginx/nginx.conf
+COPY frontend/nginx.conf /etc/nginx/nginx.conf
 
 # Copy the static build output from the build stage to Nginx's default HTML serving directory
-COPY --chown=nginx:nginx --from=builder /usr/src/app/dist/backend/browser /usr/share/nginx/html
+COPY --chown=nginx:nginx --from=builder /usr/src/app/dist/frontend/browser /usr/share/nginx/html
 
 # Use a built-in non-root user for security best practices
 USER nginx
