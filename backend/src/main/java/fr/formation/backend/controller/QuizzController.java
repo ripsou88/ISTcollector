@@ -43,10 +43,20 @@ public class QuizzController {
      */
 
     @GetMapping("/random_card")
-    public List<IstResponse> findThreeRandom() {
+    @Transactional
+    public List<IstResponse> findThreeRandom(@AuthenticationPrincipal CustomUserDetails userDetails) {
         log.debug("Recherche de 3 IST aléatoires ...");
+        List<Ist> istRandom = this.istRepository.findThreeRandom(); // .stream().map(IstResponse::convert).toList();
 
-        return this.istRepository.findThreeRandom().stream().map(IstResponse::convert).toList();
+        //Add card to user collection
+        User user = (User) this.compteRepository.findById(userDetails.getId()).orElseThrow(EntityNotFoundException::new);
+        List<Ist> userIstList =user.getIst();
+        userIstList.addAll(istRandom);
+        user.setIst(userIstList);
+
+        this.compteRepository.save(user);
+
+        return istRandom.stream().map(IstResponse::convert).toList();
     }
     
     @Transactional
