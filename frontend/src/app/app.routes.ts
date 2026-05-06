@@ -1,15 +1,11 @@
 import { Routes } from '@angular/router';
-import { AuthPage } from './page/auth-page/auth-page';
-import { HomePage } from './page/home-page/home-page';
-import { CollectionPage } from './page/collection-page/collection-page';
 import { JeuxComponent } from './components/jeux/jeux';
-<<<<<<< HEAD
+import { AuthPage } from './page/auth-page/auth-page';
+import { CollectionPage } from './page/collection-page/collection-page';
+import { HomePage } from './page/home-page/home-page';
+import { PreventionPage } from './page/prevention-page/prevention-page';
 import { Quizz } from './page/quizz/quizz';
 import { Testenora } from './page/testenora/testenora';
-=======
-import { QuizzComponent } from './components/quizz/quizz';
-import { PreventionPage } from './page/prevention-page/prevention-page';
->>>>>>> Camille
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
