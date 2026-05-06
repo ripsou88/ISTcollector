@@ -12,4 +12,8 @@ export class CardsService {
   public findAll(): Observable<Ist[]> {
     return this.http.get<Ist[]>('/ist');
   }
+
+  public getThreeRandom(): Observable<Ist[]> {
+    return this.http.get<Ist[]>("/random_card");
+  }
 }
