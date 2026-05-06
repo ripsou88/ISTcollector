@@ -27,6 +27,7 @@ export class AuthPage {
   protected formAuth!: FormGroup;
   protected formUsernameCtrl!: FormControl;
   protected formPasswordCtrl!: FormControl;
+  protected errorMessage: string = '';
 
   ngOnInit(): void {
     // Fabrication du formulaire avec le FormBuilder
@@ -41,6 +42,7 @@ export class AuthPage {
   }
 
   public addUser() {
+    this.errorMessage = '';
     if (this.formAuth.invalid) {
       this.formAuth.markAllAsTouched();
       return;
@@ -50,10 +52,15 @@ export class AuthPage {
 
     this.authService.sub(authRequest).subscribe((respSub) => {
       if (respSub.id) {
-        this.authService.auth(authRequest).subscribe((resp) => {
-          if (resp.token) {
-            this.authService.token = resp.token;
-            this.router.navigate(['/home']);
+        this.authService.auth(authRequest).subscribe({
+          next:(resp) => {
+            if (resp.token) {
+              this.authService.token = resp.token;
+              this.router.navigate(['/home']);
+            }
+          },
+          error: (err) => {
+            this.errorMessage = 'Erreur lors de la création du compte.';
           }
         });
       }
@@ -61,6 +68,7 @@ export class AuthPage {
   }
 
   public login() {
+    this.errorMessage = '';
     if (this.formAuth.invalid) {
       this.formAuth.markAllAsTouched();
       return;
@@ -72,6 +80,8 @@ export class AuthPage {
       if (resp.token) {
         this.authService.token = resp.token;
         this.router.navigate(['/home']);
+      }else {
+        this.errorMessage = 'Identifiant ou mot de passe incorrect.';
       }
     });
   }
