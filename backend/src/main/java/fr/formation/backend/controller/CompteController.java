@@ -96,6 +96,7 @@ public class CompteController {
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Vous n'avez pas le droit de modifier ce compte");
     }
 
+
     @Transactional
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole({'USER', 'ADMIN'})")
@@ -180,5 +181,10 @@ public class CompteController {
 
         return new EntityCreatedOrUpdatedResponse(admin.getId());
     }
+
+
+    
+
+
 
 }
