@@ -17,6 +17,7 @@ import { AsyncPipe } from '@angular/common';
 export class CollectionPage implements OnInit {
   private cardsService = inject(CardsService);
   protected ists$!: Observable<Ist[]>;
+
   protected vih: Ist = {
     id: 1,
     nom: 'vih',
@@ -43,5 +44,9 @@ export class CollectionPage implements OnInit {
   ngOnInit(): void {
     this.ists$ = this.cardsService.findAll();
     console.log(this.ists$);
+    this.ists$.subscribe((ists) => {
+      console.log('ISTS FROM API:', ists);
+      console.log('First typeIst:', ists[0]?.typeIst);
+    });
   }
 }
