@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -103,18 +104,21 @@ public class CompteController {
      * ---------------------------------------------
      */
     @PostMapping("/auth")
-    public TokenResponse auth(@Valid @RequestBody AuthRequest request) {
+    public ResponseEntity<Object> auth(@Valid @RequestBody AuthRequest request) {
         log.debug("Tentative de connexion ...");
 
         // On authentifie l'utilisateur ...
         Authentication authentication = new UsernamePasswordAuthenticationToken(request.getUsername(),
                 request.getPassword());
-
-        authentication = this.authenticationManager.authenticate(authentication);
+        try{
+            authentication = this.authenticationManager.authenticate(authentication);
+        }catch(BadCredentialsException e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("nom d'utilisateur ou mot de passe incorrect.");
+        }
 
         log.debug("Connexion réussie, login {} ...", request.getUsername());
 
-        return new TokenResponse(this.jwtUtils.generate(authentication));
+        return ResponseEntity.status(HttpStatus.OK).body(new TokenResponse(this.jwtUtils.generate(authentication)));
     }
 
     @PostMapping("/subscription")
