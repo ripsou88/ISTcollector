@@ -1,6 +1,5 @@
 package fr.formation.backend.model;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -14,63 +13,70 @@ import jakarta.persistence.Table;
 @Table(name = "traitement")
 public class Traitement {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-    @Column(unique = true)
-    private String nom;
+  @Column(unique = true)
+  private String nom;
 
-    @Column(length = 20, nullable = false)
-    private String prise;
+  @Column(length = 20, nullable = false)
+  private String prise;
 
-    @Column
-    private int duree; // #TODO Choisir si durée en entier ou en string (en fonction si calculs automatiques ou non ?)
-    @Enumerated(EnumType.STRING)
-    @Column
-    private TypeIst typeIst;
-    
-    public Traitement() {
-    }
+  @Column
+  private int
+      duree; // #TODO Choisir si durée en entier ou en string (en fonction si calculs automatiques
 
-    public Traitement(Integer id, String nom, String prise, int duree) {
-        this.id = id;
-        this.nom = nom;
-        this.prise = prise;
-        this.duree = duree;
-    }
+  // ou non ?)
 
-    public Integer getId() {
-        return id;
-    }
+  @Enumerated(EnumType.STRING)
+  @Column
+  private TypeIst typeIst;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public Traitement() {}
 
-    public String getNom() {
-        return nom;
-    }
+  public Traitement(String nom, String prise, int duree) {
+    this.nom = nom;
+    this.prise = prise;
+    this.duree = duree;
+  }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+  public Traitement(Integer id, String nom, String prise, int duree) {
+    this.id = id;
+    this.nom = nom;
+    this.prise = prise;
+    this.duree = duree;
+  }
 
-    public String getPrise() {
-        return prise;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public void setPrise(String prise) {
-        this.prise = prise;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public int getDuree() {
-        return duree;
-    }
+  public String getNom() {
+    return nom;
+  }
 
-    public void setDuree(int duree) {
-        this.duree = duree;
-    }
+  public void setNom(String nom) {
+    this.nom = nom;
+  }
 
+  public String getPrise() {
+    return prise;
+  }
 
+  public void setPrise(String prise) {
+    this.prise = prise;
+  }
+
+  public int getDuree() {
+    return duree;
+  }
+
+  public void setDuree(int duree) {
+    this.duree = duree;
+  }
 }
