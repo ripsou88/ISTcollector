@@ -34,6 +34,13 @@ const audioMad = document.getElementById("audioMad");
 const audioProtect = document.getElementById("audioProtect");
 const audioWin = document.getElementById("audioWin");
 
+audioStart.volume = 0.05;
+audioTheme.volume = 0.05;
+audioDeath.volume = 0.05;
+audioMad.volume = 0.05;
+audioProtect.volume = 0.05;
+audioWin.volume = 0.05;
+
 let score = 0
 let tempsScore
 
