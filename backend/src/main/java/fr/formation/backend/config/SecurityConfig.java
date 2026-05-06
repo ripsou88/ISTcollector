@@ -2,6 +2,7 @@ package fr.formation.backend.config;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -22,6 +23,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true) // Activer les annotation @PreAuthorize / @PostAuthorize
 public class SecurityConfig {
+    @Value("${SQL_URL}")
+    private String sqlUrl;
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, JwtHeaderFilter jwtHeaderFilter) throws Exception {
@@ -51,10 +54,11 @@ public class SecurityConfig {
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
+
         CorsConfiguration configuration = new CorsConfiguration();
 
         // TODO set the angular address
-        // configuration.setAllowedOrigins(List.of( "${SQL_URL}"));
+        configuration.setAllowedOrigins(List.of(sqlUrl));
         configuration.setAllowedOriginPatterns(List.of("http://localhost:*"));
 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
