@@ -1,11 +1,60 @@
+/* ----------------- TOUT LE COMPONENTS ------------------ */
+
+:host {
+    display: block;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.55);
+    height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* ----------------- TOUTE LA ZONE Y COMPRIS LES TEXTES ------------------ */
+
 #pannel-booster {
-    z-index: 2;
     display: flex;
     align-items: center;
     text-align: center;
     flex-direction: column;
-    height: 100dvh;
+
+    animation: slideUp 0.5s ease forwards;
+
+    
 }
+
+@keyframes slideUp {
+    from { transform: translateY(300px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
+
+/* ----------------- TEXTE EN DESSOUS ------------------ */
+
+#text-click {
+    font-family: var(--font-game);
+    color: var(--cream);
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: blink 2s ease-in-out infinite;
+    margin-top: 40px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* ----------------- ZONE DU BOOSTER ------------------ */
 
 .booster {
     cursor: pointer;
@@ -13,16 +62,13 @@
     transition: filter 0.3s;
     width: 240px;
     height: 420px;
+    position: relative;
+    overflow: hidden;
 }
 
 .booster:hover {
     filter: drop-shadow(0 0 50px rgba(46, 221, 187, 0.7)); 
     transform: scale(1.03); 
-}
-
-.booster:hover .booster-shine {
-    opacity: 1;
-    transform: translateX(100%) skewX(-20deg);
 }
 
 .booster-top, .booster-bottom {
@@ -34,6 +80,9 @@
 
     background: yellow;
     height: 30%;
+
+    border-radius: 12px 12px 0 0;
+
 }
 
 .booster-bottom {
@@ -41,6 +90,9 @@
     
     background: cyan;
     height: 70%;
+
+    border-radius: 0 0 12px 12px;    
+
 }
 
 .booster-top.open {
@@ -61,4 +113,24 @@
 
 @keyframes openBottom {
     to { transform: translateY(20px) }
+}
+
+/* ----------------- ZONE DU BOOSTER, effet brillant ------------------ */
+
+.booster-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        105deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.715) 50%,
+        transparent 70%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.booster:hover .booster-shine {
+    transform: translateX(100%);
+    transition: transform 0.8s ease;
 }
