@@ -6,10 +6,11 @@ import { TypePrevention } from '../../enum/type-prevention';
 import { Transmission } from '../../enum/transmission';
 import { CardsService } from '../../service/cards-service';
 import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-collection-page',
-  imports: [CardPlaceholder],
+  imports: [CardPlaceholder, AsyncPipe],
   templateUrl: './collection-page.html',
   styleUrl: './collection-page.css',
 })
