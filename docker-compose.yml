@@ -10,7 +10,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
-      network: ist-network
+      network: host
     container_name: ist-back
 
     networks:
@@ -24,9 +24,9 @@ services:
 #    build:
 #      context: .
 #      dockerfile: frontend/Dockerfile
-#    container_name: angular
+#    container_name: ist-front
 #    ports:
-#      - 4201:4201
+#      - 8083:8083
 #    networks:
 #      - biblio-network
 #    depends_on:
