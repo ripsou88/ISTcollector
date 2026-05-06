@@ -13,26 +13,25 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="question")
+@Table(name = "question")
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-  
-    @Column(name = "question", nullable=false, length = 700)
+    @Column(name = "question", nullable = false, length = 700)
     private String questionString;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reponse> reponses = new ArrayList<>();
-
 
     public Question(String questionString, List<Reponse> reponses) {
         this.questionString = questionString;
         this.reponses = reponses;
     }
 
-    public Question() {}
+    public Question() {
+    }
 
     public Integer getId() {
         return id;
@@ -58,5 +57,4 @@ public class Question {
         this.reponses = reponses;
     }
 
-    
 }
