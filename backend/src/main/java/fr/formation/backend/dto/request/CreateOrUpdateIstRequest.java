@@ -19,8 +19,6 @@ public class CreateOrUpdateIstRequest {
 
     private int incidence;
 
-    private String image;
-
     private List<Symptome> symptomes = new ArrayList<>();
 
     private String shortDescription;
@@ -61,14 +59,6 @@ public class CreateOrUpdateIstRequest {
         this.incidence = incidence;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public List<Symptome> getSymptomes() {
         return symptomes;
     }
@@ -101,22 +91,20 @@ public class CreateOrUpdateIstRequest {
         this.transmission = transmission;
     }
 
-	public List<Prevention> getPrevention() {
-		return prevention;
-	}
+    public List<Prevention> getPrevention() {
+        return prevention;
+    }
 
-	public void setPrevention(List<Prevention> prevention) {
-		this.prevention = prevention;
-	}
+    public void setPrevention(List<Prevention> prevention) {
+        this.prevention = prevention;
+    }
 
-	public List<Traitement> getTraitement() {
-		return traitement;
-	}
+    public List<Traitement> getTraitement() {
+        return traitement;
+    }
 
-	public void setTraitement(List<Traitement> traitement) {
-		this.traitement = traitement;
-	}
-
-    
+    public void setTraitement(List<Traitement> traitement) {
+        this.traitement = traitement;
+    }
 
 }

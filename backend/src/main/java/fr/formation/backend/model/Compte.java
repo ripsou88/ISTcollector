@@ -1,5 +1,6 @@
 package fr.formation.backend.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +19,10 @@ public abstract class Compte {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(unique = true, length = 20, nullable = false)
     private String username;
+
+    @Column(length = 100, nullable = false)
     private String password;
 
     public Compte() {
