@@ -42,7 +42,7 @@ public class QuizzController {
      * ---------------------------------------------
      */
 
-    @GetMapping("")
+    @GetMapping("/random_card")
     public List<IstResponse> findThreeRandom() {
         log.debug("Recherche de 3 IST aléatoires ...");
 
