@@ -81,7 +81,6 @@ INSERT INTO `traitement` (`duree`, `nom`, `prise`, `type_ist`) VALUES
   (1, 'Ceftriaxone', 'Injection', 'bacterien'),
   (1, 'Penicilline G', 'Injection', 'bacterien'),
   (10, 'Valaciclovir', 'Cachet', 'viral'),
-  (NULL, 'Lesions HPV', 'Medicale', 'viral'),
   (-1, 'Tenofovir', 'Cachet', 'viral'),
   (84, 'Antiviraux VHC', 'Cachet', 'viral'),
   (7, 'Metronidazole', 'Cachet', 'parasite'),
@@ -267,7 +266,6 @@ INSERT INTO `ist-traitement` (`ist_id`, `traitement_id`) SELECT i.id, t.id FROM 
 INSERT INTO `ist-traitement` (`ist_id`, `traitement_id`) SELECT i.id, t.id FROM `ist` i JOIN `traitement` t WHERE i.nom = 'Gonorrhee' AND t.nom = 'Ceftriaxone';
 INSERT INTO `ist-traitement` (`ist_id`, `traitement_id`) SELECT i.id, t.id FROM `ist` i JOIN `traitement` t WHERE i.nom = 'Syphilis' AND t.nom = 'Penicilline G';
 INSERT INTO `ist-traitement` (`ist_id`, `traitement_id`) SELECT i.id, t.id FROM `ist` i JOIN `traitement` t WHERE i.nom = 'Herpes genital' AND t.nom = 'Valaciclovir';
-INSERT INTO `ist-traitement` (`ist_id`, `traitement_id`) SELECT i.id, t.id FROM `ist` i JOIN `traitement` t WHERE i.nom = 'HPV' AND t.nom = 'Lesions HPV';
 INSERT INTO `ist-traitement` (`ist_id`, `traitement_id`) SELECT i.id, t.id FROM `ist` i JOIN `traitement` t WHERE i.nom = 'Hepatite B' AND t.nom = 'Tenofovir';
 INSERT INTO `ist-traitement` (`ist_id`, `traitement_id`) SELECT i.id, t.id FROM `ist` i JOIN `traitement` t WHERE i.nom = 'Hepatite C' AND t.nom = 'Antiviraux VHC';
 INSERT INTO `ist-traitement` (`ist_id`, `traitement_id`) SELECT i.id, t.id FROM `ist` i JOIN `traitement` t WHERE i.nom = 'Trichomonase' AND t.nom = 'Metronidazole';
@@ -278,7 +276,6 @@ INSERT INTO `ist-traitement` (`ist_id`, `traitement_id`) SELECT i.id, t.id FROM 
 INSERT INTO `ist-traitement` (`ist_id`, `traitement_id`) SELECT i.id, t.id FROM `ist` i JOIN `traitement` t WHERE i.nom = 'Gale' AND t.nom = 'Permethrine';
 INSERT INTO `ist-traitement` (`ist_id`, `traitement_id`) SELECT i.id, t.id FROM `ist` i JOIN `traitement` t WHERE i.nom = 'Gale' AND t.nom = 'Ivermectine';
 INSERT INTO `ist-traitement` (`ist_id`, `traitement_id`) SELECT i.id, t.id FROM `ist` i JOIN `traitement` t WHERE i.nom = 'Poux pubiens' AND t.nom = 'Antiparasitaire';
-INSERT INTO `ist-traitement` (`ist_id`, `traitement_id`) SELECT i.id, t.id FROM `ist` i JOIN `traitement` t WHERE i.nom = 'Molluscum' AND t.nom = 'Lesions HPV';
 
 -- Cartes de demo pour l'utilisateur demo
 DELETE uc FROM `user-card` uc JOIN `account` a ON a.id = uc.user_id WHERE a.username = 'demo';

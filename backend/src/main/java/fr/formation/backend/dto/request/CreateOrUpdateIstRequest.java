@@ -29,7 +29,7 @@ public class CreateOrUpdateIstRequest {
     private TypeIst typeIst;
 
     @NotBlank
-    private Transmission transmission;
+    private List<Transmission> transmissions;
 
     @NotBlank
     private List<Prevention> prevention;
@@ -85,12 +85,12 @@ public class CreateOrUpdateIstRequest {
         this.typeIst = typeIst;
     }
 
-    public Transmission getTransmission() {
-        return transmission;
+    public List<Transmission> getTransmissions() {
+        return transmissions;
     }
 
-    public void setTransmission(Transmission transmission) {
-        this.transmission = transmission;
+    public void setTransmissions(List<Transmission> transmissions) {
+        this.transmissions = transmissions;
     }
 
     public List<Prevention> getPrevention() {
@@ -117,6 +117,6 @@ public class CreateOrUpdateIstRequest {
         this.longDescription = longDescription;
     }
 
-    
+
 
 }

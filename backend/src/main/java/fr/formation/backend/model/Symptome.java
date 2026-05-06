@@ -8,34 +8,37 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Symptome {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-    @Column(unique = true, length = 20, nullable = false)
-    private String nom;
-    
-    public Symptome() {
-	}
+  @Column(unique = true, length = 20, nullable = false)
+  private String nom;
 
-	public Symptome(Integer id, String nom) {
-		this.id = id;
-		this.nom = nom;
-	}
+  public Symptome() {}
 
-	public Integer getId() {
-		return id;
-	}
+  public Symptome(String nom) {
+    this.nom = nom;
+  }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  public Symptome(Integer id, String nom) {
+    this.id = id;
+    this.nom = nom;
+  }
 
-	public String getNom() {
-		return nom;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public String getNom() {
+    return nom;
+  }
+
+  public void setNom(String nom) {
+    this.nom = nom;
+  }
 }

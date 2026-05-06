@@ -1,5 +1,7 @@
 <div class="main-container">
-  @for (card of cards; track card) {
-    <app-card-placeholder [ist]="card"> </app-card-placeholder>
+  @if (ists$ | async; as ists) {
+    @for (card of ists; track card.id) {
+      <app-card-placeholder [ist]="card"> </app-card-placeholder>
+    }
   }
 </div>
