@@ -1,0 +1,41 @@
+# Le nom du compose, optionel
+name: ist-compose
+
+# Décrire tous les services, volumes, network, etc. nécessaire au bon fonctionnement
+
+# Descrription des différents containers
+services:
+  # Description du container 
+  java:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      network: host
+    container_name: ist-back
+
+    env_file:
+      - backend/.env
+
+    networks:
+      - ist-network
+
+    ports:
+      - 8082:8082
+
+
+#  web:
+#    build:
+#      context: .
+#      dockerfile: frontend/Dockerfile
+#    container_name: ist-front
+#    ports:
+#      - 8083:8083
+#    networks:
+#      - biblio-network
+#    depends_on:
+#      - java
+
+networks:
+  ist-network:
+    name: demo-ist-rso
+

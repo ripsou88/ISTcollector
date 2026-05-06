@@ -60,6 +60,7 @@ public class IstController {
         ist.setIncidence(request.getIncidence());
         ist.setSymptomes(request.getSymptomes());
         ist.setShortDescription(request.getShortDescription());
+        ist.setLongDescription(request.getLongDescription());
         ist.setTypeIst(request.getTypeIst());
         ist.setTransmission(request.getTransmission());
         ist.setPreventions(request.getPrevention());
@@ -84,6 +85,7 @@ public class IstController {
         ist.setIncidence(request.getIncidence());
         ist.setSymptomes(request.getSymptomes());
         ist.setShortDescription(request.getShortDescription());
+        ist.setLongDescription(request.getLongDescription());
         ist.setTypeIst(request.getTypeIst());
         ist.setTransmission(request.getTransmission());
         ist.setPreventions(request.getPrevention());

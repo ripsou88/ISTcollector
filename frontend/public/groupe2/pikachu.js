@@ -60,7 +60,7 @@ function launchGame() {
   document.getElementById("formStart").style.setProperty("display", "none");
   document.getElementById("grass").style.setProperty("display", "flex");
   document.body.onkeydown = deplacement;
-  
+
   document.getElementById("timer").style.display= "revert"
   document.getElementById("score").style.display= "revert"
 
@@ -92,6 +92,17 @@ function animState() {
 }
 
 function deplacement(event) {
+
+  if (
+  event.key == "ArrowDown" ||
+  event.key == "ArrowUp" ||
+  event.key == "ArrowLeft" ||
+  event.key == "ArrowRight" ||
+  event.key == " "
+) {
+  event.preventDefault();
+}
+
   if (event.key == "ArrowDown" || event.key == "s") {
     posY += mouvement;
     animState();
@@ -134,12 +145,12 @@ function getDefense(event) {
   * Update the value of invincible to true when countdown start
   */
   let setDuree = dureeDefense;
- 
+
   if (lastDefense >= (Date.now() - dureeCooldown)) {
     if (lastDefense > (dureeDefense - Date.now()) && invincible==false) {
       console.log("No spam pls");
       messageCooldown = `Wait : ${(7000-(Date.now()-lastDefense))/1000}s`
-      
+
       cooldown.style.color= "red"
       cooldown.style.display= "revert"
       cooldown.innerHTML = messageCooldown
@@ -150,7 +161,7 @@ function getDefense(event) {
     console.log("Already protected");
     return;
   }
-  
+
   lastDefense = Date.now();
   protectionCpt++;
 
@@ -209,9 +220,9 @@ function gagnerPoints() {
 }
 
 function death() {
-  dureeCooldown = 10000000000000; //avoid protection 
+  dureeCooldown = 10000000000000; //avoid protection
   /*
-  En cas de mort 
+  En cas de mort
   Fonction moche à cause des délais d'attente entre les animations
   */
   audioTheme.pause();

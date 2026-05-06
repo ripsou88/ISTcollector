@@ -54,7 +54,8 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // TODO set the angular address
-        configuration.setAllowedOrigins(List.of("http://localhost", "${SQL_URL}"));
+        // configuration.setAllowedOrigins(List.of( "${SQL_URL}"));
+        configuration.setAllowedOriginPatterns(List.of("http://localhost:*"));
 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept", "Origin", "X-Requested-With"));
