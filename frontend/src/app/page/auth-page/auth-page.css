@@ -75,6 +75,15 @@ html, body {
     font-weight: 300;
 }
 
+.error-message {
+    color: var(--cream);
+    background: color-mix(in srgb, var(--pink-dark) 80%, transparent);
+    border-radius: 8px;
+    padding: 8px 15px;
+    margin-top: 10px;
+    font-weight: 300;
+    width: 400px;
+}
 .create-account {
     font-size: 3rem;
     text-transform: uppercase;

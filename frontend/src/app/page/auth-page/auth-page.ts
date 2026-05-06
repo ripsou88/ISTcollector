@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -29,6 +29,8 @@ export class AuthPage {
   protected formPasswordCtrl!: FormControl;
   protected errorMessage: string = '';
 
+  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
+
   ngOnInit(): void {
     // Fabrication du formulaire avec le FormBuilder
     this.formUsernameCtrl = this.formBuilder.control("", Validators.required);
@@ -49,8 +51,9 @@ export class AuthPage {
     }
 
     const authRequest: AuthRequest = this.formAuth.getRawValue() as AuthRequest;
-
-    this.authService.sub(authRequest).subscribe((respSub) => {
+    
+    this.authService.sub(authRequest).subscribe({
+      next: (respSub) => {
       if (respSub.id) {
         this.authService.auth(authRequest).subscribe({
           next:(resp) => {
@@ -60,9 +63,15 @@ export class AuthPage {
             }
           },
           error: (err) => {
-            this.errorMessage = 'Erreur lors de la création du compte.';
+            this.errorMessage = err.error ?? 'Erreur lors de la connexion';
+            this.cdr.detectChanges();
           }
         });
+      }
+      },
+      error: (err) => { // ← c'est ici que tombe le 409
+        this.errorMessage = err.error ?? 'Erreur lors de la création du compte.';
+        this.cdr.detectChanges();
       }
     });
   }
@@ -76,12 +85,16 @@ export class AuthPage {
 
     const authRequest: AuthRequest = this.formAuth.getRawValue() as AuthRequest;
 
-    this.authService.auth(authRequest).subscribe((resp) => {
-      if (resp.token) {
-        this.authService.token = resp.token;
-        this.router.navigate(['/home']);
-      }else {
-        this.errorMessage = 'Identifiant ou mot de passe incorrect.';
+    this.authService.auth(authRequest).subscribe({
+      next: (resp) => {
+        if (resp.token) {
+          this.authService.token = resp.token;
+          this.router.navigate(['/home']);
+        }
+      },
+      error: (err) => {
+        this.errorMessage = err.error ?? 'Erreur lors de la connexion.';
+        this.cdr.detectChanges();
       }
     });
   }
