@@ -200,7 +200,7 @@
   position: absolute;
   width: 18px;
   height: 18px;
-  border-color: rgba(78, 255, 140, 0.4);
+  border-color: var(--green-deep);
   border-style: solid;
   z-index: 15;
 }
