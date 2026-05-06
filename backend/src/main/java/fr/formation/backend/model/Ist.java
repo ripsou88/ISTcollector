@@ -18,60 +18,52 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "ist")
 public class Ist {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(unique = true, length = 20, nullable = false)
     private String nom;
+
     @Column
     private int gravite;
+
     @Column
     private int incidence;
-    @Column(length = 20, nullable = false)
-    private String image;
+
     @ManyToMany
-    @JoinTable(
-        name = "ist-symptome",
-        joinColumns = @JoinColumn(name = "ist_id"),
-        inverseJoinColumns = @JoinColumn(name = "symptome_id")
-    )
+    @JoinTable(name = "ist-symptome", joinColumns = @JoinColumn(name = "ist_id"), inverseJoinColumns = @JoinColumn(name = "symptome_id"))
     private List<Symptome> symptomes = new ArrayList<>();
+
     @Column(length = 20, nullable = false)
     private String shortDescription;
+
     @Enumerated(EnumType.STRING)
     @Column
     private TypeIst typeIst;
+
     @Enumerated(EnumType.STRING)
     @Column
     private Transmission transmission;
+
     @ManyToMany
-    @JoinTable(
-            name = "ist-prevention",
-            joinColumns = @JoinColumn(name = "ist_id"),
-            inverseJoinColumns = @JoinColumn(name = "prevention_id")
-        )
+    @JoinTable(name = "ist-prevention", joinColumns = @JoinColumn(name = "ist_id"), inverseJoinColumns = @JoinColumn(name = "prevention_id"))
     private List<Prevention> preventions = new ArrayList<>();
+
     @ManyToMany
-    @JoinTable(
-            name = "ist-traitement",
-            joinColumns = @JoinColumn(name = "ist_id"),
-            inverseJoinColumns = @JoinColumn(name = "traitement_id")
-        )
+    @JoinTable(name = "ist-traitement", joinColumns = @JoinColumn(name = "ist_id"), inverseJoinColumns = @JoinColumn(name = "traitement_id"))
     private List<Traitement> traitements = new ArrayList<>();
 
     public Ist() {
     }
 
-    public Ist(Integer id, String nom, int gravite, int incidence, String image,
+    public Ist(Integer id, String nom, int gravite, int incidence,
             String shortDescription, TypeIst typeIst, Transmission transmission,
             List<Prevention> preventions, List<Traitement> traitements) {
         this.id = id;
         this.nom = nom;
         this.gravite = gravite;
         this.incidence = incidence;
-        this.image = image;
         this.shortDescription = shortDescription;
         this.typeIst = typeIst;
         this.transmission = transmission;
@@ -111,15 +103,6 @@ public class Ist {
         this.incidence = incidence;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-
     public void setSymptomes(List<Symptome> symptomes) {
         this.symptomes = symptomes;
     }
@@ -153,21 +136,20 @@ public class Ist {
     }
 
     public List<Prevention> getPreventions() {
-		return preventions;
-	}
+        return preventions;
+    }
 
-	public void setPreventions(List<Prevention> preventions) {
-		this.preventions = preventions;
-	}
+    public void setPreventions(List<Prevention> preventions) {
+        this.preventions = preventions;
+    }
 
-	public List<Traitement> getTraitements() {
-		return traitements;
-	}
+    public List<Traitement> getTraitements() {
+        return traitements;
+    }
 
-	public void setTraitements(List<Traitement> traitements) {
-		this.traitements = traitements;
-	}
-
+    public void setTraitements(List<Traitement> traitements) {
+        this.traitements = traitements;
+    }
 
     public double calculerPourcentageDeTransmission() {
         return 0;
