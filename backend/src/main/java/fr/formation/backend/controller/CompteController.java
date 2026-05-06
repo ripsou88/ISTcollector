@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import fr.formation.backend.config.JwtUtils;
 import fr.formation.backend.dto.request.AuthRequest;
@@ -119,6 +120,11 @@ public class CompteController {
     @PostMapping("/subscription")
     @ResponseStatus(HttpStatus.CREATED)
     public EntityCreatedOrUpdatedResponse add(@Valid @RequestBody AuthRequest request) {
+        // Vérification de l'unicité du username
+        if (this.repository.findByUsername(request.getUsername()).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Ce nom d'utilisateur existe déjà.");
+        }
+
         log.debug("Création d'un compte utilisateur ...");
 
         // La création de compte ne concerne que les utilisateurs, pas les admins
