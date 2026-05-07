@@ -5,7 +5,7 @@ name: ist-compose
 
 # Descrription des différents containers
 services:
-  # Description du container 
+  # Description du container
   java:
     build:
       context: .
@@ -22,7 +22,6 @@ services:
     ports:
       - 8082:8080
 
-
   web:
     build:
       context: .
@@ -38,4 +37,3 @@ services:
 networks:
   ist-network:
     name: demo-ist-rso
-
