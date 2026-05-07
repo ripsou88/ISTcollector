@@ -1,7 +1,6 @@
 package fr.formation.backend.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +63,8 @@ public class CompteController {
     @GetMapping("/user={name}")
     public CompteResponse findByUsername(@PathVariable String name) {
         log.debug("Recherche d'un utilisateur avec username : {} ...", name);
-        return this.repository.findByUsernameOptional(name).map(CompteResponse::convert).orElseThrow(CompteNotFoundException::new);
+        return this.repository.findByUsernameOptional(name).map(CompteResponse::convert)
+                .orElseThrow(CompteNotFoundException::new);
     }
 
     @GetMapping("/{id}")
@@ -96,7 +96,6 @@ public class CompteController {
         // Sinon, la requête renvoie une erreur
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Vous n'avez pas le droit de modifier ce compte");
     }
-
 
     @Transactional
     @DeleteMapping("/{id}")
@@ -131,9 +130,9 @@ public class CompteController {
         // On authentifie l'utilisateur ...
         Authentication authentication = new UsernamePasswordAuthenticationToken(request.getUsername(),
                 request.getPassword());
-        try{
+        try {
             authentication = this.authenticationManager.authenticate(authentication);
-        }catch(BadCredentialsException e){
+        } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("nom d'utilisateur ou mot de passe incorrect.");
         }
 
@@ -182,10 +181,5 @@ public class CompteController {
 
         return new EntityCreatedOrUpdatedResponse(admin.getId());
     }
-
-
-
-
-
 
 }

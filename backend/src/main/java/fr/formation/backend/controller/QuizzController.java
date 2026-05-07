@@ -48,8 +48,9 @@ public class QuizzController {
         List<Ist> istRandom = this.istRepository.findThreeRandom(); // .stream().map(IstResponse::convert).toList();
 
         //Add card to user collection
-        User user = (User) this.compteRepository.findById(userDetails.getId()).orElseThrow(EntityNotFoundException::new);
-        List<Ist> userIstList =user.getIst();
+        User user = (User) this.compteRepository.findById(userDetails.getId())
+                .orElseThrow(EntityNotFoundException::new);
+        List<Ist> userIstList = user.getIst();
         userIstList.addAll(istRandom);
         user.setIst(userIstList);
 
