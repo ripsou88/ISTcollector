@@ -19,76 +19,67 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.formation.backend.dto.request.CreateOrUpdateTraitementRequest;
 import fr.formation.backend.dto.response.EntityCreatedOrUpdatedResponse;
 import fr.formation.backend.dto.response.TraitementResponse;
-import fr.formation.backend.exception.TraitementNotFoundException;
 import fr.formation.backend.model.Traitement;
-import fr.formation.backend.repo.TraitementRepository;
-import jakarta.persistence.EntityNotFoundException;
+import fr.formation.backend.service.TraitementService;
 import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/traitement")
 public class TraitementController {
     private static final Logger log = LoggerFactory.getLogger(TraitementController.class);
 
-    private final TraitementRepository repository;
+    private final TraitementService service;
 
-    public TraitementController(TraitementRepository repository) {
-        this.repository = repository;
+    public TraitementController(TraitementService service) {
+        this.service = service;
     }
 
+    @GetMapping
     public List<TraitementResponse> findAll() {
         log.debug("Liste des préventions ...");
-        return this.repository.findAll().stream().map(TraitementResponse::convert).toList();
+
+        return this.service.findAll().stream().map(TraitementResponse::convert).toList();
     }
 
     @GetMapping("/{id}")
     public TraitementResponse findById(@PathVariable @NonNull Integer id) {
         log.debug("Prévention {} ...", id);
-        return this.repository.findById(id).map(TraitementResponse::convert)
-                .orElseThrow(TraitementNotFoundException::new);
+
+        Traitement traitement = this.service.findById(id);
+
+        return TraitementResponse.convert(traitement);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public EntityCreatedOrUpdatedResponse create(@Valid @RequestBody CreateOrUpdateTraitementRequest request) {
+    public Integer create(@Valid @RequestBody CreateOrUpdateTraitementRequest request) {
         log.debug("Ajout d'un nouveau mode de prévention ...");
 
-        Traitement traitement = new Traitement();
+        Integer id_post = this.service.save(null, request).getId();
 
-        traitement.setNom(request.getNom());
-        traitement.setPrise(request.getPrise());
-        traitement.setDuree(request.getDuree());
+        log.debug("Mode de prévention {} ajoutée !", id_post);
 
-        this.repository.save(traitement);
-
-        log.debug("Mode de prévention {} ajoutée !", traitement.getId());
-
-        return new EntityCreatedOrUpdatedResponse(traitement.getId());
+        return id_post;
     }
 
     @PutMapping("/{id}")
-    public EntityCreatedOrUpdatedResponse update(@PathVariable @NonNull Integer id,
+    public Integer update(@PathVariable @NonNull Integer id,
             @Valid @RequestBody CreateOrUpdateTraitementRequest request) {
         log.debug("Modification de la prévention {} ...", id);
 
-        Traitement traitement = this.repository.findById(id).orElseThrow(EntityNotFoundException::new);
-
-        traitement.setNom(request.getNom());
-        traitement.setPrise(request.getPrise());
-        traitement.setDuree(request.getDuree());
-
-        this.repository.save(traitement);
+        Integer id_put = this.service.save(id, request).getId();
 
         log.debug("Prévention {} modifiée !", id);
 
-        return new EntityCreatedOrUpdatedResponse(traitement.getId());
+        return id_put;
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable @NonNull Integer id) {
         log.debug("Suppression de la prévention {} ...", id);
 
-        this.repository.deleteById(id);
+        this.service.deleteById(id);
 
         log.debug("Prévention {} supprimée !", id);
     }

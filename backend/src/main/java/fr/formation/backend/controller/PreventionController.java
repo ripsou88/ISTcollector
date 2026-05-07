@@ -17,12 +17,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.formation.backend.dto.request.CreateOrUpdatePreventionRequest;
-import fr.formation.backend.dto.response.EntityCreatedOrUpdatedResponse;
 import fr.formation.backend.dto.response.PreventionResponse;
-import fr.formation.backend.exception.PreventionNotFoundException;
 import fr.formation.backend.model.Prevention;
-import fr.formation.backend.repo.PreventionRepository;
-import jakarta.persistence.EntityNotFoundException;
+import fr.formation.backend.service.PreventionService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -30,63 +27,57 @@ import jakarta.validation.Valid;
 public class PreventionController {
     private static final Logger log = LoggerFactory.getLogger(PreventionController.class);
 
-    private final PreventionRepository repository;
+    private final PreventionService service;
 
-    public PreventionController(PreventionRepository repository) {
-        this.repository = repository;
+    public PreventionController(PreventionService service) {
+        this.service = service;
     }
 
+    @GetMapping
     public List<PreventionResponse> findAll() {
         log.debug("Liste des préventions ...");
-        return this.repository.findAll().stream().map(PreventionResponse::convert).toList();
+
+        return this.service.findAll().stream().map(PreventionResponse::convert).toList();
     }
 
     @GetMapping("/{id}")
     public PreventionResponse findById(@PathVariable @NonNull Integer id) {
         log.debug("Prévention {} ...", id);
-        return this.repository.findById(id).map(PreventionResponse::convert)
-                .orElseThrow(PreventionNotFoundException::new);
+
+        Prevention prevention = this.service.findById(id);
+
+        return PreventionResponse.convert(prevention);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public EntityCreatedOrUpdatedResponse create(@Valid @RequestBody CreateOrUpdatePreventionRequest request) {
+    public Integer create(@Valid @RequestBody CreateOrUpdatePreventionRequest request) {
         log.debug("Ajout d'un nouveau mode de prévention ...");
 
-        Prevention prevention = new Prevention();
+        Integer id_post = this.service.save(null, request).getId();
 
-        prevention.setNom(request.getNom());
-        prevention.setTypePrevention(request.getTypePrevention());
+        log.debug("Mode de prévention {} ajoutée !", id_post);
 
-        this.repository.save(prevention);
-
-        log.debug("Mode de prévention {} ajoutée !", prevention.getId());
-
-        return new EntityCreatedOrUpdatedResponse(prevention.getId());
+        return id_post;
     }
 
     @PutMapping("/{id}")
-    public EntityCreatedOrUpdatedResponse update(@PathVariable @NonNull Integer id,
+    public Integer update(@PathVariable @NonNull Integer id,
             @Valid @RequestBody CreateOrUpdatePreventionRequest request) {
         log.debug("Modification de la prévention {} ...", id);
 
-        Prevention prevention = this.repository.findById(id).orElseThrow(EntityNotFoundException::new);
+        Integer id_put = this.service.save(id, request).getId();
 
-        prevention.setNom(request.getNom());
-        prevention.setTypePrevention(request.getTypePrevention());
+        log.debug("Prévention {} modifiée !", id_put);
 
-        this.repository.save(prevention);
-
-        log.debug("Prévention {} modifiée !", id);
-
-        return new EntityCreatedOrUpdatedResponse(prevention.getId());
+        return id_put;
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable @NonNull Integer id) {
         log.debug("Suppression de la prévention {} ...", id);
 
-        this.repository.deleteById(id);
+        this.service.deleteById(id);
 
         log.debug("Prévention {} supprimée !", id);
     }
