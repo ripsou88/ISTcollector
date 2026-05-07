@@ -27,6 +27,7 @@ Servers/
 
 # Environment files
 /.env
+.env.ts
 
 # Angular CLI and build artefacts
 /.angular-cli.json

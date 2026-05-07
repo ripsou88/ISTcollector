@@ -1,6 +1,7 @@
 package fr.formation.backend.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +30,8 @@ import fr.formation.backend.config.JwtUtils;
 import fr.formation.backend.dto.request.AuthRequest;
 import fr.formation.backend.dto.response.CompteResponse;
 import fr.formation.backend.dto.response.EntityCreatedOrUpdatedResponse;
+import fr.formation.backend.dto.response.OwnedCardsResponse;
 import fr.formation.backend.dto.response.TokenResponse;
-import fr.formation.backend.exception.CompteNotFoundException;
 import fr.formation.backend.model.Admin;
 import fr.formation.backend.model.Compte;
 import fr.formation.backend.model.User;
@@ -61,65 +62,88 @@ public class CompteController {
     }
 
     @GetMapping("/user={name}")
-    public CompteResponse findByUsername(@PathVariable String name) {
+    public Optional<CompteResponse> findByUsername(@PathVariable String name) {
         log.debug("Recherche d'un utilisateur avec username : {} ...", name);
-        return this.repository.findByUsernameOptional(name).map(CompteResponse::convert)
-                .orElseThrow(CompteNotFoundException::new);
+        return this.repository.findByUsernameOptional(name).map(CompteResponse::convert);
     }
 
     @GetMapping("/{id}")
     public CompteResponse findById(@PathVariable @NonNull Integer id) {
         log.debug("Recherche d'un utilisateur avec id : {} ...", id);
-        return this.repository.findById(id).map(CompteResponse::convert).orElseThrow(EntityNotFoundException::new);
+        return this.repository
+                .findById(id)
+                .map(CompteResponse::convert)
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     @Transactional
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole({'USER', 'ADMIN'})")
-    public ResponseEntity<Object> update(@PathVariable @NonNull Integer id, @Valid @RequestBody AuthRequest request,
+    public ResponseEntity<Object> update(
+            @PathVariable @NonNull Integer id,
+            @Valid @RequestBody AuthRequest request,
             Authentication auth) {
-        boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")); // Vérifie si l'utilisateur est un admin ou non
-        Compte compte = this.repository.findById(id).orElseThrow(EntityNotFoundException::new); // Créé un compte temporaire à partir de l'ID donné dans l'URL de la requête
+        boolean isAdmin = auth.getAuthorities().stream()
+                .anyMatch(
+                        a -> a.getAuthority()
+                                .equals("ROLE_ADMIN")); // Vérifie si l'utilisateur est un admin ou non
+        Compte compte = this.repository
+                .findById(id)
+                .orElseThrow(
+                        EntityNotFoundException::new); // Créé un compte temporaire à partir de l'ID donné dans l'URL de la
+        // requête
 
         log.debug("Modification du compte {} ...", id);
 
         if (compte.getUsername().equals(auth.getName()) || isAdmin) {
-            // Si l'utilisateur est le propriétaire du compte ou qu'il est admin, il peut modifier le compte
+            // Si l'utilisateur est le propriétaire du compte ou qu'il est admin, il peut modifier le
+            // compte
             compte.setUsername(request.getUsername());
             compte.setPassword(this.passwordEncoder.encode(request.getPassword()));
 
             this.repository.save(compte);
             log.debug("Informations du compte {} modifiées !", id);
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(new EntityCreatedOrUpdatedResponse(compte.getId()));
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(new EntityCreatedOrUpdatedResponse(compte.getId()));
         }
         // Sinon, la requête renvoie une erreur
-        return ResponseEntity.status(HttpStatus.CONFLICT).body("Vous n'avez pas le droit de modifier ce compte");
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body("Vous n'avez pas le droit de modifier ce compte");
     }
 
     @Transactional
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole({'USER', 'ADMIN'})")
     public ResponseEntity<Object> deleteById(@PathVariable @NonNull Integer id, Authentication auth) {
-        boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")); // Vérifie si l'utilisateur est un admin ou non
-        Compte compte = this.repository.findById(id).orElseThrow(EntityNotFoundException::new);// Créé un compte temporaire à partir de l'ID donné dans l'URL de la requête
+        boolean isAdmin = auth.getAuthorities().stream()
+                .anyMatch(
+                        a -> a.getAuthority()
+                                .equals("ROLE_ADMIN")); // Vérifie si l'utilisateur est un admin ou non
+        Compte compte = this.repository
+                .findById(id)
+                .orElseThrow(
+                        EntityNotFoundException::new); // Créé un compte temporaire à partir de l'ID donné dans l'URL de la
+        // requête
 
         log.debug("Suppression du compte {} ...", id);
 
         if (compte.getUsername().equals(auth.getName()) || isAdmin) {
-            // Si l'utilisateur est le propriétaire du compte ou qu'il est admin, il peut supprimer le compte
+            // Si l'utilisateur est le propriétaire du compte ou qu'il est admin, il peut supprimer le
+            // compte
             this.repository.deleteById(id);
             log.debug("Compte {} supprimée !", id);
 
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new EntityCreatedOrUpdatedResponse(compte.getId()));
+            return ResponseEntity.status(HttpStatus.ACCEPTED)
+                    .body(new EntityCreatedOrUpdatedResponse(compte.getId()));
         }
         // Sinon, la requête renvoie une erreur
-        return ResponseEntity.status(HttpStatus.CONFLICT).body("Vous n'avez pas le droit de supprimer ce compte");
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body("Vous n'avez pas le droit de supprimer ce compte");
     }
 
     /**
-     * ---------------------------------------------
-     * METHODES D'AUTHENTIFICATION ET D'INSCRIPTIONS
+     * --------------------------------------------- METHODES D'AUTHENTIFICATION ET D'INSCRIPTIONS
      * ---------------------------------------------
      */
     @Transactional
@@ -133,12 +157,14 @@ public class CompteController {
         try {
             authentication = this.authenticationManager.authenticate(authentication);
         } catch (BadCredentialsException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("nom d'utilisateur ou mot de passe incorrect.");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("nom d'utilisateur ou mot de passe incorrect.");
         }
 
         log.debug("Connexion réussie, login {} ...", request.getUsername());
 
-        return ResponseEntity.status(HttpStatus.OK).body(new TokenResponse(this.jwtUtils.generate(authentication)));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new TokenResponse(this.jwtUtils.generate(authentication)));
     }
 
     @Transactional
@@ -161,7 +187,8 @@ public class CompteController {
 
         log.debug("Compte créé : {} ...", utilisateur.getId());
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(new EntityCreatedOrUpdatedResponse(utilisateur.getId()));
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new EntityCreatedOrUpdatedResponse(utilisateur.getId()));
     }
 
     @Transactional
@@ -182,4 +209,11 @@ public class CompteController {
         return new EntityCreatedOrUpdatedResponse(admin.getId());
     }
 
+    // Recupere les ids de cartes
+    @GetMapping("/cards")
+    @PreAuthorize("hasRole('USER')")
+    public OwnedCardsResponse getMyCardsId(Authentication auth) {
+        List<Integer> ids = this.repository.findOwnedIstIdsByUsername(auth.getName());
+        return new OwnedCardsResponse(ids);
+    }
 }

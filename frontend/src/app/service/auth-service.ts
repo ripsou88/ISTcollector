@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   public sub(authRequest: AuthRequest): Observable<SubResponse> {
-        return this.http.post<SubResponse>('/compte/subscription', authRequest);
+    return this.http.post<SubResponse>('/compte/subscription', authRequest);
   }
 
   public isLogged(): boolean {

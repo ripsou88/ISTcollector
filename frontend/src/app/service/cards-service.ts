@@ -2,6 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Ist } from '../interface/ist';
 import { HttpClient } from '@angular/common/http';
+import { AuthRequest } from '../dto/auth-request';
+import { OwnedCardsResponse } from '../interface/ownedCardsResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +16,10 @@ export class CardsService {
   }
 
   public getThreeRandom(): Observable<Ist[]> {
-    return this.http.get<Ist[]>("/quizz/random_card");
+    return this.http.get<Ist[]>('/quizz/random_card');
+  }
+
+  public getUserCards(): Observable<OwnedCardsResponse> {
+    return this.http.get<OwnedCardsResponse>('/compte/cards');
   }
 }
