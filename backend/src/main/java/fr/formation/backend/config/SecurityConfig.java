@@ -33,8 +33,8 @@ public class SecurityConfig {
         // Configuration des accès : qui a droit de voir quoi
         http.authorizeHttpRequests(auth -> {
 
-            auth.requestMatchers(HttpMethod.POST, "/api/auth").permitAll();
-            auth.requestMatchers(HttpMethod.POST, "/api/subscription").permitAll();
+            auth.requestMatchers(HttpMethod.POST, "/api/compte/auth").permitAll();
+            auth.requestMatchers(HttpMethod.POST, "/api/compte/subscription").permitAll();
 
             // Uniquement les utilisateurs authentifiés partout sur l'application
             auth.anyRequest().authenticated();
