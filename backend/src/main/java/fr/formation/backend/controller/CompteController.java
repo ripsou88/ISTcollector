@@ -89,15 +89,12 @@ public class CompteController {
                                 .equals("ROLE_ADMIN")); // Vérifie si l'utilisateur est un admin ou non
         Compte compte = this.repository
                 .findById(id)
-                .orElseThrow(
-                        EntityNotFoundException::new); // Créé un compte temporaire à partir de l'ID donné dans l'URL de la
-        // requête
+                .orElseThrow(EntityNotFoundException::new); // Créé un compte temporaire à partir de l'ID donné dans l'URL de la requête
 
         log.debug("Modification du compte {} ...", id);
 
         if (compte.getUsername().equals(auth.getName()) || isAdmin) {
-            // Si l'utilisateur est le propriétaire du compte ou qu'il est admin, il peut modifier le
-            // compte
+            // Si l'utilisateur est le propriétaire du compte ou qu'il est admin, il peut modifier le compte
             compte.setUsername(request.getUsername());
             compte.setPassword(this.passwordEncoder.encode(request.getPassword()));
 
@@ -122,15 +119,12 @@ public class CompteController {
                                 .equals("ROLE_ADMIN")); // Vérifie si l'utilisateur est un admin ou non
         Compte compte = this.repository
                 .findById(id)
-                .orElseThrow(
-                        EntityNotFoundException::new); // Créé un compte temporaire à partir de l'ID donné dans l'URL de la
-        // requête
+                .orElseThrow(EntityNotFoundException::new); // Créé un compte temporaire à partir de l'ID donné dans l'URL de la requête
 
         log.debug("Suppression du compte {} ...", id);
 
         if (compte.getUsername().equals(auth.getName()) || isAdmin) {
-            // Si l'utilisateur est le propriétaire du compte ou qu'il est admin, il peut supprimer le
-            // compte
+            // Si l'utilisateur est le propriétaire du compte ou qu'il est admin, il peut supprimer le compte
             this.repository.deleteById(id);
             log.debug("Compte {} supprimée !", id);
 
@@ -143,8 +137,9 @@ public class CompteController {
     }
 
     /**
-     * --------------------------------------------- METHODES D'AUTHENTIFICATION ET D'INSCRIPTIONS
-     * ---------------------------------------------
+     * -----------------------------------------------
+     *  METHODES D'AUTHENTIFICATION ET D'INSCRIPTIONS
+     * -----------------------------------------------
      */
     @Transactional
     @PostMapping("/auth")

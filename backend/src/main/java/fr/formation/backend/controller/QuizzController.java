@@ -1,14 +1,7 @@
 package fr.formation.backend.controller;
 
-import fr.formation.backend.config.CustomUserDetails;
-import fr.formation.backend.dto.response.IstResponse;
-import fr.formation.backend.model.Ist;
-import fr.formation.backend.model.User;
-import fr.formation.backend.repo.CompteRepository;
-import fr.formation.backend.repo.IstRepository;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +13,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import fr.formation.backend.config.CustomUserDetails;
+import fr.formation.backend.dto.response.IstResponse;
+import fr.formation.backend.model.Ist;
+import fr.formation.backend.model.User;
+import fr.formation.backend.repo.CompteRepository;
+import fr.formation.backend.repo.IstRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("/api/quizz")
@@ -34,8 +36,9 @@ public class QuizzController {
     private CompteRepository compteRepository;
 
     /**
-     * --------------------------------------------- METHODES LIEE AU COLLECTION DE CARTE
-     * ---------------------------------------------
+     * -----------------------------------------
+     *  METHODES LIEES AUX COLLECTIONS DE CARTE
+     * -----------------------------------------
      */
     @GetMapping("/random_card")
     @Transactional

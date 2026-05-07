@@ -22,7 +22,6 @@ import fr.formation.backend.model.Traitement;
 import fr.formation.backend.service.TraitementService;
 import jakarta.validation.Valid;
 
-
 @RestController
 @RequestMapping("/api/traitement")
 public class TraitementController {
