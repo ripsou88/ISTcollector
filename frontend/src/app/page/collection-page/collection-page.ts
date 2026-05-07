@@ -19,6 +19,7 @@ export class CollectionPage implements OnInit {
   private cardsService = inject(CardsService);
   protected ists$!: Observable<Ist[]>;
   protected userIsts$!: Observable<OwnedCardsResponse>;
+  protected ownedIds = new Set<number>();
 
   // protected vih: Ist = {
   //   id: 1,
@@ -45,10 +46,11 @@ export class CollectionPage implements OnInit {
 
   ngOnInit(): void {
     this.ists$ = this.cardsService.findAll();
+    this.userIsts$ = this.cardsService.getUserCards();
     this.userIsts$.subscribe((response) => {
-      const ownedIds = new Set(response.ownedCardsId);
+      this.ownedIds = new Set(response.ownedIstIds);
 
-      console.log('Ids :', ownedIds);
+      console.log('Ids :', this.ownedIds);
     });
     console.log(this.ists$);
     this.ists$.subscribe((ists) => {
