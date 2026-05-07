@@ -20,7 +20,7 @@ services:
       - ist-network
 
     ports:
-      - 8082:8082
+      - 8082:8080
 
 
   web:

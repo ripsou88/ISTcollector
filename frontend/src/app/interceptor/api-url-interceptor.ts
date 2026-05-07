@@ -1,10 +1,11 @@
 import { HttpInterceptorFn } from '@angular/common/http';
+import {BACK_URL} from './../../../.env';
 
 export const apiUrlInterceptor: HttpInterceptorFn = (req, next) => {
   console.log("Interception !!");
 
   const apiRequest = req.clone({
-    url: "http://localhost:8080/api" + req.url
+    url: BACK_URL+"/api" + req.url
   });
 
   return next(apiRequest);
