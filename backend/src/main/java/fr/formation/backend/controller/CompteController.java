@@ -31,6 +31,7 @@ import fr.formation.backend.dto.request.AuthRequest;
 import fr.formation.backend.dto.response.CompteResponse;
 import fr.formation.backend.dto.response.EntityCreatedOrUpdatedResponse;
 import fr.formation.backend.dto.response.TokenResponse;
+import fr.formation.backend.exception.CompteNotFoundException;
 import fr.formation.backend.model.Admin;
 import fr.formation.backend.model.Compte;
 import fr.formation.backend.model.User;
@@ -61,9 +62,9 @@ public class CompteController {
     }
 
     @GetMapping("/user={name}")
-    public Optional<CompteResponse> findByUsername(@PathVariable String name) {
+    public CompteResponse findByUsername(@PathVariable String name) {
         log.debug("Recherche d'un utilisateur avec username : {} ...", name);
-        return this.repository.findByUsername(name).map(CompteResponse::convert);
+        return this.repository.findByUsernameOptional(name).map(CompteResponse::convert).orElseThrow(CompteNotFoundException::new);
     }
 
     @GetMapping("/{id}")
@@ -145,7 +146,7 @@ public class CompteController {
     @PostMapping("/subscription")
     public ResponseEntity<Object> add(@Valid @RequestBody AuthRequest request) {
         // Vérification de l'unicité du username
-        if (this.repository.findByUsername(request.getUsername()).isPresent()) {
+        if (this.repository.findByUsernameOptional(request.getUsername()).isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Ce nom d'utilisateur existe déjà.");
         }
 
@@ -183,7 +184,7 @@ public class CompteController {
     }
 
 
-    
+
 
 
 
