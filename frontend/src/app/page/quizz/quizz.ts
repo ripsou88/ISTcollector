@@ -1,11 +1,13 @@
+import { Booster } from './../../components/booster/booster';
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { finalize, timeout } from 'rxjs';
 import { Question } from '../../interface/question';
 import { QuizzService } from '../../service/quizz-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-quizz',
-  imports: [],
+  imports: [CommonModule,Booster],
   templateUrl: './quizz.html',
   styleUrl: './quizz.css',
 })
@@ -17,6 +19,8 @@ export class Quizz {
   protected canRetry = false;
   protected loading = false;
   protected validating = false;
+  protected showBooster: boolean = false;
+
 
   private quizzService: QuizzService = inject(QuizzService);
   private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
@@ -41,19 +45,22 @@ export class Quizz {
       return;
     }
 
-    const hasEverythingCorrect = this.questions.length > 0 && this.questions.every((question) => {
+    const errorCount = this.questions.filter((question) => {
       const correctReponse = question.reponses.find((reponse) => reponse.correct);
-      return this.selectedReponses[question.id] === correctReponse?.id;
-    });
+      return this.selectedReponses[question.id] !== correctReponse?.id;
+    }).length;
+    const hasEverythingCorrect = this.questions.length > 0 && errorCount === 0;
 
     if (hasEverythingCorrect) {
-      this.resultMessage = '';
+      this.resultMessage = 'Super ! Toutes tes reponses sont justes. Voici ta recompense !';
       this.canRetry = false;
-      this.increaseLevel();
+      this.validating = true;
+      // TODO penser a appeler increase level dans le component boooster
+      //this.increaseLevel();
       return;
     }
 
-    this.resultMessage = "Tu n'as pas tout juste. Tu peux refaire le quizz.";
+    this.resultMessage = `Tu as ${errorCount} 'erreurs'. Tu peux refaire le quizz.`;
     this.canRetry = true;
   }
 
@@ -86,21 +93,9 @@ export class Quizz {
       });
   }
 
-  private increaseLevel(): void {
-    this.validating = true;
-
-    this.quizzService.increaseLevel()
-      .pipe(finalize(() => {
-        this.validating = false;
-        this.cdr.detectChanges();
-      }))
-      .subscribe({
-        next: () => {
-          // TODO: implementer l'ouverture de booster.
-        },
-        error: () => {
-          this.resultMessage = "Le quizz est reussi, mais le niveau n'a pas pu etre mis a jour.";
-        },
-      });
+  protected openBooster(): void {
+    this.showBooster = true;
   }
+
+
 }
