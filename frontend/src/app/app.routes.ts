@@ -13,6 +13,7 @@ export const routes: Routes = [
   { path: 'connexion', component: AuthPage, title: 'Connexion' },
   { path: 'guides', component: HomePage, title: 'Guides IST' },
   { path: 'collection', component: CollectionPage, title: 'Collection IST' },
+    { path: 'collection/:id', component: CollectionPage },
   { path: 'prevention', component: PreventionPage, title: 'Prévention IST' },
   { path: 'jeux', component: JeuxComponent, title: 'Jeux' },
   { path: 'quizz', component: Quizz, title: 'Quizz' },

@@ -20,6 +20,7 @@ export class Booster {
   private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
 boosterOuverture() {
+  console.log("boosterOuverture appelée");
     this.isOpen = true;
     
     this.cards.getThreeRandom().subscribe(cards => {
@@ -33,4 +34,7 @@ boosterOuverture() {
     }, 500);
 }
 
+quitter() {
+  
+}
 }
