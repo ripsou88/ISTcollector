@@ -14,7 +14,7 @@ import fr.formation.backend.model.User;
 
 @DataJpaTest
 @Sql(scripts = "classpath:/account-test.sql")
-public class CompteRepoTest {
+public class CompteRepositoryTest {
     @Autowired
     private CompteRepository compteRepository;
 

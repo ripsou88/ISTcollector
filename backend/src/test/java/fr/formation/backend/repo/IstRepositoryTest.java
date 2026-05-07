@@ -8,22 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
-import fr.formation.backend.model.Question;
+import fr.formation.backend.model.Ist;
 
 @DataJpaTest
-public class QuestionRepoTest {
+@Sql(scripts = "classpath:/ist-test.sql")
+public class IstRepositoryTest {
     @Autowired
-    private QuestionRepository questionRepository;
+    private IstRepository istRepository;
 
     @Test
-    @Sql(scripts = "classpath:/question-test.sql")
-    void shouldFindTenRandomReturnTenValues() {
+    void shouldFindThreeRandomReturnThreeValues() {
         // given
 
         // when
-        List<Question> result = this.questionRepository.findTenRandom();
+        List<Ist> result = this.istRepository.findThreeRandom();
 
         // then
-        Assertions.assertEquals(10, result.size());
+        Assertions.assertEquals(3, result.size());
     }
 }
