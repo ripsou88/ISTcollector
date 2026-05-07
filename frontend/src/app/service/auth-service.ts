@@ -33,4 +33,27 @@ export class AuthService {
   public isLogged(): boolean {
     return !!this._token;
   }
+
+  public isAdmin(): boolean {
+    return this.getTokenRole() === 'ROLE_ADMIN';
+  }
+
+  private getTokenRole(): string {
+    if (!this._token) {
+      return '';
+    }
+
+    try {
+      const payload = this._token.split('.')[1];
+      const base64Payload = payload
+        .replace(/-/g, '+')
+        .replace(/_/g, '/')
+        .padEnd(Math.ceil(payload.length / 4) * 4, '=');
+      const decodedPayload = JSON.parse(atob(base64Payload));
+
+      return decodedPayload.role ?? '';
+    } catch {
+      return '';
+    }
+  }
 }

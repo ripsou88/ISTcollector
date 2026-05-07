@@ -2,6 +2,7 @@
   <nav>
 
     <div class="nav-left">
+
       <div class="hamburger" (click)="toggleMenu()">
         <svg viewBox="0 0 24 24" class="hamburger-icon">
           <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -16,69 +17,40 @@
 
       <div class="search-bar">
         <img src="img/front/Pokeball.png" class="search-icon" alt="search">
-        <input type="text" placeholder="Rechercher une IST...">
+
+        <input
+          type="text"
+          placeholder="Rechercher une IST..."
+          [(ngModel)]="searchTerm"
+          (input)="searchIST()"
+        >
+
+        <div class="search-results" *ngIf="searchTerm.length > 0">
+
+          <div
+            *ngFor="let ist of filteredIST"
+            class="result-item"
+            (click)="goToIST(ist)"
+          >
+            {{ ist }}
+          </div>
+
+        </div>
       </div>
+
     </div>
 
     <!-- MENU -->
-    <ul class="nav-menu" [class.open]="menuOpen">
+    <ul class="nav-menu" [class.open]="menuActive">
 
-      <li>
-        <a routerLink="/home"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-        (click)="menuOpen = false">
-        ACCUEIL
-      </a>
-    </li>
+      <li><a routerLink="/home" (click)="closeMenu()">ACCUEIL</a></li>
+      <li><a routerLink="/prevention" (click)="closeMenu()">PREVENTION</a></li>
+      <li><a routerLink="/collection" (click)="closeMenu()">COLLECTION</a></li>
+      <li><a routerLink="/quizz" (click)="closeMenu()">QUIZZ</a></li>
+      <li><a routerLink="/jeux" (click)="closeMenu()">JEUX</a></li>
+      <li><a routerLink="/connexion" (click)="closeMenu()">CONNEXION</a></li>
 
-    <li>
-      <a routerLink="/prevention"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      (click)="menuOpen = false">
-      PREVENTION
-    </a>
-  </li>
+    </ul>
 
-  <li>
-    <a routerLink="/collection"
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{ exact: true }"
-    (click)="menuOpen = false">
-    COLLECTION
-  </a>
-</li>
-
-<li>
-  <a routerLink="/quizz"
-  routerLinkActive="active"
-  [routerLinkActiveOptions]="{ exact: true }"
-  (click)="menuOpen = false">
-  QUIZZ
-</a>
-</li>
-
-
-<li>
-  <a routerLink="/jeux"
-  routerLinkActive="active"
-  [routerLinkActiveOptions]="{ exact: true }"
-  (click)="menuOpen = false">
-  JEUX
-</a>
-</li>
-
-<li>
-  <a routerLink="/connexion"
-  routerLinkActive="active"
-  [routerLinkActiveOptions]="{ exact: true }"
-  (click)="menuOpen = false">
-  CONNEXION
-</a>
-</li>
-
-</ul>
-
-</nav>
+  </nav>
 </header>

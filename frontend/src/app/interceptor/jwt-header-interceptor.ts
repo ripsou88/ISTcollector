@@ -6,11 +6,9 @@ export const jwtHeaderInterceptor: HttpInterceptorFn = (req, next) => {
   const authService: AuthService = inject(AuthService);
 
   // Si on appelle l'authentification, on n'injecte pas le Authorization
-  if (req.url.endsWith("/api/auth")) {
+  if (req.url.endsWith('/api/compte/auth') || req.url.endsWith('/api/compte/subscription') || !authService.token) {
     return next(req);
   }
-
-  // authService.auth();
 
   const jwtRequest = req.clone({
     setHeaders: {

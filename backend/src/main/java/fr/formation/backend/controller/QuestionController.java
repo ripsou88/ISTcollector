@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -58,6 +59,7 @@ public class QuestionController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public EntityCreatedOrUpdatedResponse create(@Valid @RequestBody CreateOrUpdateQuestionRequest request) {
         log.debug("Ajout d'une nouvelle question ...");
@@ -74,6 +76,7 @@ public class QuestionController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public EntityCreatedOrUpdatedResponse update(@PathVariable @NonNull Integer id,
             @Valid @RequestBody CreateOrUpdateQuestionRequest request) {
@@ -91,6 +94,7 @@ public class QuestionController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteById(@PathVariable @NonNull Integer id) {
         log.debug("Suppression de la question {} ...", id);
 
