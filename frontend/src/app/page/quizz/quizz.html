@@ -38,8 +38,8 @@
       </article>
     }
 
-    @if (questions.length > 0) {
-      <button class="validate" type="button" [disabled]="validating" (click)="checkQuizz()">
+    @if (questions.length > 0 && !validating && !canRetry) {
+      <button class="validate" type="button"  (click)="checkQuizz()">
         Verifier
       </button>
     }
