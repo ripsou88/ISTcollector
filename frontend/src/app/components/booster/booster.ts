@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Ist } from '../../interface/ist';
 import { CommonModule } from '@angular/common';
 import { CardPlaceholder } from '../card-placeholder/card-placeholder';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booster',
@@ -17,24 +18,24 @@ export class Booster {
   protected boosterCards: Ist[] = [];
   private cards: CardsService = inject(CardsService);
 
+  private router: Router = inject(Router);
   private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
-boosterOuverture() {
-  console.log("boosterOuverture appelée");
-    this.isOpen = true;
-    
-    this.cards.getThreeRandom().subscribe(cards => {
-      this.boosterCards = cards;
-      this.cdr.detectChanges();
-    });
+  boosterOuverture() {
+      this.cards.getThreeRandom().subscribe(cards => {
+        this.boosterCards = cards;
+        this.cdr.detectChanges();
+      });
 
-    setTimeout(() => {
-      this.showCards = true;
-      this.cdr.detectChanges();
-    }, 500);
-}
+      this.isOpen = true;
 
-quitter() {
-  
-}
+      setTimeout(() => {
+        this.showCards = true;
+        this.cdr.detectChanges();
+      }, 1300);
+  }
+
+  quitter() {
+    this.router.navigate(['/collection']);
+  }
 }

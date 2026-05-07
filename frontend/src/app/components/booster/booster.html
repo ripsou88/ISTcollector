@@ -24,7 +24,7 @@
     </div>
 
     <div id="pannel-cards" *ngIf="showCards">
-        <div id="cards-affichage"><app-card-placeholder *ngFor="let card of boosterCards" [ist]="card"></app-card-placeholder></div>
+        <div id="cards-affichage"><app-card-placeholder class="app-cards" *ngFor="let card of boosterCards" [ist]="card"></app-card-placeholder></div>
         <div id="text-click">TU AS OBTENUS  3 CARTES !</div>
         <button class="bouton-quitter" (click)="quitter()">Quitter</button>
     </div>
