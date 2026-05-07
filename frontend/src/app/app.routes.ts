@@ -15,7 +15,5 @@ export const routes: Routes = [
     { path: 'collection/:id', component: CollectionPage },
   { path: 'prevention', component: PreventionPage, title: 'Prévention IST' },
   { path: 'jeux', component: JeuxComponent, title: 'Jeux' },
-  { path: 'quizz', component: QuizzComponent, title: 'Quizz' }
-  { path: 'quizz', component: Quizz, title: 'Quizz' },
-  { path: 'testenora', component: Testenora, title: 'Tests Enora' },
+  { path: 'quizz', component: QuizzComponent, title: 'Quizz' },
 ];

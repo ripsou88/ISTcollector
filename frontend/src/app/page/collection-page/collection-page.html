@@ -1,5 +1,5 @@
-<div class="main-container">
-  @for (card of cards; track card) {
-    <app-card-placeholder></app-card-placeholder>
+<div class="collection">
+  @for (ist of ists$ | async; track ist.nom) {
+    <app-card-placeholder [ist]="ist"></app-card-placeholder>
   }
 </div>

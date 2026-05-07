@@ -1,71 +1,62 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, combineLatest } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+
 import { CardPlaceholder } from '../../components/card-placeholder/card-placeholder';
 import { Ist } from '../../interface/ist';
-import { TypeIst } from '../../enum/type-ist';
-import { TypePrevention } from '../../enum/type-prevention';
-import { Transmission } from '../../enum/transmission';
-import { CardsService } from '../../service/cards-service';
-import { Observable } from 'rxjs';
-import { map} from 'rxjs';
-import { AsyncPipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { SearchService } from '../../service/search-service';
 
 @Component({
   selector: 'app-collection-page',
-  imports: [CardPlaceholder],
+  standalone: true,
+  imports: [CommonModule, CardPlaceholder],
   templateUrl: './collection-page.html',
   styleUrl: './collection-page.css',
 })
-
-export class CollectionPage {
-  protected cards = [1, 2, 3, 4, 5, 6, 7, 8];
-}
 export class CollectionPage implements OnInit {
-  private cardsService = inject(CardsService);
-  protected ists$!: Observable<Ist[]>;
+
   private route = inject(ActivatedRoute);
+  private searchService = inject(SearchService);
 
-  // protected vih: Ist = {
-  //   id: 1,
-  //   nom: 'vih',
-  //   gravite: 5,
-  //   incidence: 5000,
-  //   symptomes: ['Generique'],
-  //   shortDesc: 'sympathic disease',
-  //   desc: 'Le VIH est un retrovirus qui va s’attaquer au systeme immunitaire et plus specifiquement aux lymphocyte T CD4, qui au stade final d’infection est connu sous le nom de sida',
-  //   typeIst: 'viral',
-  //   traitements: [{ id: 1, nom: 'Antiretroviral', prise: 'Idk', duree: -1 }],
-  //   preventions: [{ id: 1, nom: 'Preservatif', typePrevention: TypePrevention.Barriere }],
-  //   transmissions: [
-  //     Transmission.Contact_Sanguin,
-  //     Transmission.Materno_Foetale,
-  //     Transmission.Sexuelle,
-  //   ],
-  // };
+  protected ists$!: Observable<Ist[]>;
 
-  // protected cards: Ist[] = Array.from({ length: 10 }, (_, i) => ({
-  //   ...this.vih,
-  //   id: i + 1,
-  // }));
+  private allIst: Ist[] = [
+    { nom: 'VIH' } as Ist,
+    { nom: 'Syphilis' } as Ist,
+    { nom: 'Chlamydia' } as Ist,
+    { nom: 'Gonorrhée' } as Ist,
+    { nom: 'Hépatite B' } as Ist,
+    { nom: 'Hépatite C' } as Ist,
+    { nom: 'HPV' } as Ist,
+    { nom: 'Herpès' } as Ist,
+    { nom: 'Trichomonas' } as Ist,
+    { nom: 'Mycoplasma' } as Ist,
+  ];
 
-ngOnInit(): void {
+  ngOnInit(): void {
 
-    this.route.paramMap.subscribe(params => {
+    const routeSearch$ = this.route.paramMap.pipe(
+      map(params => params.get('id')?.toLowerCase() ?? ''),
+      startWith('')
+    );
 
-      const searchTerm = params.get('id')?.toLowerCase() ?? '';
+    const search$ = this.searchService.search$.pipe(
+      startWith('')
+    );
 
-      this.ists$ = this.cardsService.findAll().pipe(
-        map((ists: Ist[]) => {
+    this.ists$ = combineLatest([routeSearch$, search$]).pipe(
+      map(([routeSearch, search]) => {
 
-          if (searchTerm.length > 0) {
-            return ists.filter((i: Ist) =>
-              i.nom.toLowerCase().includes(searchTerm)
-            );
-          }
+        const query = (search ?? routeSearch).toLowerCase().trim();
 
-          return ists;
-        })
-      );
-    });
+        if (!query) return this.allIst;
+
+        return this.allIst.filter(i =>
+          i.nom.toLowerCase().includes(query)
+        );
+      })
+    );
   }
 }
