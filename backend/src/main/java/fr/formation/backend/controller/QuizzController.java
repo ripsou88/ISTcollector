@@ -24,7 +24,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/quizz")
 public class QuizzController {
 
     private static final Logger log = LoggerFactory.getLogger(CompteController.class);

@@ -23,11 +23,11 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   public auth(authRequest: AuthRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>('/auth', authRequest);
+    return this.http.post<AuthResponse>('/compte/auth', authRequest);
   }
 
   public sub(authRequest: AuthRequest): Observable<SubResponse> {
-        return this.http.post<SubResponse>('/subscription', authRequest);
+        return this.http.post<SubResponse>('/compte/subscription', authRequest);
   }
 
   public isLogged(): boolean {
