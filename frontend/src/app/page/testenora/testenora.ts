@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Booster } from '../../components/booster/booster';
 import { CommonModule } from '@angular/common';
+import { CardsService } from '../../service/cards-service';
 
 @Component({
   selector: 'app-testenora',
@@ -10,4 +11,9 @@ import { CommonModule } from '@angular/common';
 })
 export class Testenora {
   protected showBooster: boolean = false;
+  private cards: CardsService = inject(CardsService);
+
+  boosterOuverture() {
+    this.cards.getThreeRandom();
+  }
 }

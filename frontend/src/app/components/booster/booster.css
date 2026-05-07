@@ -197,3 +197,12 @@
 .istedex-img img {
     height: 180%;
 }
+
+/* ----------------- ZONE DES CARTES ------------------ */
+
+#pannel-cards {
+    display: flex;
+    width: 600px;
+    height: 600px;
+    background:yellow;
+}
