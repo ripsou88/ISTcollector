@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
-import { CardsService } from '../../service/cards-service';
-import { Observable } from 'rxjs';
-import { Ist } from '../../interface/ist';
 import { CommonModule } from '@angular/common';
+import { CardsService } from '../../service/cards-service';
+import { Ist } from '../../interface/ist';
 import { CardPlaceholder } from '../card-placeholder/card-placeholder';
+import { QuizzService } from '../../service/quizz-service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,18 +16,21 @@ export class Booster {
   protected isOpen: boolean = false;
   protected showCards: boolean = false;
   protected boosterCards: Ist[] = [];
-  private cards: CardsService = inject(CardsService);
 
+  private cards: CardsService = inject(CardsService);
+  private quizzService: QuizzService = inject(QuizzService);
   private router: Router = inject(Router);
   private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
   boosterOuverture() {
-      this.cards.getThreeRandom().subscribe(cards => {
-        this.boosterCards = cards;
-        this.cdr.detectChanges();
-      });
+    this.isOpen = true;
+    this.cards.getThreeRandom().subscribe((cards) => {
+      this.boosterCards = cards;
+      this.cdr.detectChanges();
+    });
 
-      this.isOpen = true;
+
+    this.quizzService.increaseLevel().subscribe();
 
       setTimeout(() => {
         this.showCards = true;
