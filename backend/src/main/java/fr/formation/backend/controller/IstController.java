@@ -98,7 +98,7 @@ public class IstController {
         return new EntityCreatedOrUpdatedResponse(ist.getId());
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable @NonNull Integer id) {
         log.debug("Suppression de l'IST {} ...", id);
 

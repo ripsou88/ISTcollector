@@ -1,6 +1,7 @@
 package fr.formation.backend.controller;
 
 import fr.formation.backend.config.JwtUtils;
+import fr.formation.backend.config.RoleEnum;
 import fr.formation.backend.dto.request.AuthRequest;
 import fr.formation.backend.dto.response.CompteResponse;
 import fr.formation.backend.dto.response.EntityCreatedOrUpdatedResponse;
@@ -165,8 +166,14 @@ public class CompteController {
 
     log.debug("Connexion réussie, login {} ...", request.getUsername());
 
+    String role =
+        this.repository
+            .findByUsername(request.getUsername())
+            .map(compte -> compte instanceof Admin ? RoleEnum.ADMIN.getRole() : RoleEnum.USER.getRole())
+            .orElse(RoleEnum.USER.getRole());
+
     return ResponseEntity.status(HttpStatus.OK)
-        .body(new TokenResponse(this.jwtUtils.generate(authentication)));
+        .body(new TokenResponse(this.jwtUtils.generate(authentication, role)));
   }
 
   @Transactional

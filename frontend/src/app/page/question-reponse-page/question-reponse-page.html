@@ -1,0 +1,54 @@
+<main class="question-reponse-page">
+  <form class="question-form" (ngSubmit)="saveQuestion()">
+    <h1>{{ idQuestionEnEdition ? 'Modifier une question' : 'Ajouter une question' }}</h1>
+
+    <label for="question">Question</label>
+    <textarea id="question" name="question" [(ngModel)]="question" required></textarea>
+
+    <h2>Reponses</h2>
+
+    <div class="reponse" *ngFor="let reponse of reponses; let index = index">
+      <input
+        type="text"
+        [name]="'reponse-' + index"
+        [(ngModel)]="reponse.reponse"
+        placeholder="Reponse"
+        required
+      />
+
+      <label>
+        <input type="checkbox" [name]="'correct-' + index" [(ngModel)]="reponse.correct" />
+        Correcte
+      </label>
+
+      <button type="button" (click)="removeReponse(index)">Supprimer</button>
+    </div>
+
+    <button type="button" (click)="addReponse()">Ajouter une reponse</button>
+    <button type="submit">{{ idQuestionEnEdition ? 'Modifier' : 'Enregistrer' }}</button>
+    <button type="button" *ngIf="idQuestionEnEdition" (click)="cancelEdit()">Annuler</button>
+
+    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </form>
+
+  <section class="questions-list">
+    <h2>Questions existantes</h2>
+
+    <p *ngIf="loadingQuestions">Chargement des questions...</p>
+    <p *ngIf="!loadingQuestions && questions.length === 0">Aucune question trouvee.</p>
+
+    <article class="question-card" *ngFor="let question of questions">
+      <h3>{{ question.question }}</h3>
+
+      <ul>
+        <li *ngFor="let reponse of question.reponses">
+          {{ reponse.reponse }} <strong *ngIf="reponse.correct">(correcte)</strong>
+        </li>
+      </ul>
+
+      <button type="button" (click)="editQuestion(question)">Modifier</button>
+      <button type="button" (click)="deleteQuestion(question.id)">Supprimer</button>
+    </article>
+  </section>
+</main>

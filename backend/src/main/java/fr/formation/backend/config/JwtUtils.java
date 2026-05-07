@@ -22,17 +22,25 @@ public class JwtUtils {
     }
 
     public String generate(Authentication auth) {
-        Date now = new Date();
-        SecretKey secretKey = Keys.hmacShaKeyFor(this.jwtKey.getBytes());
+        String role = auth.getAuthorities().stream()
+                .map(authority -> authority.getAuthority())
+                .findFirst()
+                .orElse(RoleEnum.USER.getRole());
 
-        // Si la connexion est OK, on génère un jeton JWT
+        return this.generate(auth, role);
+    }
+
+    public String generate(Authentication auth, String role) {
+        Date now = new Date();
+        SecretKey secretKey = Keys.hmacShaKeyFor(this.jwtKey.getBytes(StandardCharsets.UTF_8));
+
         return Jwts.builder()
-                .subject(auth.getName()) // Souvent, c'est le username ici
+                .subject(auth.getName())
+                .claim("role", role)
                 .issuedAt(now)
-                .expiration(new Date(now.getTime() + 3_600_000)) // Durée de validité = 1 heure
+                .expiration(new Date(now.getTime() + 3_600_000))
                 .signWith(secretKey)
-                .compact() // Le jeton JWT sous forme de String
-        ;
+                .compact();
     }
 
     public Optional<String> validate(String token) {
@@ -40,17 +48,14 @@ public class JwtUtils {
 
         try {
             return Optional.of(Jwts.parser()
-                    .verifyWith(secretKey) // On donne la clé pour valider le jeton
+                    .verifyWith(secretKey)
                     .build()
-                    .parseSignedClaims(token) // On donne le jeton à valider
-                    .getPayload() // Le contenu du jeton
-                    .getSubject() // Le nom d'utilisateur
+                    .parseSignedClaims(token)
+                    .getPayload()
+                    .getSubject()
             );
-        }
-
-        catch (Exception ex) {
+        } catch (Exception ex) {
             return Optional.empty();
         }
     }
-
 }

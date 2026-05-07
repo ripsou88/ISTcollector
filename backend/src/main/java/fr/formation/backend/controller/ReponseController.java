@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,6 +56,7 @@ public class ReponseController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public EntityCreatedOrUpdatedResponse create(@Valid @RequestBody CreateOrUpdateReponseRequest request) {
         log.debug("Ajout d'une nouvelle reponse ...");
@@ -72,6 +74,7 @@ public class ReponseController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public EntityCreatedOrUpdatedResponse update(@PathVariable @NonNull Integer id,
             @Valid @RequestBody CreateOrUpdateReponseRequest request) {
         log.debug("Modification de la reponse {} ...", id);
@@ -89,6 +92,7 @@ public class ReponseController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteById(@PathVariable @NonNull Integer id) {
         log.debug("Suppression de la reponse {} ...", id);
 
