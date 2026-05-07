@@ -24,6 +24,7 @@ boosterOuverture() {
     
     this.cards.getThreeRandom().subscribe(cards => {
       this.boosterCards = cards;
+      this.cdr.detectChanges();
     });
 
     setTimeout(() => {
