@@ -141,20 +141,20 @@ public class IstInitializer {
         vih.setPreventions(
             List.of(preservatif, depistage, prepVih, tpeVih, materielSterile, informerPartenaire));
 
-        Ist chlamydiose = new Ist();
-        chlamydiose.setNom("chlamydiose");
-        chlamydiose.setGravite(3);
-        chlamydiose.setIncidence(61100);
-        chlamydiose.setShortDescription("Souvent invisible");
-        chlamydiose.setLongDescription(
+        Ist chlamydia = new Ist();
+        chlamydia.setNom("chlamydia");
+        chlamydia.setGravite(3);
+        chlamydia.setIncidence(61100);
+        chlamydia.setShortDescription("Souvent invisible");
+        chlamydia.setLongDescription(
             "La chlamydiose est une IST bacterienne due a Chlamydia trachomatis. Elle touche le"
                 + " col, l'uretre, le rectum ou la gorge. Elle est tres souvent asymptomatique, ce"
                 + " qui facilite sa transmission. Non traitee, elle peut provoquer une infection"
                 + " genitale haute, des douleurs pelviennes et des problemes de fertilite, surtout"
                 + " chez la femme.");
-        chlamydiose.setTypeIst(TypeIst.bacterien);
-        chlamydiose.setTransmissions(List.of(Transmission.sexuelle));
-        chlamydiose.setSymptomes(
+        chlamydia.setTypeIst(TypeIst.bacterien);
+        chlamydia.setTransmissions(List.of(Transmission.sexuelle));
+        chlamydia.setSymptomes(
             List.of(
                 asymptomatique,
                 bruluresUrine,
@@ -162,8 +162,8 @@ public class IstInitializer {
                 douleursPelvis,
                 douleurRapports,
                 saignements));
-        chlamydiose.setTraitements(List.of(doxycycline, azithromycine));
-        chlamydiose.setPreventions(
+        chlamydia.setTraitements(List.of(doxycycline, azithromycine));
+        chlamydia.setPreventions(
             List.of(preservatif, depistage, partenaireTraite, informerPartenaire));
 
         Ist gonorrhee = new Ist();
@@ -209,7 +209,7 @@ public class IstInitializer {
             List.of(preservatif, depistage, examenPrenatal, informerPartenaire));
 
         Ist herpes = new Ist();
-        herpes.setNom("herpes genital");
+        herpes.setNom("herpes_genital");
         herpes.setGravite(3);
         herpes.setIncidence(36000);
         herpes.setShortDescription("Poussees douloureus");
@@ -227,9 +227,10 @@ public class IstInitializer {
             List.of(preservatif, digueDentaire, eviterPoussees, informerPartenaire));
 
         Ist hpv = new Ist();
-        hpv.setNom("hpv");
+        hpv.setNom("papillomavirus");
         hpv.setGravite(4);
-        hpv.setShortDescription("Virus tres frequent");
+        hpv.setShortDescription(
+            "Une IST virale très fréquente, souvent invisible, mais liée à certains cancers.");
         hpv.setLongDescription(
             "Les papillomavirus humains sont des virus tres frequents transmis surtout par contact"
                 + " sexuel peau a peau ou muqueuse a muqueuse. La plupart des infections"
@@ -406,7 +407,7 @@ public class IstInitializer {
         istRepository.saveAll(
             List.of(
                 vih,
-                chlamydiose,
+                chlamydia,
                 gonorrhee,
                 syphilis,
                 herpes,

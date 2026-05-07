@@ -11,7 +11,7 @@
     <div class="corner corner-bl"></div>
     <div class="corner corner-br"></div>
 
-    <div class="ligne1">{{ ist().nom }}</div>
+    <div class="ligne1">{{ ist().nom | istNameFormat }}</div>
     <div class="ligne2">
       <div class="ist-type">{{ typeIstEmoji[ist().typeIst].emoji }}</div>
       <div class="power"><span *ngFor="let star of getStars()">⭐</span></div>
