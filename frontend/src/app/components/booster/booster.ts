@@ -2,12 +2,8 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardsService } from '../../service/cards-service';
 import { Ist } from '../../interface/ist';
-import { CardPlaceholder } from '../card-placeholder/card-placeholder';
-<<<<<<< HEAD
 import { CardDisplay } from '../card-display/card-display';
-=======
 import { QuizzService } from '../../service/quizz-service';
->>>>>>> main
 
 @Component({
   selector: 'app-booster',
