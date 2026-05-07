@@ -2,13 +2,13 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardsService } from '../../service/cards-service';
 import { Ist } from '../../interface/ist';
-import { CardPlaceholder } from '../card-placeholder/card-placeholder';
+import { CardDisplay } from '../card-display/card-display';
 import { QuizzService } from '../../service/quizz-service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booster',
-  imports: [CommonModule, CardPlaceholder],
+  imports: [CommonModule, CardDisplay],
   templateUrl: './booster.html',
   styleUrl: './booster.css',
 })

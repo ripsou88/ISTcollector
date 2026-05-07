@@ -1,17 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CardPlaceholder } from '../../components/card-placeholder/card-placeholder';
 import { Ist } from '../../interface/ist';
-import { TypeIst } from '../../enum/type-ist';
-import { TypePrevention } from '../../enum/type-prevention';
-import { Transmission } from '../../enum/transmission';
 import { CardsService } from '../../service/cards-service';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { OwnedCardsResponse } from '../../interface/ownedCardsResponse';
+import { CardDisplay } from '../../components/card-display/card-display';
 
 @Component({
   selector: 'app-collection-page',
-  imports: [CardPlaceholder, AsyncPipe],
+  imports: [CardPlaceholder, AsyncPipe, CardDisplay],
   templateUrl: './collection-page.html',
   styleUrl: './collection-page.css',
 })
@@ -21,42 +19,11 @@ export class CollectionPage implements OnInit {
   protected userIsts$!: Observable<OwnedCardsResponse>;
   protected ownedIds = new Set<number>();
 
-  // protected vih: Ist = {
-  //   id: 1,
-  //   nom: 'vih',
-  //   gravite: 5,
-  //   incidence: 5000,
-  //   symptomes: ['Generique'],
-  //   shortDesc: 'sympathic disease',
-  //   desc: 'Le VIH est un retrovirus qui va s’attaquer au systeme immunitaire et plus specifiquement aux lymphocyte T CD4, qui au stade final d’infection est connu sous le nom de sida',
-  //   typeIst: 'viral',
-  //   traitements: [{ id: 1, nom: 'Antiretroviral', prise: 'Idk', duree: -1 }],
-  //   preventions: [{ id: 1, nom: 'Preservatif', typePrevention: TypePrevention.Barriere }],
-  //   transmissions: [
-  //     Transmission.Contact_Sanguin,
-  //     Transmission.Materno_Foetale,
-  //     Transmission.Sexuelle,
-  //   ],
-  // };
-
-  // protected cards: Ist[] = Array.from({ length: 10 }, (_, i) => ({
-  //   ...this.vih,
-  //   id: i + 1,
-  // }));
-
   ngOnInit(): void {
     this.ists$ = this.cardsService.findAll();
     this.userIsts$ = this.cardsService.getUserCards();
     this.userIsts$.subscribe((response) => {
       this.ownedIds = new Set(response.ownedIstIds);
-
-      console.log('Ids :', this.ownedIds);
-    });
-    console.log(this.ists$);
-    this.ists$.subscribe((ists) => {
-      console.log('ISTS FROM API:', ists);
-      console.log('First typeIst:', ists[0]?.typeIst);
-      console.log(ists[0].shortDescription);
     });
   }
 }

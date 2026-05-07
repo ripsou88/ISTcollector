@@ -15,25 +15,6 @@ import { IstNameFormatPipe } from '../../pipes/ist-name-format-pipe';
 export class CardPlaceholder implements AfterViewInit {
   public readonly ist = input.required<Ist>();
 
-  protected readonly isModalOpen = signal(false);
-  protected readonly isAnimating = signal(false);
-
-  protected openModal(): void {
-    if (this.isAnimating() || this.isModalOpen()) {
-      return;
-    }
-
-    this.isAnimating.set(true);
-
-    setTimeout(() => {
-      this.isModalOpen.set(true);
-      this.isAnimating.set(false);
-    }, 300);
-  }
-
-  protected closeModal(): void {
-    this.isModalOpen.set(false);
-  }
   protected typeIstEmoji = TypeIstEmoji;
   protected transmissionEmoji = TransmissionEmoji;
 

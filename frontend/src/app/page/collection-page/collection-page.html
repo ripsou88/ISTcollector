@@ -1,8 +1,7 @@
 <div class="main-container">
   @if (ists$ | async; as ists) {
     @for (card of ists; track card.id) {
-      <app-card-placeholder [ist]="card" [class.locked]="!ownedIds.has(card.id)">
-      </app-card-placeholder>
+      <app-card-display [ist]="card" [class.locked]="!ownedIds.has(card.id)" />
     }
   }
 </div>
