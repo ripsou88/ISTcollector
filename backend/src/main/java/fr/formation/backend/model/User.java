@@ -1,10 +1,5 @@
 package fr.formation.backend.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.hibernate.annotations.ColumnDefault;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
@@ -12,47 +7,45 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @DiscriminatorValue("usr")
 public class User extends Compte {
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(
-	        name = "user-card",
-	        joinColumns = @JoinColumn(name = "user_id"),
-	        inverseJoinColumns = @JoinColumn(name = "ist_id")			
-	    )
-	private List<Ist> ist = new ArrayList<>();
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(
+      name = "user-card",
+      joinColumns = @JoinColumn(name = "user_id"),
+      inverseJoinColumns = @JoinColumn(name = "ist_id"))
+  private List<Ist> ists = new ArrayList<>();
 
-	@Column(name = "level")
-	@ColumnDefault("0")
-	private Integer Level = 0;
+  @Column(name = "level")
+  @ColumnDefault("0")
+  private Integer Level = 0;
 
-    public User() {
-    }
+  public User() {}
 
-    public User(Integer id, String username, String password,List<Ist> ist) {
-        super(id, username, password);
-        this.ist=ist;
-    }
+  public User(Integer id, String username, String password, List<Ist> ists) {
+    super(id, username, password);
+    this.ists = ists;
+  }
 
-	public List<Ist> getIst() {
-		return ist;
-	}
+  public List<Ist> getIsts() {
+    return ists;
+  }
 
-	public void setIst(List<Ist> ist) {
-		this.ist = ist;
-	}
+  public void setIsts(List<Ist> ists) {
+    this.ists = ists;
+  }
 
-	public Integer getLevel() {
-		return Level;
-	}
+  public Integer getLevel() {
+    return Level;
+  }
 
-	public void setLevel(Integer level) {
-		Level = level;
-	}
-
-
-
+  public void setLevel(Integer level) {
+    Level = level;
+  }
 }
