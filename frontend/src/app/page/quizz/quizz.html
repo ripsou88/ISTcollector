@@ -12,7 +12,7 @@
 }
 
 @if (gameStarted) {
-  <section class="quizz-game">
+  <section class="quizz-game" [class.hidden]="validating" (animationend)="openBooster()">
     <h1 class="title">QUIZZ</h1>
 
     @if (loading) {
@@ -44,12 +44,17 @@
       </button>
     }
 
-    @if (resultMessage) {
-      <p class="result-message">{{ resultMessage }}</p>
-    }
-
     @if (canRetry) {
       <button class="retry" type="button" (click)="retryQuizz()">Refaire le quizz</button>
     }
   </section>
+
+  @if (resultMessage) {
+    <p class="result-message" [class.success]="validating">
+      {{ resultMessage }}
+    </p>
+  }
 }
+
+  <app-booster *ngIf="showBooster">BOOSTER</app-booster>
+
