@@ -1,46 +1,41 @@
-<div class="allcarte" #allcarte [class.card-opening]="isAnimating()" (click)="openModal()">
-
+<div class="allcarte" #allcarte>
   <div class="carte-de-face">
     <div class="carte" #carte>
-        <!-- Foil / shimmer / glare layers -->
-        <div class="foil" #foil></div>
-        <div class="shimmer" #shimmer></div>
-        <div class="glare" #glare></div>
+      <!-- Foil / shimmer / glare layers -->
+      <div class="foil" #foil></div>
+      <div class="shimmer" #shimmer></div>
+      <div class="glare" #glare></div>
 
-        <!-- Corner decorations -->
-        <div class="corner corner-tl"></div>
-        <div class="corner corner-tr"></div>
-        <div class="corner corner-bl"></div>
-        <div class="corner corner-br"></div>
+      <!-- Corner decorations -->
+      <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
 
-        <div class="ligne1">{{ ist().nom | istNameFormat }}</div>
-        <div class="ligne2">
-          <div class="ist-type">{{ typeIstEmoji[ist().typeIst].emoji }}</div>
-          <div class="power"><span *ngFor="let star of getStars()">⭐</span></div>
-        </div>
+      <div class="ligne1">{{ ist().nom | istNameFormat }}</div>
+      <div class="ligne2">
+        <div class="ist-type">{{ typeIstEmoji[ist().typeIst].emoji }}</div>
+        <div class="power"><span *ngFor="let star of getStars()">⭐</span></div>
+      </div>
 
-        <div class="ligne3"><img [src]="'/img/virus/' + ist().nom + '.png'" /></div>
+      <div class="ligne3"><img [src]="'/img/virus/' + ist().nom + '.png'" /></div>
 
-        <div class="ligne4">
-          <span *ngFor="let t of ist().transmissions">{{ transmissionEmoji[t].emoji }}</span>
-        </div>
+      <div class="ligne4">
+        <span *ngFor="let t of ist().transmissions">{{ transmissionEmoji[t].emoji }}</span>
+      </div>
 
-        <div class="ligne5">{{ ist().shortDescription }}</div>
-        <div class="ligne6">Environ {{ ist().incidence }} cas annuels</div>
+      <div class="ligne5">{{ ist().shortDescription }}</div>
+      <div class="ligne6">Environ {{ ist().incidence }} cas annuels</div>
     </div>
   </div>
 
   <div class="carte-de-dos">
     <div class="booster-top">
-        <div class="istedex-img"><img src="/img/front/LOGO.png"></div>
-        <div class="corner corner-tl"></div>
-        <div class="corner corner-tr"></div>
-        <div class="corner corner-bl"></div>
-        <div class="corner corner-br"></div>        
+      <div class="istedex-img"><img src="/img/front/LOGO.png" /></div>
+      <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
     </div>
   </div>
-
 </div>
-@if (isModalOpen()) {
-  <app-card-popup [ist]="ist()" (close)="closeModal()"></app-card-popup>
-}

@@ -1,83 +1,81 @@
-<div class="modal-backdrop">
-  <div class="modal-box">
-    <div class="modal-header">
-      <h2>{{ ist().nom }}</h2>
-      <button type="button" class="btn-close" (click)="close.emit()" aria-label="Fermer"></button>
-    </div>
-    <div class="modal-body">
-      <section class="info-section">
-        <h3>Description:</h3>
+<div class="modal-box">
+  <div class="modal-header">
+    <h2>{{ ist().nom }}</h2>
+    <button type="button" class="btn-close" (click)="close.emit()" aria-label="Fermer"></button>
+  </div>
+  <div class="modal-body">
+    <section class="info-section">
+      <h3>Description:</h3>
 
-        <p>{{ ist().longDescription }}</p>
-      </section>
+      <p>{{ ist().longDescription }}</p>
+    </section>
 
-      <section class="info-section">
-        <h3>Symptômes:</h3>
-        @if (ist().symptomes.length > 0) {
-          <div class="tag-list">
-            @for (symptome of ist().symptomes; track symptome) {
-              <span class="tag">{{ symptome.nom }}</span>
-            }
-          </div>
-        } @else {
-          <p class="muted">Aucun symptôme spécifique renseigné.</p>
-        }
-      </section>
-      <section class="info-section">
-        <h3>Traitements</h3>
+    <section class="info-section">
+      <h3>Symptômes:</h3>
+      @if (ist().symptomes.length > 0) {
+        <div class="tag-list">
+          @for (symptome of ist().symptomes; track symptome) {
+            <span class="tag">{{ symptome.nom }}</span>
+          }
+        </div>
+      } @else {
+        <p class="muted">Aucun symptôme spécifique renseigné.</p>
+      }
+    </section>
+    <section class="info-section">
+      <h3>Traitements</h3>
 
-        <div class="traitement-list">
-          @for (traitement of ist().traitements; track traitement.id) {
-            <div class="traitement-card">
-              <strong>{{ traitement.nom }}</strong>
+      <div class="traitement-list">
+        @for (traitement of ist().traitements; track traitement.id) {
+          <div class="traitement-card">
+            <strong>{{ traitement.nom }}</strong>
 
-              <div class="traitement-details">
-                <span>Prise : {{ traitement.prise }}</span>
-                <span>
-                  Durée :
-                  @if (traitement.duree === -1) {
-                    à vie
-                  } @else {
-                    {{ traitement.duree }} jours
-                  }
-                </span>
-              </div>
+            <div class="traitement-details">
+              <span>Prise : {{ traitement.prise }}</span>
+              <span>
+                Durée :
+                @if (traitement.duree === -1) {
+                  à vie
+                } @else {
+                  {{ traitement.duree }} jours
+                }
+              </span>
             </div>
-          }
-        </div>
-      </section>
+          </div>
+        }
+      </div>
+    </section>
 
-      <section class="info-section">
-        <h3>Préventions:</h3>
+    <section class="info-section">
+      <h3>Préventions:</h3>
 
-        <div class="tag-list">
-          @for (prevention of ist().preventions; track prevention.id) {
-            <span class="tag">{{ prevention.nom }}</span>
-          }
-        </div>
-      </section>
-      <section class="info-section">
-        <h3>Type:</h3>
+      <div class="tag-list">
+        @for (prevention of ist().preventions; track prevention.id) {
+          <span class="tag">{{ prevention.nom }}</span>
+        }
+      </div>
+    </section>
+    <section class="info-section">
+      <h3>Type:</h3>
 
-        <div class="tag-list">
-          <span class="tag danger">{{ typeIstEmoji[ist().typeIst].label }} </span>
-        </div>
-      </section>
+      <div class="tag-list">
+        <span class="tag danger">{{ typeIstEmoji[ist().typeIst].label }} </span>
+      </div>
+    </section>
 
-      <section class="info-section">
-        <h3>Transmissions:</h3>
+    <section class="info-section">
+      <h3>Transmissions:</h3>
 
-        <div class="tag-list">
-          @for (transmission of ist().transmissions; track transmission) {
-            <span class="tag danger">{{ transmissionEmoji[transmission].label }} </span>
-          }
-        </div>
-      </section>
+      <div class="tag-list">
+        @for (transmission of ist().transmissions; track transmission) {
+          <span class="tag danger">{{ transmissionEmoji[transmission].label }} </span>
+        }
+      </div>
+    </section>
 
-      <section class="info-section">
-        <h3>Incidence annuelle:</h3>
-        <p>{{ ist().incidence }} cas environ</p>
-      </section>
-    </div>
+    <section class="info-section">
+      <h3>Incidence annuelle:</h3>
+      <p>{{ ist().incidence }} cas environ</p>
+    </section>
   </div>
 </div>

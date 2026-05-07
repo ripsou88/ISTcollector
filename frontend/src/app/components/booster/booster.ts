@@ -4,10 +4,11 @@ import { Observable } from 'rxjs';
 import { Ist } from '../../interface/ist';
 import { CommonModule } from '@angular/common';
 import { CardPlaceholder } from '../card-placeholder/card-placeholder';
+import { CardDisplay } from '../card-display/card-display';
 
 @Component({
   selector: 'app-booster',
-  imports: [CommonModule, CardPlaceholder],
+  imports: [CommonModule, CardPlaceholder, CardDisplay],
   templateUrl: './booster.html',
   styleUrl: './booster.css',
 })
@@ -19,11 +20,11 @@ export class Booster {
 
   private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
-boosterOuverture() {
-  console.log("boosterOuverture appelée");
+  boosterOuverture() {
+    console.log('boosterOuverture appelée');
     this.isOpen = true;
-    
-    this.cards.getThreeRandom().subscribe(cards => {
+
+    this.cards.getThreeRandom().subscribe((cards) => {
       this.boosterCards = cards;
       this.cdr.detectChanges();
     });
@@ -32,9 +33,7 @@ boosterOuverture() {
       this.showCards = true;
       this.cdr.detectChanges();
     }, 500);
-}
+  }
 
-quitter() {
-  
-}
+  quitter() {}
 }
