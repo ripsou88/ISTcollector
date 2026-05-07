@@ -27,7 +27,6 @@ RUN --mount=type=cache,target=/root/.npm npm ci
 COPY frontend/. .
 # Run the build script.
 RUN npm run build
-RUN pwd
 
 ################################################################################
 FROM nginxinc/nginx-unprivileged:${NGINX_VERSION} AS runner
