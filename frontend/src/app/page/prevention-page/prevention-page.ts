@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-prevention-page',
@@ -8,7 +9,14 @@ import { CommonModule } from '@angular/common';
   templateUrl: './prevention-page.html',
   styleUrls: ['./prevention-page.css']
 })
+
 export class PreventionPage {
+
+  constructor(private router: Router) {}
+
+startPrevention() {
+  this.router.navigate(['/prevention']);
+}
 
   preventionList = [
     { name: 'Préservatif', type: 'barriere' },
@@ -26,5 +34,4 @@ export class PreventionPage {
     { name: 'Limiter les partenaires', type: 'comportement' },
     { name: 'Informer le partenaire', type: 'comportement' }
   ];
-
 }

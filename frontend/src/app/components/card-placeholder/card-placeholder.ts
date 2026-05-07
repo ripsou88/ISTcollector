@@ -4,10 +4,11 @@ import { Component, AfterViewInit, ViewChild, ElementRef, input, signal } from '
 import { TransmissionEmoji } from '../../enum/transmission';
 import { TypeIstEmoji } from '../../enum/type-ist';
 import { NgFor } from '@angular/common';
+import { IstNameFormatPipe } from '../../pipes/ist-name-format-pipe';
 
 @Component({
   selector: 'app-card-placeholder',
-  imports: [CardPopup, NgFor],
+  imports: [CardPopup, NgFor, IstNameFormatPipe],
   templateUrl: './card-placeholder.html',
   styleUrl: './card-placeholder.css',
 })
