@@ -7,6 +7,7 @@ import { Transmission } from '../../enum/transmission';
 import { CardsService } from '../../service/cards-service';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { OwnedCardsResponse } from '../../interface/ownedCardsResponse';
 
 @Component({
   selector: 'app-collection-page',
@@ -17,6 +18,7 @@ import { AsyncPipe } from '@angular/common';
 export class CollectionPage implements OnInit {
   private cardsService = inject(CardsService);
   protected ists$!: Observable<Ist[]>;
+  protected userIsts$!: Observable<OwnedCardsResponse>;
 
   // protected vih: Ist = {
   //   id: 1,
@@ -43,6 +45,11 @@ export class CollectionPage implements OnInit {
 
   ngOnInit(): void {
     this.ists$ = this.cardsService.findAll();
+    this.userIsts$.subscribe((response) => {
+      const ownedIds = new Set(response.ownedCardsId);
+
+      console.log('Ids :', ownedIds);
+    });
     console.log(this.ists$);
     this.ists$.subscribe((ists) => {
       console.log('ISTS FROM API:', ists);
