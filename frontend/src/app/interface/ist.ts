@@ -1,6 +1,7 @@
 import { Transmission } from '../enum/transmission';
 import { TypeIst } from '../enum/type-ist';
 import { Prevention } from './prevention';
+import { Symptome } from './Symptome';
 import { Traitement } from './traitement';
 
 export interface Ist {
@@ -8,9 +9,9 @@ export interface Ist {
   nom: string;
   gravite: number;
   incidence: number;
-  symptomes: string[];
-  shortDesc: string;
-  desc: string;
+  symptomes: Symptome[];
+  shortDescription: string;
+  longDescription: string;
   typeIst: TypeIst;
   traitements: Traitement[];
   preventions: Prevention[];

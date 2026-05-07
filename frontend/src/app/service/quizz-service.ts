@@ -14,6 +14,7 @@ export class QuizzService {
   }
 
   public increaseLevel(): Observable<void> {
-    return this.http.get<void>('/increase_level');
+    return this.http.get<void>('/quizz/increase_level');
   }
+
 }

@@ -39,7 +39,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/compte")
 public class CompteController {
     private static final Logger log = LoggerFactory.getLogger(CompteController.class);
     @Autowired

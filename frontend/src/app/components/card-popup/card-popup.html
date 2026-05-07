@@ -8,7 +8,7 @@
       <section class="info-section">
         <h3>Description:</h3>
 
-        <p>{{ ist().desc }}</p>
+        <p>{{ ist().longDescription }}</p>
       </section>
 
       <section class="info-section">
@@ -16,7 +16,7 @@
         @if (ist().symptomes.length > 0) {
           <div class="tag-list">
             @for (symptome of ist().symptomes; track symptome) {
-              <span class="tag">{{ symptome }}</span>
+              <span class="tag">{{ symptome.nom }}</span>
             }
           </div>
         } @else {
@@ -56,13 +56,20 @@
           }
         </div>
       </section>
+      <section class="info-section">
+        <h3>Type:</h3>
+
+        <div class="tag-list">
+          <span class="tag danger">{{ typeIstEmoji[ist().typeIst].label }} </span>
+        </div>
+      </section>
 
       <section class="info-section">
         <h3>Transmissions:</h3>
 
         <div class="tag-list">
           @for (transmission of ist().transmissions; track transmission) {
-            <span class="tag danger">{{ transmissionLabel(transmission) }} </span>
+            <span class="tag danger">{{ transmissionEmoji[transmission].label }} </span>
           }
         </div>
       </section>
