@@ -6,13 +6,14 @@ import java.util.List;
 import fr.formation.backend.model.Ist;
 import fr.formation.backend.model.TypePrevention;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class CreateOrUpdatePreventionRequest {
 
     @NotBlank
     private String nom;
 
-    @NotBlank
+    @NotNull
     private TypePrevention typePrevention;
 
     private List<Ist> ists = new ArrayList<>();

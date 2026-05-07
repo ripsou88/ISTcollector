@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.formation.backend.model.Ist;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class CreateOrUpdateTraitementRequest {
 
@@ -14,7 +15,7 @@ public class CreateOrUpdateTraitementRequest {
     @NotBlank
     private String prise;
 
-    @NotBlank
+    @NotNull
     private int duree; // TODO Update en fonction du choix dans model/Traitement
 
     private List<Ist> ists = new ArrayList<>();

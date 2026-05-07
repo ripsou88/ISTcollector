@@ -9,6 +9,8 @@ import fr.formation.backend.model.Traitement;
 import fr.formation.backend.model.Transmission;
 import fr.formation.backend.model.TypeIst;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public class CreateOrUpdateIstRequest {
 
@@ -25,16 +27,16 @@ public class CreateOrUpdateIstRequest {
 
     private String longDescription;
 
-    @NotBlank
+    @NotNull
     private TypeIst typeIst;
 
-    @NotBlank
+    @NotEmpty
     private List<Transmission> transmissions;
 
-    @NotBlank
+    @NotEmpty
     private List<Prevention> prevention;
 
-    @NotBlank
+    @NotEmpty
     private List<Traitement> traitement;
 
     public String getNom() {
@@ -93,19 +95,19 @@ public class CreateOrUpdateIstRequest {
         this.transmissions = transmissions;
     }
 
-    public List<Prevention> getPrevention() {
+    public List<Prevention> getPreventions() {
         return prevention;
     }
 
-    public void setPrevention(List<Prevention> prevention) {
+    public void setPreventions(List<Prevention> prevention) {
         this.prevention = prevention;
     }
 
-    public List<Traitement> getTraitement() {
+    public List<Traitement> getTraitements() {
         return traitement;
     }
 
-    public void setTraitement(List<Traitement> traitement) {
+    public void setTraitements(List<Traitement> traitement) {
         this.traitement = traitement;
     }
 
