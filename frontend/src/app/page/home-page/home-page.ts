@@ -2,11 +2,12 @@ import { Component, AfterViewInit } from '@angular/core';
 import { Hero } from '../../components/hero/hero';
 import { Cards } from '../../components/cards/cards';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [Hero, Cards],
+  imports: [Hero, Cards, FormsModule],
   templateUrl: './home-page.html',
   styleUrls: ['./home-page.css'],
 })
@@ -25,6 +26,37 @@ export class HomePage implements AfterViewInit {
 
   goQuizz() {
     this.router.navigate(['/quizz']);
+  }
+
+  // Recherche IST
+
+  searchTerm = '';
+
+  allIST = [
+  'VIH',
+  'Chlamydiose',
+  'Gonorrhée',
+  'Syphilis',
+  'Herpès génital',
+  'Papillomavirus (HPV)',
+  'Hépatite B',
+  'Hépatite C',
+  'Trichomonase',
+  'Mycoplasma genitalium',
+  'Lymphogranulomatose vénérienne',
+  'Chancre mou',
+  'Donovanose',
+  'Gale',
+  'Poux pubiens',
+  'Molluscum contagiosum'
+];
+
+  filteredIST = this.allIST;
+
+  searchIST() {
+    this.filteredIST = this.allIST.filter(ist =>
+      ist.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 
   //Bulle
