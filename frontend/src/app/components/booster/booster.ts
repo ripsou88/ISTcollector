@@ -7,7 +7,7 @@ import { QuizzService } from '../../service/quizz-service';
 
 @Component({
   selector: 'app-booster',
-  imports: [CommonModule, CardPlaceholder, CardDisplay],
+  imports: [CommonModule, CardDisplay],
   templateUrl: './booster.html',
   styleUrl: './booster.css',
 })
