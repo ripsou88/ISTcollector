@@ -24,8 +24,9 @@
         <span *ngFor="let t of ist().transmissions">{{ transmissionEmoji[t].emoji }}</span>
       </div>
 
-      <div class="ligne5">{{ ist().shortDescription }}</div>
-      <div class="ligne6">Environ {{ ist().incidence }} cas annuels</div>
+        <div class="ligne5">{{ ist().shortDescription }}</div>
+        <div class="ligne5">Moyens de prévention :</div>
+        <div class="ligne6"><span class="dans-ligne6" *ngFor="let prevention of ist().preventions">{{ prevention.nom }}</span> </div>
     </div>
   </div>
 

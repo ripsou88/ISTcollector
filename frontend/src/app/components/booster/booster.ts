@@ -4,6 +4,7 @@ import { CardsService } from '../../service/cards-service';
 import { Ist } from '../../interface/ist';
 import { CardDisplay } from '../card-display/card-display';
 import { QuizzService } from '../../service/quizz-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booster',
@@ -18,24 +19,26 @@ export class Booster {
 
   private cards: CardsService = inject(CardsService);
   private quizzService: QuizzService = inject(QuizzService);
+  private router: Router = inject(Router);
   private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
   boosterOuverture() {
-    console.log('boosterOuverture appelée');
     this.isOpen = true;
-
     this.cards.getThreeRandom().subscribe((cards) => {
       this.boosterCards = cards;
       this.cdr.detectChanges();
     });
 
+
     this.quizzService.increaseLevel().subscribe();
 
-    setTimeout(() => {
-      this.showCards = true;
-      this.cdr.detectChanges();
-    }, 500);
+      setTimeout(() => {
+        this.showCards = true;
+        this.cdr.detectChanges();
+      }, 1300);
   }
 
-  quitter() {}
+  quitter() {
+    this.router.navigate(['/collection']);
+  }
 }
