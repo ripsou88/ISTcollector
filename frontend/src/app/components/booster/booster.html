@@ -1,31 +1,30 @@
 <div class="overlay">
-    <div id="pannel-booster" *ngIf="!showCards">
-        <div class="booster" (click)="boosterOuverture()">
+  <div id="pannel-booster" *ngIf="!showCards">
+    <div class="booster" (click)="boosterOuverture()">
+      <div class="booster-top" [class.open]="isOpen">
+        <div class="istedex-img"><img src="/img/front/LOGO.png" /></div>
+        <div class="booster-shine"></div>
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+      </div>
 
-
-
-            <div class="booster-top" [class.open]="isOpen">
-                <div class="istedex-img"><img src="/img/front/LOGO.png"/></div>
-                <div class="booster-shine"></div>
-                <div class="corner corner-tl"></div>
-                <div class="corner corner-tr"></div>                 
-            </div>
-
-            <div class="booster-bottom" [class.open]="isOpen">
-                <div class="emoji-bact">🦠</div>
-                <div class="booster-shine"></div> 
-                <div class="corner corner-bl"></div>
-                <div class="corner corner-br"></div>                
-            </div>
-
-
-        </div>
-        <div id="text-click">CLIQUE POUR OUVRIR TON BOOSTER</div>
+      <div class="booster-bottom" [class.open]="isOpen">
+        <div class="emoji-bact">🦠</div>
+        <div class="booster-shine"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+      </div>
     </div>
+    <div id="text-click">CLIQUE POUR OUVRIR TON BOOSTER</div>
+  </div>
 
-    <div id="pannel-cards" *ngIf="showCards">
-        <div id="cards-affichage"><app-card-placeholder *ngFor="let card of boosterCards" [ist]="card"></app-card-placeholder></div>
-        <div id="text-click">TU AS OBTENUS  3 CARTES !</div>
-        <button class="bouton-quitter" (click)="quitter()">Quitter</button>
+  <div id="pannel-cards" *ngIf="showCards">
+    <div id="cards-affichage">
+      @for (card of boosterCards; track card.id) {
+        <app-card-display [ist]="card" />
+      }
     </div>
+    <div id="text-click">TU AS OBTENUS 3 CARTES !</div>
+    <button class="bouton-quitter" (click)="quitter()">Quitter</button>
+  </div>
 </div>
