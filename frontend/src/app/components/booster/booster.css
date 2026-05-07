@@ -202,6 +202,41 @@
 
 #pannel-cards {
     display: flex;
-    width: 600px;
-    height: 600px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#cards-affichage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.bouton-quitter {
+    margin-top: 20px;
+    font-family: var(--font-petit);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: color-mix(in srgb, var(--green-dark) 80%, transparent);
+    color: var(--cream);
+    border: none;
+    border-radius: 12px;
+    padding: 14px 30px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+button:hover, .btn-success:hover {
+    filter: brightness(1.1);
+    scale: 1.02;
+}
+
+button:active, .btn-success:active {
+    scale: 0.96;
+    filter: brightness(0.9);
+    transition: scale 0.05s, filter 0.05s;
 }

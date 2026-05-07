@@ -5,7 +5,7 @@
 
 
             <div class="booster-top" [class.open]="isOpen">
-                <div class="istedex-img"><img src="/img/front/LOGO.png"></div>
+                <div class="istedex-img"><img src="/img/front/LOGO.png"/></div>
                 <div class="booster-shine"></div>
                 <div class="corner corner-tl"></div>
                 <div class="corner corner-tr"></div>                 
@@ -24,7 +24,8 @@
     </div>
 
     <div id="pannel-cards" *ngIf="showCards">
-        ICI LES CARTES
-        <app-card-placeholder *ngFor="let card of boosterCards" [ist]="card"></app-card-placeholder>
+        <div id="cards-affichage"><app-card-placeholder *ngFor="let card of boosterCards" [ist]="card"></app-card-placeholder></div>
+        <div id="text-click">TU AS OBTENUS  3 CARTES !</div>
+        <button class="bouton-quitter" (click)="quitter()">Quitter</button>
     </div>
 </div>
