@@ -38,7 +38,7 @@
 }
 
 #pannel-booster, #pannel-cards {
-    margin-top: -100px;
+    
 }
 
 /* ----------------- TEXTE EN DESSOUS ------------------ */
@@ -210,6 +210,8 @@
     justify-content: center;
     flex-direction: column;
     animation: slideUp 1s ease forwards;
+    height: 100%;
+    width: 100%;
 }
 
 #cards-affichage {
