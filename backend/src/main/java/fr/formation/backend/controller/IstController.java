@@ -22,6 +22,7 @@ import fr.formation.backend.model.Ist;
 import fr.formation.backend.service.IstService;
 import jakarta.validation.Valid;
 
+
 @RestController
 @RequestMapping("/api/ist")
 public class IstController {
@@ -39,6 +40,12 @@ public class IstController {
 
         return this.service.findAll().stream().map(IstResponse::convert).toList();
     }
+
+    @GetMapping("/threernd")
+    public List<IstResponse> findThreeRandom() {
+        return this.service.findThreeRandom().stream().map(IstResponse::convert).toList();
+    }
+
 
     @GetMapping("/{id}")
     public IstResponse findById(@PathVariable @NonNull Integer id) {

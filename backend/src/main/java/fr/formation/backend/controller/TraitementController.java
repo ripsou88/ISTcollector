@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.formation.backend.dto.request.CreateOrUpdateTraitementRequest;
-import fr.formation.backend.dto.response.EntityCreatedOrUpdatedResponse;
 import fr.formation.backend.dto.response.TraitementResponse;
 import fr.formation.backend.model.Traitement;
 import fr.formation.backend.service.TraitementService;
