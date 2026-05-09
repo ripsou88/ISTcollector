@@ -8,7 +8,7 @@ import { IstNameFormatPipe } from '../../pipes/ist-name-format-pipe';
 
 @Component({
   selector: 'app-card-placeholder',
-  imports: [CardPopup, NgFor, IstNameFormatPipe],
+  imports: [NgFor, IstNameFormatPipe],
   templateUrl: './card-placeholder.html',
   styleUrl: './card-placeholder.css',
 })
