@@ -9,6 +9,7 @@ import { PreventionPage } from './page/prevention-page/prevention-page';
 import { QuestionReponsePage } from './page/question-reponse-page/question-reponse-page';
 import { Quizz } from './page/quizz/quizz';
 import { Testenora } from './page/testenora/testenora';
+import { Error404 } from './page/error404/error404';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -21,5 +22,7 @@ export const routes: Routes = [
   { path: 'questionReponse', component: QuestionReponsePage, title: 'Questions / Reponses', canActivate: [adminGuard] },
   { path: 'jeux', component: JeuxComponent, title: 'Jeux' },
   { path: 'quizz', component: Quizz, title: 'Quizz', canActivate: [authGuard] },
-  { path: 'testenora', component: Testenora, title: 'Tests Enora' }
+  { path: 'testenora', component: Testenora, title: 'Tests Enora' },
+
+  { path: '**', component: Error404 } // Route vers page Erreur 404 -> Doit être le dernier choix
 ];
