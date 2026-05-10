@@ -187,7 +187,7 @@
 }
 
 /* Responsive Tablette */
-@media (max-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1024px) {
 
   .prevention-page {
     max-width: 95%;
@@ -213,7 +213,7 @@
 }
 
 /* Responsive TV */
-@media (min-width: 1440px) {
+@media (min-width: 1600px) {
 
   .prevention-page {
     max-width: 1400px;

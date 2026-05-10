@@ -1,21 +1,11 @@
-html, body {
-  display: flex;
-  color: var(--white);
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-petit);
-  font-weight: 700;
-  letter-spacing: 1px;
-  overflow: hidden;
-}
-
 #main-pannel {
   display: block;
+  color: var(--white);
   border-radius: 25px;
   padding: 50px;
   margin: 15px;
   height: calc(100dvh - 105px);
-  width: 100%;
+  width: 100% - margin;
   box-sizing: border-box;
 
   background-image: url('/img/front/jordan.jpg');
