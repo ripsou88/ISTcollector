@@ -24,5 +24,5 @@ export const routes: Routes = [
   { path: 'quizz', component: Quizz, title: 'Quizz', canActivate: [authGuard] },
   { path: 'testenora', component: Testenora, title: 'Tests Enora' },
 
-  { path: '**', component: Error404 } // Route vers page Erreur 404 -> Doit être le dernier choix
+  { path: '**', component: Error404, title: "Erreur 404" } // Route vers page Erreur 404 -> Doit être le dernier choix
 ];

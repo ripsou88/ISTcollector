@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-error404',
@@ -8,5 +8,5 @@ import { RouterModule } from '@angular/router';
   styleUrl: './error404.css',
 })
 export class Error404 {
-
+  constructor(private router: Router) {}
 }
