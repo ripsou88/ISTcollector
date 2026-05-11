@@ -13,10 +13,6 @@
   padding: 1rem;
 }
 
-:host(.locked) app-card-placeholder {
-  filter: grayscale(1);
-}
-
 .card-wrapper {
   display: inline-block;
   cursor: pointer;

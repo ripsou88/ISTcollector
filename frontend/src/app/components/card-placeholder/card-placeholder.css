@@ -1,3 +1,8 @@
+:host-context(.locked) .carte-de-face,
+:host-context(.locked) .carte-de-dos {
+  filter: grayscale(1);
+}
+
 .allcarte {
   height: 420px;
   width: 240px;
@@ -295,4 +300,3 @@
   justify-content: center;
   font-size: 60px;
 }
-
