@@ -35,6 +35,9 @@ public class SecurityConfig {
 
             auth.requestMatchers(HttpMethod.POST, "/api/compte/auth").permitAll();
             auth.requestMatchers(HttpMethod.POST, "/api/compte/subscription").permitAll();
+            auth.requestMatchers(HttpMethod.GET, "/api/ist").permitAll();
+            auth.requestMatchers(HttpMethod.GET, "/api/ist/*").permitAll();
+
 
             // Uniquement les utilisateurs authentifiés partout sur l'application
             auth.anyRequest().authenticated();
@@ -57,12 +60,12 @@ public class SecurityConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // TODO set the angular address
         configuration.setAllowedOrigins(List.of(sqlUrl));
+        // TODO set the angular address
         configuration.setAllowedOriginPatterns(List.of("http://localhost:*"));
 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept", "Origin", "X-Requested-With"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept", "Origin", "X-Requested-With", "X-XSRF-TOKEN"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
