@@ -17,7 +17,6 @@ export class CardDisplay implements OnChanges {
   protected readonly isAnimating = signal(false);
 
   ngOnChanges() {
-    console.log('ngOnChanges forceOpen:', this.forceOpen(), 'ist:', this.ist()?.nom);
     if (this.forceOpen()) {
       this.isModalOpen.set(true);
     }

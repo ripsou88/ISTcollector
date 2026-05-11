@@ -41,7 +41,6 @@ export class CollectionPage implements OnInit {
           );
           if (match) {
             this.selectedIstName.set(match.nom);
-            console.log('match trouvé:', match.nom);
           }
         });
       }
