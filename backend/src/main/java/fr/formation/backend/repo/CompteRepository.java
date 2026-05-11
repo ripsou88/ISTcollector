@@ -12,9 +12,9 @@ public interface CompteRepository extends JpaRepository<Compte, Integer> {
     @Query("From User")
     public List<User> findAllUser();
 
-  @Query("select u from Compte u where u.username = ?1")
-  public Optional<Compte> findByUsernameOptional(String username);
+    @Query("select u from Compte u where u.username = ?1")
+    public Optional<Compte> findByUsernameOptional(String username);
 
-  @Query("select i.id from User u join u.ists i where u.username = ?1")
-  public List<Integer> findOwnedIstIdsByUsername(String username);
+    @Query("select i.id from User u join u.ists i where u.username = ?1")
+    public List<Integer> findOwnedIstIdsByUsername(String username);
 }

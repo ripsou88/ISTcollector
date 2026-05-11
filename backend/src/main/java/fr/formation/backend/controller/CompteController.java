@@ -1,7 +1,6 @@
 package fr.formation.backend.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +35,7 @@ import fr.formation.backend.model.Admin;
 import fr.formation.backend.model.Compte;
 import fr.formation.backend.model.User;
 import fr.formation.backend.repo.CompteRepository;
+import fr.formation.backend.service.CompteService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
@@ -55,29 +55,36 @@ public class CompteController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    private final CompteService service;
+
+    public CompteController(CompteService service) {
+        this.service = service;
+    }
+
     @GetMapping("/users")
     public List<CompteResponse> findAllUser() {
         log.debug("Liste de tous les utilisateurs (hors admin) ...");
-        return this.repository.findAllUser().stream().map(CompteResponse::convert).toList();
+        return this.service.findAllUser().stream().map(CompteResponse::convert).toList();
     }
 
     @GetMapping("/user={name}")
-    public Optional<CompteResponse> findByUsername(@PathVariable String name) {
+    public CompteResponse findByUsername(@PathVariable String name) {
         log.debug("Recherche d'un utilisateur avec username : {} ...", name);
-        return this.repository.findByUsernameOptional(name).map(CompteResponse::convert);
+        Compte compte = this.service.findByUsernameOptional(name);
+
+        return CompteResponse.convert(compte);
     }
 
     @GetMapping("/{id}")
     public CompteResponse findById(@PathVariable @NonNull Integer id) {
         log.debug("Recherche d'un utilisateur avec id : {} ...", id);
-        return this.repository
-                .findById(id)
-                .map(CompteResponse::convert)
-                .orElseThrow(EntityNotFoundException::new);
+
+        Compte compte = this.service.findById(id);
+        return CompteResponse.convert(compte);
     }
 
     @Transactional
-    @PutMapping("/{id}")
+    @PutMapping("/{id}") // #TODO Update with Service instead of repository
     @PreAuthorize("hasAnyRole({'USER', 'ADMIN'})")
     public ResponseEntity<Object> update(
             @PathVariable @NonNull Integer id,
@@ -113,7 +120,7 @@ public class CompteController {
     }
 
     @Transactional
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") // #TODO Update with Service instead of repository
     @PreAuthorize("hasAnyRole({'USER', 'ADMIN'})")
     public ResponseEntity<Object> deleteById(@PathVariable @NonNull Integer id, Authentication auth) {
         boolean isAdmin = auth.getAuthorities().stream()
@@ -168,7 +175,7 @@ public class CompteController {
     }
 
     @Transactional
-    @PostMapping("/subscription")
+    @PostMapping("/subscription") // #TODO Update with Service instead of repository
     public ResponseEntity<Object> add(@Valid @RequestBody AuthRequest request) {
         // Vérification de l'unicité du username
         if (this.repository.findByUsernameOptional(request.getUsername()).isPresent()) {
@@ -192,7 +199,7 @@ public class CompteController {
     }
 
     @Transactional
-    @PostMapping("/subscription-admin")
+    @PostMapping("/subscription-admin") // #TODO Update with Service instead of repository
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ADMIN')")
     public EntityCreatedOrUpdatedResponse newAdmin(@Valid @RequestBody AuthRequest request) {
@@ -213,7 +220,7 @@ public class CompteController {
     @GetMapping("/cards")
     @PreAuthorize("hasRole('USER')")
     public OwnedCardsResponse getMyCardsId(Authentication auth) {
-        List<Integer> ids = this.repository.findOwnedIstIdsByUsername(auth.getName());
+        List<Integer> ids = this.service.findOwnedIstIdsByUsername(auth.getName());
         return new OwnedCardsResponse(ids);
     }
 }
