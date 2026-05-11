@@ -7,3 +7,13 @@
 
   flex-wrap: wrap;
 }
+
+.collection-search {
+  margin: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.collection-search input {
+  max-width: 400px;
+}
