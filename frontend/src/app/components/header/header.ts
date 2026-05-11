@@ -21,29 +21,26 @@ export class Header implements OnInit {
   menuActive = false;
   searchTerm = '';
 
-allIST: string[] = [
-  'VIH / Sida',
-  'Syphilis',
-  'Chlamydia',
-  'Gonorrhée',
-  'Hépatite A',
-  'Hépatite B',
-  'Hépatite C',
-  'Herpès génital (HSV-1 / HSV-2)',
-  'HPV (Papillomavirus)',
-  'Trichomonase',
-  'Mycoplasma genitalium',
-  'Uréaplasma',
-  'Chancre mou (Haemophilus ducreyi)',
-  'Lymphogranulomatose vénérienne (LGV)',
-  'Molluscum contagiosum',
-  'Gale',
-  'Poux du pubis (Phtirius pubis)',
-  'Candidose génitale',
-  'Vaginose bactérienne'
-];
+  allIST = [
+    { label: 'VIH / Sida', nom: 'vih' },
+    { label: 'Syphilis', nom: 'syphilis' },
+    { label: 'Chlamydia', nom: 'chlamydia' },
+    { label: 'Gonorrhée', nom: 'gonorrhee' },
+    { label: 'Hépatite B', nom: 'hepatite_b' },
+    { label: 'Hépatite C', nom: 'hepatite_c' },
+    { label: 'Herpès génital (HSV-1 / HSV-2)', nom: 'herpes_genital' },
+    { label: 'HPV (Papillomavirus)', nom: 'papillomavirus' },
+    { label: 'Trichomonase', nom: 'trichomonase' },
+    { label: 'Mycoplasma genitalium', nom: 'mycoplasma' },
+    { label: 'Chancre mou (Haemophilus ducreyi)', nom: 'chancre_mou' },
+    { label: 'Lymphogranulomatose vénérienne (LGV)', nom: 'lgv' },
+    { label: 'Molluscum contagiosum', nom: 'molluscum' },
+    { label: 'Gale', nom: 'gale' },
+    { label: 'Poux du pubis (Phtirius pubis)', nom: 'poux_pubiens' },
+    { label: 'Donovanose', nom: 'donovanose' },
+  ];
 
-  filteredIST: string[] = [];
+  filteredIST: { label: string, nom: string }[] = [];
 
   ngOnInit(): void {
     this.filteredIST = [...this.allIST];
@@ -62,18 +59,17 @@ allIST: string[] = [
     }
 
     this.filteredIST = this.allIST.filter(ist =>
-      ist.toLowerCase().includes(value)
+      ist.label.toLowerCase().includes(value)
     );
 
     this.searchService.setSearch(value);
   }
 
-  goToIST(ist: string) {
-    const value = ist.trim().toLowerCase();
-
-    this.searchService.setSearch(value);
-
-    this.router.navigate(['/collection', value]); // 👈 mieux avec param
+  goToIST(ist: { label: string, nom: string }) {
+    this.router.navigate(['/collection'], {
+      queryParams: { ist: ist.nom, modal: true }
+    });
+    
     this.menuActive = false;
     this.searchTerm = '';
     this.filteredIST = [...this.allIST];

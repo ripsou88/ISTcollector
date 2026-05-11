@@ -18,6 +18,8 @@ export class CardPlaceholder implements AfterViewInit {
   protected typeIstEmoji = TypeIstEmoji;
   protected transmissionEmoji = TransmissionEmoji;
 
+  public readonly zoomed = input<boolean>(false);
+
   @ViewChild('allcarte') wrapRef!: ElementRef;
   @ViewChild('carte') cardRef!: ElementRef;
   @ViewChild('foil') foilRef!: ElementRef;

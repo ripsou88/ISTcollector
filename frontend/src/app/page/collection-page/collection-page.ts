@@ -6,6 +6,7 @@ import { Ist } from '../../interface/ist';
 import { OwnedCardsResponse } from '../../interface/ownedCardsResponse';
 import { CardsService } from '../../service/cards-service';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-collection-page',
@@ -15,16 +16,35 @@ import { FormsModule } from '@angular/forms';
 })
 export class CollectionPage implements OnInit {
   private cardsService = inject(CardsService);
+  private route = inject(ActivatedRoute);
+
   protected ists$!: Observable<Ist[]>;
   protected userIsts$!: Observable<OwnedCardsResponse>;
   protected ownedIds = new Set<number>();
   protected searchTerm = '';
+  protected selectedIstName = signal<string | null>(null);
 
   ngOnInit(): void {
     this.ists$ = this.cardsService.findAll();
     this.userIsts$ = this.cardsService.getUserCards();
     this.userIsts$.subscribe((response) => {
       this.ownedIds = new Set(response.ownedIstIds);
+    });
+
+    this.route.queryParams.subscribe(params => {
+      if (params['ist'] && params['modal'] === 'true') {
+        const istParam = params['ist'];
+
+        this.ists$.subscribe(ists => {
+          const match = ists.find(ist =>
+            istParam.toLowerCase().includes(ist.nom.toLowerCase())
+          );
+          if (match) {
+            this.selectedIstName.set(match.nom);
+            console.log('match trouvé:', match.nom);
+          }
+        });
+      }
     });
   }
 
