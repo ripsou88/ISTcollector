@@ -25,6 +25,7 @@ import fr.formation.backend.config.JwtUtils;
 import fr.formation.backend.config.SecurityConfig;
 import fr.formation.backend.dto.request.AuthRequest;
 import fr.formation.backend.repo.CompteRepository;
+import fr.formation.backend.service.CompteService;
 
 @WebMvcTest(CompteController.class)
 @Import(SecurityConfig.class)
@@ -39,6 +40,9 @@ public class CompteControllerTest {
 
     @MockitoBean
     private CompteRepository compteRepository;
+
+    @MockitoBean
+    private CompteService service;
 
     @MockitoBean
     private JpaUserDetailsService jpaUserDetailsService;
