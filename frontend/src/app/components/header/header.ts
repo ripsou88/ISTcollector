@@ -3,6 +3,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SearchService } from '../../service/search-service';
+import { AuthService } from '../../service/auth-service';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,7 @@ export class Header implements OnInit {
 
   private router = inject(Router);
   private searchService = inject(SearchService);
+  private authService = inject(AuthService);
 
   menuActive = false;
   searchTerm = '';
@@ -79,5 +81,15 @@ allIST: string[] = [
 
   closeMenu() {
     this.menuActive = false;
+  }
+
+  isLogged(): boolean {
+    return this.authService.isLogged();
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/home']);
+    this.closeMenu();
   }
 }
