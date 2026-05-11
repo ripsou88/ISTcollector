@@ -23,7 +23,7 @@ html, body {
     width: 100%;
     box-sizing: border-box;
 
-    background-image: 
+    background-image:
         linear-gradient(#8b306599),
         url('/img/front/user_f_reverse.png'),
         linear-gradient(var(--pink-dark-transparent)),

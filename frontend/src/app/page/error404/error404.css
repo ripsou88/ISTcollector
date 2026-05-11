@@ -1,0 +1,35 @@
+#main-pannel {
+  display: block;
+  color: var(--white);
+  border-radius: 25px;
+  padding: 50px;
+  margin: 15px;
+  height: calc(100dvh - 105px);
+  width: 100% - margin;
+  box-sizing: border-box;
+
+  background-image: url('/img/front/jordan.jpg');
+  background-size: 100% 100%;
+
+  position: relative;
+  overflow: hidden;
+}
+
+a {
+  color: var(--white);
+  background: var(--green-light);
+  text-decoration: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  letter-spacing: 0.5px;
+}
+
+a:hover {
+  color: var(--white);
+  background: var(--pink);
+  transform: scale(1.1);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+}

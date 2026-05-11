@@ -1,15 +1,14 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { CardPlaceholder } from '../../components/card-placeholder/card-placeholder';
-import { Ist } from '../../interface/ist';
-import { CardsService } from '../../service/cards-service';
-import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { OwnedCardsResponse } from '../../interface/ownedCardsResponse';
+import { Component, inject, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CardDisplay } from '../../components/card-display/card-display';
+import { Ist } from '../../interface/ist';
+import { OwnedCardsResponse } from '../../interface/ownedCardsResponse';
+import { CardsService } from '../../service/cards-service';
 
 @Component({
   selector: 'app-collection-page',
-  imports: [CardPlaceholder, AsyncPipe, CardDisplay],
+  imports: [AsyncPipe, CardDisplay],
   templateUrl: './collection-page.html',
   styleUrl: './collection-page.css',
 })
