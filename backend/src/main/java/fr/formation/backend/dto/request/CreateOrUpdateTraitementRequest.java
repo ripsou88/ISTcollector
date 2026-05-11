@@ -16,7 +16,7 @@ public class CreateOrUpdateTraitementRequest {
     private String prise;
 
     @NotNull
-    private int duree; // TODO Update en fonction du choix dans model/Traitement
+    private int duree;
 
     private List<Ist> ists = new ArrayList<>();
 

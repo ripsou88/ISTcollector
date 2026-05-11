@@ -24,9 +24,7 @@ public class Traitement {
     private String prise;
 
     @Column
-    private int duree; // #TODO Choisir si durée en entier ou en string (en fonction si calculs automatiques
-
-    // ou non ?)
+    private int duree;
 
     @Enumerated(EnumType.STRING)
     @Column
