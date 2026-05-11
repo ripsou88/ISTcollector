@@ -2,7 +2,7 @@
   <div class="carte-de-face">
     <div class="carte" #carte>
       <!-- Foil / shimmer / glare layers -->
-      <div class="foil" #foil></div>
+      <div class="foil" #foil [class.gold]="count() >= 10"></div>
       <div class="shimmer" #shimmer></div>
       <div class="glare" #glare></div>
 
@@ -11,6 +11,8 @@
       <div class="corner corner-tr"></div>
       <div class="corner corner-bl"></div>
       <div class="corner corner-br"></div>
+
+      <div class="card-count">x{{ count() }}</div>
 
       <div class="ligne1">{{ ist().nom | istNameFormat }}</div>
       <div class="ligne2">

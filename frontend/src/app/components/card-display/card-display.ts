@@ -12,12 +12,12 @@ import { CardPopup } from '../card-popup/card-popup';
 export class CardDisplay implements OnChanges {
   public readonly ist = input.required<Ist>();
   public readonly forceOpen = input<boolean>(false);
+  public readonly count = input<number>(0);
 
   protected readonly isModalOpen = signal(false);
   protected readonly isAnimating = signal(false);
 
   ngOnChanges() {
-    console.log('ngOnChanges forceOpen:', this.forceOpen(), 'ist:', this.ist()?.nom);
     if (this.forceOpen()) {
       this.isModalOpen.set(true);
     }

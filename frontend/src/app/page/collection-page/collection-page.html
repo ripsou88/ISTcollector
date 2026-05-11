@@ -9,7 +9,7 @@
 <div class="main-container">
   @if (ists$ | async; as ists) {
     @for (card of filteredIsts(ists); track card.id) {
-      <app-card-display [ist]="card" [class.locked]="!ownedIds.has(card.id)" [forceOpen]="card.nom === selectedIstName()"/>
+      <app-card-display [ist]="card" [class.locked]="!ownedIds.has(card.id)" [count]="ownedCounts.get(card.id) ?? 0" [forceOpen]="card.nom === selectedIstName()"/>
     } @empty {
       <p>Aucune carte trouvée</p>
     }
