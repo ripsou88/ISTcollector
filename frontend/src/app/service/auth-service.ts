@@ -38,6 +38,11 @@ export class AuthService {
     return this.getTokenRole() === 'ROLE_ADMIN';
   }
 
+  public logout(): void {
+    this._token = '';
+    sessionStorage.removeItem('token');
+  }
+
   private getTokenRole(): string {
     if (!this._token) {
       return '';

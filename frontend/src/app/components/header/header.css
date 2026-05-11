@@ -114,7 +114,8 @@ nav {
     height: 28px;
   }
 
-  nav ul li a {
+  nav ul li a,
+  nav ul li button {
     color: var(--white);
     text-decoration: none;
     padding: 0.5rem 0.8rem;
@@ -123,12 +124,22 @@ nav {
     font-size: 0.9rem;
     transition: all 0.3s;
     letter-spacing:0.5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
   }
 
-  nav ul li a:hover {
+  nav ul li a:hover,
+  nav ul li button:hover {
     background: var(--pink);
     transform: scale(1.1);
     text-shadow: 0 0 8px rgba(255,255,255,0.9);
+  }
+
+  .logout-btn {
+    background: transparent;
+    border: none;
+    color: var(--white);
   }
 
   /* Responsive pour les mobiles */
