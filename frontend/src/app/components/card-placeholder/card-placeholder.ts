@@ -8,15 +8,18 @@ import { IstNameFormatPipe } from '../../pipes/ist-name-format-pipe';
 
 @Component({
   selector: 'app-card-placeholder',
-  imports: [CardPopup, NgFor, IstNameFormatPipe],
+  imports: [NgFor, IstNameFormatPipe],
   templateUrl: './card-placeholder.html',
   styleUrl: './card-placeholder.css',
 })
 export class CardPlaceholder implements AfterViewInit {
   public readonly ist = input.required<Ist>();
+  public readonly count = input<number>(0);
 
   protected typeIstEmoji = TypeIstEmoji;
   protected transmissionEmoji = TransmissionEmoji;
+
+  public readonly zoomed = input<boolean>(false);
 
   @ViewChild('allcarte') wrapRef!: ElementRef;
   @ViewChild('carte') cardRef!: ElementRef;

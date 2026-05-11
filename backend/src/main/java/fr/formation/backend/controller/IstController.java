@@ -40,6 +40,11 @@ public class IstController {
         return this.service.findAll().stream().map(IstResponse::convert).toList();
     }
 
+    @GetMapping("/random_card")
+    public List<IstResponse> findThreeRandom() {
+        return this.service.findThreeRandom().stream().map(IstResponse::convert).toList();
+    }
+
     @GetMapping("/{id}")
     public IstResponse findById(@PathVariable @NonNull Integer id) {
         log.debug("IST {} ...", id);

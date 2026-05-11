@@ -27,6 +27,12 @@ public class IstService {
                 .orElse(new ArrayList<>());
     }
 
+    public List<Ist> findThreeRandom() {
+        return Optional
+                .ofNullable(this.istRepository.findThreeRandom())
+                .orElse(new ArrayList<>());
+    }
+
     public Ist findById(@NonNull Integer id) {
         return this.istRepository.findById(id).orElseThrow(IstNotFoundException::new);
     }

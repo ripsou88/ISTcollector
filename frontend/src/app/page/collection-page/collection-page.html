@@ -1,7 +1,17 @@
+<div class="collection-search">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Rechercher une IST..."
+    [(ngModel)]="searchTerm"
+  />
+</div>
 <div class="main-container">
   @if (ists$ | async; as ists) {
-    @for (card of ists; track card.id) {
-      <app-card-display [ist]="card" [class.locked]="!ownedIds.has(card.id)" />
+    @for (card of filteredIsts(ists); track card.id) {
+      <app-card-display [ist]="card" [class.locked]="!ownedIds.has(card.id)" [count]="ownedCounts.get(card.id) ?? 0" [forceOpen]="card.nom === selectedIstName()"/>
+    } @empty {
+      <p>Aucune carte trouvée</p>
     }
   }
 </div>

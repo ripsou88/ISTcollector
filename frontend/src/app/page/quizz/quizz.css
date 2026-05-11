@@ -174,7 +174,7 @@
 
 .result-message.success {
   position: fixed;
-  top: 85%;
+  top: 88%;
   left: 50%;
   z-index: 1001;
   width: min(560px, calc(100vw - 2rem));

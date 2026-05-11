@@ -1,11 +1,11 @@
 <div>
   <div class="card-wrapper" [class.card-opening]="isAnimating()" (click)="openModal()">
-    <app-card-placeholder [ist]="ist()"></app-card-placeholder>
+    <app-card-placeholder [ist]="ist()" [count]="count()"></app-card-placeholder>
   </div>
 
   @if (isModalOpen()) {
     <div class="modal-backdrop">
-      <app-card-placeholder [ist]="ist()"></app-card-placeholder>
+      <app-card-placeholder [ist]="ist()" [zoomed]="true" [count]="count()"></app-card-placeholder>
 
       <app-card-popup class="modal-details" [ist]="ist()" (close)="closeModal()"></app-card-popup>
     </div>

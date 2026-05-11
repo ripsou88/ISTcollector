@@ -7,7 +7,7 @@
 .overlay {
     position: fixed;
     inset: 0;
-    z-index: 1000;
+    z-index: 1002;
     background: rgba(0, 0, 0, 0.55);
     height: 100dvh;
 
@@ -37,9 +37,6 @@
     to   { transform: translateY(0); opacity: 1; }
 }
 
-#pannel-booster, #pannel-cards {
-    
-}
 
 /* ----------------- TEXTE EN DESSOUS ------------------ */
 
