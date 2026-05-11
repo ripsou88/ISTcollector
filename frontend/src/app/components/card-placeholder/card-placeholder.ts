@@ -14,6 +14,7 @@ import { IstNameFormatPipe } from '../../pipes/ist-name-format-pipe';
 })
 export class CardPlaceholder implements AfterViewInit {
   public readonly ist = input.required<Ist>();
+  public readonly count = input<number>(0);
 
   protected typeIstEmoji = TypeIstEmoji;
   protected transmissionEmoji = TransmissionEmoji;

@@ -21,6 +21,7 @@ export class CollectionPage implements OnInit {
   protected ists$!: Observable<Ist[]>;
   protected userIsts$!: Observable<OwnedCardsResponse>;
   protected ownedIds = new Set<number>();
+  protected ownedCounts = new Map<number, number>();
   protected searchTerm = '';
   protected selectedIstName = signal<string | null>(null);
 
@@ -29,6 +30,9 @@ export class CollectionPage implements OnInit {
     this.userIsts$ = this.cardsService.getUserCards();
     this.userIsts$.subscribe((response) => {
       this.ownedIds = new Set(response.ownedIstIds);
+      response.ownedIstIds.forEach(id => {
+        this.ownedCounts.set(id, (this.ownedCounts.get(id) ?? 0) + 1);
+      });
     });
 
     this.route.queryParams.subscribe(params => {
