@@ -70,6 +70,8 @@
   box-shadow:
     inset 0 0 0 3px var(--green-deep),
     inset 0 0 0 4px rgba(0, 0, 0, 0.3);
+  overflow: clip;
+  overflow-clip-margin: border-box;
 }
 
 .ligne1 {
@@ -150,9 +152,12 @@
   margin: 2px 4px;
 }
 /* ---------------- Brillant arc en ciel ---------------- */
+.foil, .glare, .shimmer {
+  inset: -50px;
+}
+
 .foil {
   position: absolute;
-  inset: 0;
   border-radius: 20px;
   pointer-events: none;
   z-index: 20;
@@ -186,13 +191,14 @@
     var(--green-deep)
   );
 
-  /* DOREE
+  filter: blur(2px);
+}
+
+.foil.gold {
   background: conic-gradient(
   from 0deg at var(--mx, 50%) var(--my, 50%),
   #7a4f00, #ffd700, #fffacd, #ffd700, #b8860b, #ffe066, #ffd700, #7a4f00
   );
-  */
-  filter: blur(2px);
 }
 
 .allcarte:hover .foil {
@@ -201,7 +207,6 @@
 
 .glare {
   position: absolute;
-  inset: 0;
   border-radius: 20px;
   pointer-events: none;
   z-index: 21;
@@ -220,7 +225,6 @@
 
 .shimmer {
   position: absolute;
-  inset: 0;
   border-radius: 20px;
   pointer-events: none;
   z-index: 19;
