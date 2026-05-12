@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 @Converter(autoApply = true)
 public class TransmissionConverter implements AttributeConverter<Transmission, String> {
- 
+
     @Override
     public String convertToDatabaseColumn(Transmission typeTransmission) {
         if (typeTransmission == null) {
@@ -22,8 +22,8 @@ public class TransmissionConverter implements AttributeConverter<Transmission, S
         }
 
         return Stream.of(Transmission.values())
-          .filter(c -> c.getTypeTransmission().equals(typeTransmission))
-          .findFirst()
-          .orElseThrow(IllegalArgumentException::new);
+                .filter(c -> c.getTypeTransmission().equals(typeTransmission))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 }

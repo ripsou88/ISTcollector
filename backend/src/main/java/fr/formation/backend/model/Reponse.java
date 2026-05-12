@@ -18,7 +18,7 @@ public class Reponse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "reponse", nullable = false , length = 700)
+    @Column(name = "reponse", nullable = false, length = 700)
     private String reponseString;
 
     @JsonIgnore
@@ -26,7 +26,7 @@ public class Reponse {
     @JoinColumn(name = "id_question")
     private Question question;
 
-    @Column(name = "correct", nullable = false) 
+    @Column(name = "correct", nullable = false)
     private boolean correct;
 
     public Reponse(String reponseString, Question question, boolean correct) {
@@ -35,7 +35,8 @@ public class Reponse {
         this.correct = correct;
     }
 
-    public Reponse(){}
+    public Reponse() {
+    }
 
     public Integer getId() {
         return id;
@@ -68,9 +69,5 @@ public class Reponse {
     public void setCorrect(boolean correct) {
         this.correct = correct;
     }
-
-    
-    
-    
 
 }

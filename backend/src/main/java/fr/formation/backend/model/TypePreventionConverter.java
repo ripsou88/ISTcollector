@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 @Converter(autoApply = true)
 public class TypePreventionConverter implements AttributeConverter<TypePrevention, String> {
- 
+
     @Override
     public String convertToDatabaseColumn(TypePrevention typePrevention) {
         if (typePrevention == null) {
@@ -22,8 +22,8 @@ public class TypePreventionConverter implements AttributeConverter<TypePreventio
         }
 
         return Stream.of(TypePrevention.values())
-          .filter(c -> c.getTypePrevention().equals(typePrevention))
-          .findFirst()
-          .orElseThrow(IllegalArgumentException::new);
+                .filter(c -> c.getTypePrevention().equals(typePrevention))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 }
