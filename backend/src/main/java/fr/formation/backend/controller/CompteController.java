@@ -62,12 +62,14 @@ public class CompteController {
     }
 
     @GetMapping("/users")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<CompteResponse> findAllUser() {
         log.debug("Liste de tous les utilisateurs (hors admin) ...");
         return this.service.findAllUser().stream().map(CompteResponse::convert).toList();
     }
 
     @GetMapping("/user={name}")
+    @PreAuthorize("hasRole('ADMIN')")
     public CompteResponse findByUsername(@PathVariable String name) {
         log.debug("Recherche d'un utilisateur avec username : {} ...", name);
         Compte compte = this.service.findByUsernameOptional(name);
@@ -76,6 +78,7 @@ public class CompteController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public CompteResponse findById(@PathVariable @NonNull Integer id) {
         log.debug("Recherche d'un utilisateur avec id : {} ...", id);
 

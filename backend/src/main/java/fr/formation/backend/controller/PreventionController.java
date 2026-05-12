@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,6 +51,7 @@ public class PreventionController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public Integer create(@Valid @RequestBody CreateOrUpdatePreventionRequest request) {
         log.debug("Ajout d'un nouveau mode de prévention ...");
@@ -62,6 +64,7 @@ public class PreventionController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public Integer update(@PathVariable @NonNull Integer id,
             @Valid @RequestBody CreateOrUpdatePreventionRequest request) {
         log.debug("Modification de la prévention {} ...", id);
@@ -74,6 +77,7 @@ public class PreventionController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteById(@PathVariable @NonNull Integer id) {
         log.debug("Suppression de la prévention {} ...", id);
 
